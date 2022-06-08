@@ -20,10 +20,10 @@ Database : Firebase
 Fungsi yang ada :
 Guru
 - login {required db firestore}
-- home page {API untuk }
-- edit Contact (Kevin) {required db}
-- ganti password (Kevin) {required db}
-- view contact (Kevin) {required db}
+- home page {API untuk slide }
+- edit Contact (Kevin) {required db, snackbar/alert}
+- ganti password (Kevin) {required db, snackbar/alert}
+- view contact (Kevin) {required db, intent to wa/line berdasar contact}
 - profile (kevin) {required db}
 - view score (Rico) {required db}
 - cek absensi (Rico) {required db}
@@ -35,10 +35,10 @@ Guru
 Siswa
 - login
 - home page
-- edit Contact (Kevin)
-- ganti password (Kevin)
-- view contact (Kevin)
-- profile (kevin)
+- edit Contact (Kevin) {required db, snackbar/alert}
+- ganti password (Kevin) {required db, snackbar/alert}
+- view contact (Kevin) {required db, intent to wa/line berdasar contact}
+- profile (kevin) {required db}
 - view score (Rico)
 - view letter berdasarkan guru (Andrew)
 - mengerjakan tes dan absensi tes (Rico)
