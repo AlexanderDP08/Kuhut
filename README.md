@@ -18,17 +18,17 @@ Database : Firebase
 
 Fungsi yang ada :
 Guru
-- login
-- home page
-- edit Contact (Kevin)
-- ganti password (Kevin)
-- view contact (Kevin)
-- profile (kevin)
-- view score (Rico)
-- cek absensi (Rico)
-- mengirim letter untuk murid tergantung kelas dan setiap guru dapat memilih template cover letter(Andrew)
-- membuat soal tes (Alex)
-- membuat jadwal tes (Alex)
+- login {required db firestore}
+- home page {API untuk }
+- edit Contact (Kevin) {required db}
+- ganti password (Kevin) {required db}
+- view contact (Kevin) {required db}
+- profile (kevin) {required db}
+- view score (Rico) {required db}
+- cek absensi (Rico) {required db}
+- mengirim letter untuk murid tergantung kelas dan setiap guru dapat memilih template cover letter(Andrew) {required db}
+- membuat soal tes (Alex) {required db}
+- membuat jadwal tes (Alex) {required db}
 - (fitur sementara)
 
 Siswa
