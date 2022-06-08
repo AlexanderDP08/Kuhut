@@ -7,6 +7,7 @@
 |           |             |       |
 
 Format untuk pengumpulan Kelompok :
+</br>
 Anggota 1 : Alexander Dean Pandreou - c14190109 </br>
 Anggota 2 : Andrew Geraldo - c14190124 </br>
 Anggota 3 : Kevin Chandra Husodho - c14190136 </br>
