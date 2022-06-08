@@ -39,9 +39,9 @@ Siswa
 - ganti password (Kevin) {required db, snackbar/alert}
 - view contact (Kevin) {required db, intent to wa/line berdasar contact}
 - profile (kevin) {required db}
-- view score (Rico)
-- view letter berdasarkan guru (Andrew)
-- mengerjakan tes dan absensi tes (Rico)
+- view score (Rico) {required db}
+- view letter berdasarkan guru (Andrew) {required db}
+- mengerjakan tes dan absensi tes (Rico) {required db}
 - (fitur sementara)
 
 Widget yang akan digunakan :
@@ -52,3 +52,9 @@ Widget yang akan digunakan :
 - text/ icon/ image
 - card
 - dll (tergantung keperluan)
+
+Cara kerja kelompok
+	kita bertanggung jawab dan bekerja dari setiap halaman yang sudah dibagi dengan desain awal 1 page pada home untuk menjadi dasar dari type model ui page, lalu ketika semua sudah dijadikan satu untuk digabungkan, saling membantu dalam pengerjaan ketika ada error pada page yang dibuat jika tidak mengerti.
+
+Progress kerja setiap personil
+	08/06/2022 : masih hanya membahas pembagian masih belum dalam pembuatan aplikasi pada flutter
