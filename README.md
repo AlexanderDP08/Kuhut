@@ -7,10 +7,10 @@
 |           |             |       |
 
 Format untuk pengumpulan Kelompok :
-Anggota 1 : Alexander Dean Pandreou - c14190109
-Anggota 2 : Andrew Geraldo - c14190124
-Anggota 3 : Kevin Chandra Husodho - c14190136
-Anggota 4 : Rico Ronaldi - c14190123
+Anggota 1 : Alexander Dean Pandreou - c14190109 </br>
+Anggota 2 : Andrew Geraldo - c14190124 </br>
+Anggota 3 : Kevin Chandra Husodho - c14190136 </br>
+Anggota 4 : Rico Ronaldi - c14190123 </br>
 
 Judul : Aplikasi Kuhut Online Exam
 
