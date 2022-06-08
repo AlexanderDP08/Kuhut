@@ -17,7 +17,7 @@ Judul : Aplikasi Kuhut Online Exam
 
 Database : Firebase
 
-Fungsi yang ada :
+Fungsi yang ada :</br>
 Guru
 - login {required db firestore}
 - home page {API untuk slide }
