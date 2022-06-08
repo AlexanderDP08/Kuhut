@@ -26,7 +26,7 @@ Guru
 - profile (kevin)
 - view score (Rico)
 - cek absensi (Rico)
-- mengirim letter untuk murid tergantung kelas dan setiap guru memiliki template berbeda (Andrew)
+- mengirim letter untuk murid tergantung kelas dan setiap guru dapat memilih template cover letter(Andrew)
 - membuat soal tes (Alex)
 - membuat jadwal tes (Alex)
 - (fitur sementara)
