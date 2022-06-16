@@ -11,7 +11,7 @@ then
 flutter clean
 flutter pub get
 git add *
-echo -n "Masukkan nama commit"
+echo -n "Masukkan nama commit : "
 read name
 git commit -m $name
 git push origin main
