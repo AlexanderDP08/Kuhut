@@ -23,13 +23,26 @@ class _MyAppState extends State<MyApp> {
       appBar: AppBar(
         title: Text("Kuhut"),
       ),
-      body: Column(
-        children: [
-          Container(
-            child: ElevatedButton(
-                onPressed: () {}, child: Text("Go to page buat soal")),
-          )
-        ],
+      body: Container(
+        padding: EdgeInsets.only(top: 50),
+        child: Column(
+          children: [
+            TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: "Username"
+              ),
+              
+            ),
+             TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: "Password"
+              ),
+            ),
+            ElevatedButton.icon(onPressed: (){}, icon: Icon(Icons.login), label: Text("Login"))
+          ],
+        ),
       ),
     );
   }
