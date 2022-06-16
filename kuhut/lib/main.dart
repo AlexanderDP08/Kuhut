@@ -30,6 +30,36 @@ class _MyAppState extends State<MyApp> {
 
   TextEditingController get_user = TextEditingController();
   TextEditingController get_pass = TextEditingController();
+
+  void continueDialog(String text, String content) {
+    Widget cancelButton = TextButton(
+      child: Text("Batal"),
+      onPressed: () {
+        Navigator.of(context, rootNavigator: true).pop();
+      },
+    );
+
+    AlertDialog alerting = AlertDialog(
+      title: Text(text),
+      content: Text(content),
+      actions: [cancelButton],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alerting;
+      },
+    );
+  }
+
+  bool check_text(String email, String pass) {
+    if (email != "" && pass != "") {
+      return true;
+    }
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,29 +84,34 @@ class _MyAppState extends State<MyApp> {
                   border: OutlineInputBorder(), hintText: "Password"),
             ),
             ElevatedButton.icon(
-                onPressed: () async {
-                  final db = FirebaseFirestore.instance;
-
-                  // Get document with ID totalVisitors in collection dashboard
-                  await db
+              icon: Icon(Icons.login),
+              label: Text("Login"),
+              onPressed: () {
+                final db = FirebaseFirestore.instance;
+                if (check_text(
+                        get_user.text.toString(), get_pass.text.toString()) ==
+                    true) {
+                  db
                       .collection('tbUser')
                       .doc(get_user.text.toString())
                       .get()
-                      .then((DocumentSnapshot dsData) async {
-                    // Get value of field date from document dashboard/totalVisitors
+                      .then((DocumentSnapshot dsData)  {
                     String email = dsData['email'];
                     String password = dsData['password'];
-                    if (get_user.text.toString() == email &&
-                        get_pass.text.toString() == password) {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => MainMenu()));
-                    } else {
-                      print("Error No Data Found!");
-                    }
+
+                     if (get_user.text.toString() == email &&
+                          get_pass.text.toString() == password) {
+                        Navigator.push(context,MaterialPageRoute(
+                                builder: (context) => MainMenu())        
+                        );
+                      }
                   });
-                },
-                icon: Icon(Icons.login),
-                label: Text("Login")),
+                } else {
+                  continueDialog(
+                  "Input All", "Please Input all the Field Here");
+                }
+              },
+            ),
           ],
         ),
       ),
