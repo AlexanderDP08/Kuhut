@@ -27,12 +27,12 @@ class _MyAppState extends State<MyApp> {
         padding: EdgeInsets.only(top: 50),
         child: Column(
           children: [
+            Image.asset("images/kuhutExam.png"),
             TextField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: "Username"
               ),
-              
             ),
              TextField(
               decoration: InputDecoration(
@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
                 hintText: "Password"
               ),
             ),
-            ElevatedButton.icon(onPressed: (){}, icon: Icon(Icons.login), label: Text("Login"))
+            ElevatedButton.icon(onPressed: (){}, icon: Icon(Icons.login), label: Text("Login")),
           ],
         ),
       ),
