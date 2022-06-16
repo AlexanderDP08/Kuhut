@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "146774521609",
+    "project_id": "kuhutflutter",
+    "storage_bucket": "kuhutflutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:146774521609:android:f1b7113c6ecc98727dc5d8",
+        "android_client_info": {
+          "package_name": "com.example.kuhut"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "146774521609-6955oascveb9jif1r459emgsu5f4lu5p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlXtHqwFTzJfOGXhS4FsRw5pUhjthZ98g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "146774521609-6955oascveb9jif1r459emgsu5f4lu5p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
