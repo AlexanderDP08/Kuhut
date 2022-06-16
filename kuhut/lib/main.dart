@@ -1,8 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:kuhut/pages/main_menu.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MaterialApp(
     title: 'Kuhut',
     home: MyApp(),
@@ -17,6 +23,13 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  Future<FirebaseApp> _initFirebase() async {
+    FirebaseApp firebaseApp = await Firebase.initializeApp();
+    return firebaseApp;
+  }
+
+  TextEditingController get_user = TextEditingController();
+  TextEditingController get_pass = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,20 +40,43 @@ class _MyAppState extends State<MyApp> {
         padding: EdgeInsets.only(top: 50),
         child: Column(
           children: [
-            Image.asset("images/kuhutExam.png"),
+            Image.asset(
+              "images/kuhutExam.png",
+            ),
             TextField(
+              controller: get_user,
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: "Username"
-              ),
+                  border: OutlineInputBorder(), hintText: "Username"),
             ),
-             TextField(
+            TextField(
+              controller: get_pass,
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: "Password"
-              ),
+                  border: OutlineInputBorder(), hintText: "Password"),
             ),
-            ElevatedButton.icon(onPressed: (){}, icon: Icon(Icons.login), label: Text("Login")),
+            ElevatedButton.icon(
+                onPressed: () async {
+                  final db = FirebaseFirestore.instance;
+
+                  // Get document with ID totalVisitors in collection dashboard
+                  await db
+                      .collection('tbUser')
+                      .doc(get_user.text.toString())
+                      .get()
+                      .then((DocumentSnapshot dsData) async {
+                    // Get value of field date from document dashboard/totalVisitors
+                    String email = dsData['email'];
+                    String password = dsData['password'];
+                    if (get_user.text.toString() == email &&
+                        get_pass.text.toString() == password) {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => MainMenu()));
+                    } else {
+                      print("Error No Data Found!");
+                    }
+                  });
+                },
+                icon: Icon(Icons.login),
+                label: Text("Login")),
           ],
         ),
       ),
