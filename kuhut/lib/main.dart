@@ -61,7 +61,7 @@ class _MyAppState extends State<MyApp> {
     }
     return false;
   }
-
+  bool hide = true;
   void createToast(String message, Color warna, int time){
     Fluttertoast.showToast(
         msg: message,
@@ -102,15 +102,32 @@ class _MyAppState extends State<MyApp> {
               "images/kuhutExam.png",
             ),
             TextField(
+        
               controller: get_user,
               decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.person),
                   border: OutlineInputBorder(), hintText: "Username"),
             ),
             TextField(
               controller: get_pass,
-              obscureText: true,
+              obscureText: hide,
               decoration: InputDecoration(
-                  border: OutlineInputBorder(), hintText: "Password"),
+                prefixIcon: Icon(Icons.key),
+                  border: OutlineInputBorder(), hintText: "Password",
+                  suffixIcon: IconButton(
+                    icon: Icon(Icons.remove_red_eye), onPressed: () {
+                      setState(() {
+                        //hide =true?  hide = false : hide = true
+                        if (hide == true){
+                          hide = false;
+                        }
+                        else{
+                          hide = true;
+                        }
+                      }); 
+                       
+                     },
+                  )),
             ),
             ElevatedButton.icon(
               icon: Icon(Icons.login),
