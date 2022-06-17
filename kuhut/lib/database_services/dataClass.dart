@@ -9,7 +9,7 @@ class Login{
   Map<String, dynamic> toJson(){ //json 
     return {
       "email" : email,
-      "pass" : password
+      "password" : password
     };
   }
   //form TambahData

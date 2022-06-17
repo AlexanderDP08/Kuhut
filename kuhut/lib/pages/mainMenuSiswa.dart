@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kuhut/pages/resetpass.dart';
 
 class MainMenuSiswas extends StatefulWidget {
   final String siswa_name;
@@ -21,7 +22,13 @@ class _MainMenuSiswasState extends State<MainMenuSiswas> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text("Welcome, "),
-              Text(widget.siswa_name)
+              Text(widget.siswa_name),
+              ElevatedButton(onPressed: (){
+                {
+                  Navigator.push(context,MaterialPageRoute(
+                    builder: (context) => ResetPass(siswaNameReset : widget.siswa_name )));
+                  }
+              }, child: Text("reset password"))
             ],
           ),
         )

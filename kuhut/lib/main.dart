@@ -125,8 +125,7 @@ class _MyAppState extends State<MyApp> {
                           hide = true;
                         }
                       }); 
-                       
-                     },
+                    },
                   )),
             ),
             ElevatedButton.icon(
@@ -149,15 +148,15 @@ class _MyAppState extends State<MyApp> {
                       .then((DocumentSnapshot dsData)  {
                     String email = dsData['email'];
                     String password = dsData['password'];
-                     if (get_user.text.toString() == email) {
+                    if (get_user.text.toString() == email) {
                             if (get_pass.text.toString() == password){
                               //cek if guru or siswa based on email
                                 if (getStats == "teacher"){
-                                   Navigator.push(context,MaterialPageRoute(
+                                  Navigator.push(context,MaterialPageRoute(
                                 builder: (context) => MainMenuTeacher(name: reserved,)));
                                 }
                                 else if (getStats == "siswa"){
-                                   Navigator.push(context,MaterialPageRoute(
+                                  Navigator.push(context,MaterialPageRoute(
                                 builder: (context) => MainMenuSiswas(siswa_name: reserved,)));
                                 }
                               
@@ -166,7 +165,7 @@ class _MyAppState extends State<MyApp> {
                               //flutter toast Invalid Password/ganti di text
                               createToast("Invalid Password", Colors.red, 1);
                             }
-                       
+                      
                       }
                   });
                 } else {
