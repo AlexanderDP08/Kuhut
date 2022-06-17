@@ -74,11 +74,14 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  String getInstance(String email){
+  String getInstance(String email, String tipe){
     int i=0;
     while (i < email.length){
       i++;
       if (email[i]== "@"){
+        if (tipe == "reverse"){
+          return email.substring(0, i);  
+        }
         return email.substring(i+1, email.length);
       }
     }
@@ -118,8 +121,10 @@ class _MyAppState extends State<MyApp> {
                 if (check_text(
                         get_user.text.toString(), get_pass.text.toString()) ==
                     true) {
-                      String getStats = (getInstance(get_user.text.toString()));
+                      String getStats = (getInstance(get_user.text.toString(),"standard"));
                       print(getStats);
+                      String reserved = (getInstance(get_user.text.toString(), "reverse"));
+                      
                   db
                       .collection('tbUser')
                       .doc(get_user.text.toString())
@@ -132,11 +137,11 @@ class _MyAppState extends State<MyApp> {
                               //cek if guru or siswa based on email
                                 if (getStats == "teacher"){
                                    Navigator.push(context,MaterialPageRoute(
-                                builder: (context) => MainMenuTeacher()));
+                                builder: (context) => MainMenuTeacher(name: reserved,)));
                                 }
                                 else if (getStats == "siswa"){
                                    Navigator.push(context,MaterialPageRoute(
-                                builder: (context) => MainMenuSiswas()));
+                                builder: (context) => MainMenuSiswas(siswa_name: reserved,)));
                                 }
                               
                             }
