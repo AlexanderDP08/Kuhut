@@ -1,6 +1,7 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
+import 'package:kuhut/pages/PageAddSoal.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -27,7 +28,12 @@ class _MyAppState extends State<MyApp> {
         children: [
           Container(
             child: ElevatedButton(
-                onPressed: () {}, child: Text("Go to page buat soal")),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return PageAddSoal();
+                  }));
+                },
+                child: Text("Go to page buat soal")),
           )
         ],
       ),
