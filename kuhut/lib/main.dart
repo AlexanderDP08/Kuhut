@@ -159,6 +159,9 @@ class _MyAppState extends State<MyApp> {
                                   Navigator.push(context,MaterialPageRoute(
                                 builder: (context) => MainMenuSiswas(siswa_name: reserved,)));
                                 }
+                                else{
+                                  createToast("Input instance", Colors.red, 1);
+                                }
                               
                             }
                             else{
