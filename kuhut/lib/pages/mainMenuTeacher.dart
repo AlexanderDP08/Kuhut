@@ -25,9 +25,45 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
             children: [
               WelcomeWidget(),
               Text(widget.name, style: TextStyle(fontSize: fontsize-2, ),),
-              Menu(),
-              Menu(),
-              Menu(),
+              Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                // Image.asset("images/kuhutExam.png"),
+                // Image.asset("images/kuhutExam.png"),
+                IconButton(onPressed: (){
+
+                }, icon: Image.asset("images/kuhutExam.png"), iconSize: 100,),
+                IconButton(onPressed: (){
+
+                }, icon: Image.asset("images/kuhutExam.png"), iconSize: 100,),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                // Image.asset("images/kuhutExam.png"),
+                // Image.asset("images/kuhutExam.png"),
+                IconButton(onPressed: (){
+
+                }, icon: Image.asset("images/kuhutExam.png"), iconSize: 100,),
+                IconButton(onPressed: (){
+
+                }, icon: Image.asset("images/kuhutExam.png"), iconSize: 100,),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                // Image.asset("images/kuhutExam.png"),
+                // Image.asset("images/kuhutExam.png"),
+                IconButton(onPressed: (){
+
+                }, icon: Image.asset("images/kuhutExam.png"), iconSize: 100,),
+                IconButton(onPressed: (){
+
+                }, icon: Image.asset("images/kuhutExam.png"), iconSize: 100,),
+              ],
+            ),
             ],
           ),
         )
@@ -39,8 +75,14 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
     return Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Image.asset("images/kuhutExam.png"),
-                Image.asset("images/kuhutExam.png"),
+                // Image.asset("images/kuhutExam.png"),
+                // Image.asset("images/kuhutExam.png"),
+                IconButton(onPressed: (){
+
+                }, icon: Image.asset("images/kuhutExam.png"), iconSize: 100,),
+                IconButton(onPressed: (){
+
+                }, icon: Image.asset("images/kuhutExam.png"), iconSize: 100,),
               ],
             );
   }
