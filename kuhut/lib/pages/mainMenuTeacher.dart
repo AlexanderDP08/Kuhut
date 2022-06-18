@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:kuhut/imagePath.dart';
 
 class MainMenuTeacher extends StatefulWidget {
   final String name;
@@ -12,6 +13,9 @@ class MainMenuTeacher extends StatefulWidget {
 
 class _MainMenuTeacherState extends State<MainMenuTeacher> {
   var fontsize = 20.0;
+
+  var t_path = teacherImagePath();
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -32,10 +36,10 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                 // Image.asset("images/kuhutExam.png"),
                 IconButton(onPressed: (){
 
-                }, icon: Image.asset("images/kuhutExam.png"), iconSize: 100,),
+                }, icon: Image.asset(t_path.attendance), iconSize: 100,),
                 IconButton(onPressed: (){
 
-                }, icon: Image.asset("images/kuhutExam.png"), iconSize: 100,),
+                }, icon: Image.asset(t_path.changePassword), iconSize: 100,),
               ],
             ),
             Row(
@@ -45,10 +49,10 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                 // Image.asset("images/kuhutExam.png"),
                 IconButton(onPressed: (){
 
-                }, icon: Image.asset("images/kuhutExam.png"), iconSize: 100,),
+                }, icon: Image.asset(t_path.contactLogo), iconSize: 100,),
                 IconButton(onPressed: (){
 
-                }, icon: Image.asset("images/kuhutExam.png"), iconSize: 100,),
+                }, icon: Image.asset(t_path.createExam), iconSize: 100,),
               ],
             ),
             Row(
@@ -58,10 +62,10 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                 // Image.asset("images/kuhutExam.png"),
                 IconButton(onPressed: (){
 
-                }, icon: Image.asset("images/kuhutExam.png"), iconSize: 100,),
+                }, icon: Image.asset(t_path.editContact), iconSize: 100,),
                 IconButton(onPressed: (){
 
-                }, icon: Image.asset("images/kuhutExam.png"), iconSize: 100,),
+                }, icon: Image.asset(t_path.profileLogo), iconSize: 100,),
               ],
             ),
             ],
