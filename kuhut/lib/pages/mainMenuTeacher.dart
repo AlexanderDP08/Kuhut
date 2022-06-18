@@ -11,6 +11,7 @@ class MainMenuTeacher extends StatefulWidget {
 }
 
 class _MainMenuTeacherState extends State<MainMenuTeacher> {
+  var fontsize = 20.0;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,16 +19,31 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
         appBar: AppBar(
           title: Text("Teacher Home"),
         ),
-        body : Container(
+        body : SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Welcome,"),
-              Text(widget.name)
+              WelcomeWidget(),
+              Text(widget.name, style: TextStyle(fontSize: fontsize-2, ),),
+              Menu(),
+              Menu(),
+              Menu(),
             ],
           ),
         )
       ),
     );
   }
+
+  Row Menu() {
+    return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Image.asset("images/kuhutExam.png"),
+                Image.asset("images/kuhutExam.png"),
+              ],
+            );
+  }
+
+  Text WelcomeWidget() => Text("Welcome,", style: TextStyle(fontSize: fontsize),);
 }
