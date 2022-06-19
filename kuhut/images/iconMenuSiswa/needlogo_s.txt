@@ -1,0 +1,12 @@
+ToDo Cari Gambar 
+
+edit Contact (Kevin) {required db, snackbar/alert}
+ganti password (Kevin) {required db, snackbar/alert}
+view contact (Kevin) {required db, intent to wa/line berdasar contact}
+profile (kevin) {required db}
+view score (Rico) {required db}
+cek absensi (Rico) {required db}
+mengirim letter untuk murid tergantung kelas dan setiap guru dapat memilih template cover letter(Andrew) {required db}
+membuat soal tes (Alex) {required db}
+membuat jadwal tes (Alex) {required db}
+(fitur sementara)
