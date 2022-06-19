@@ -3,12 +3,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-import 'package:kuhut/pages/PageAddSoal.dart';
-=======
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:kuhut/pages/main_menu.dart';
->>>>>>> 9cd6877d67861ebbcdb83563eeca58a4cfaa553b
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -70,20 +66,6 @@ class _MyAppState extends State<MyApp> {
       appBar: AppBar(
         title: Text("Kuhut"),
       ),
-<<<<<<< HEAD
-      body: Column(
-        children: [
-          Container(
-            child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return PageAddSoal();
-                  }));
-                },
-                child: Text("Go to page buat soal")),
-          )
-        ],
-=======
       body: Container(
         padding: EdgeInsets.only(top: 50),
         child: Column(
@@ -113,26 +95,24 @@ class _MyAppState extends State<MyApp> {
                       .collection('tbUser')
                       .doc(get_user.text.toString())
                       .get()
-                      .then((DocumentSnapshot dsData)  {
+                      .then((DocumentSnapshot dsData) {
                     String email = dsData['email'];
                     String password = dsData['password'];
 
-                     if (get_user.text.toString() == email &&
-                          get_pass.text.toString() == password) {
-                        Navigator.push(context,MaterialPageRoute(
-                                builder: (context) => MainMenu())        
-                        );
-                      }
+                    if (get_user.text.toString() == email &&
+                        get_pass.text.toString() == password) {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => MainMenu()));
+                    }
                   });
                 } else {
                   continueDialog(
-                  "Input All", "Please Input all the Field Here");
+                      "Input All", "Please Input all the Field Here");
                 }
               },
             ),
           ],
         ),
->>>>>>> 9cd6877d67861ebbcdb83563eeca58a4cfaa553b
       ),
     );
   }
