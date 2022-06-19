@@ -18,6 +18,53 @@ TextEditingController get_pass2 = TextEditingController();
 bool hide = true;
 
 class _ResetpassState extends State<ResetPass> {
+  void createToast(String message, Color warna, int time){
+    Fluttertoast.showToast(
+        msg: message,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black,
+        textColor: warna,
+        fontSize: 16.0
+    );
+  }
+  void gantiPassword(){
+      final dtbaru = Login(email: widget.siswaNameReset+("@siswa"), password: get_pass.text.toString());
+      DatabaseUser.ubahData(item: dtbaru);
+      dismiss();
+      createToast("Data berhasil dirubah", Colors.green, 2);
+  }
+  void dismiss(){
+    Navigator.of(context, rootNavigator: true).pop();
+  }
+   void continueDialog(String text, String content) {
+    Widget cancelButton = TextButton(
+      child: Text("Batal"),
+      onPressed: () {
+       dismiss();
+      },
+    );
+     Widget confirmButton = TextButton(
+      child: Text("Ubah"),
+      onPressed: () {
+        gantiPassword();
+      },
+    );
+
+    AlertDialog alerting = AlertDialog(
+      title: Text(text),
+      content: Text(content),
+      actions: [cancelButton, confirmButton],
+    );
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alerting;
+      },
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -76,8 +123,9 @@ class _ResetpassState extends State<ResetPass> {
                 
                 ElevatedButton(onPressed: (){
                   if (get_pass.text.toString() == get_pass2.text.toString()){
-                     final dtbaru = Login(email: widget.siswaNameReset+("@siswa"), password: get_pass.text.toString());
-                     DatabaseUser.ubahData(item: dtbaru);
+                    continueDialog("Change Password", "Apakah anda yakin ingin mengganti password anda?");
+                    //  final dtbaru = Login(email: widget.siswaNameReset+("@siswa"), password: get_pass.text.toString());
+                    //  DatabaseUser.ubahData(item: dtbaru);
                   }
                   else{
                      Fluttertoast.showToast(
