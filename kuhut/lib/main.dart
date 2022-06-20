@@ -112,7 +112,7 @@ class _MyAppState extends State<MyApp> {
               controller: get_pass,
               obscureText: hide,
               decoration: InputDecoration(
-                prefixIcon: Icon(Icons.key),
+                prefixIcon: Icon(Icons.lock),
                   border: OutlineInputBorder(), hintText: "Password",
                   suffixIcon: IconButton(
                     icon: Icon(Icons.remove_red_eye), onPressed: () {

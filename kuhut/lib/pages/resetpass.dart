@@ -73,18 +73,24 @@ class _ResetpassState extends State<ResetPass> {
             title: Text("Siswa "),
           ),
           body: Container(
+            padding: EdgeInsets.all(20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text("Welcome, "),
                 Text(widget.siswaNameReset),
                 TextField(
+                  showCursor: true,
                   controller: get_pass,
                   obscureText: hide,
                   decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.key),
+                    icon: const Icon(
+                      Icons.lock,
+                      size: 35,
+                    ),
                       border: OutlineInputBorder(),
-                      hintText: "Password",
+                      hintText: "Input Your New Password",
+                      labelText: "New Password",
                       suffixIcon: IconButton(
                         icon: Icon(Icons.remove_red_eye),
                         onPressed: () {
@@ -99,13 +105,19 @@ class _ResetpassState extends State<ResetPass> {
                         },
                       )),
                 ),
+                SizedBox(height: 20),
                 TextField(
                   controller: get_pass2,
                   obscureText: hide,
+                  showCursor: true,
                   decoration: InputDecoration(
-                      prefixIcon: Icon(Icons.key),
+                      icon: const Icon(
+                      Icons.lock,
+                      size: 35,
+                    ),
                       border: OutlineInputBorder(),
-                      hintText: "Repeat new password",
+                      hintText: "Input Your Repeat New Password",
+                      labelText: "Repeat New Password",
                       suffixIcon: IconButton(
                         icon: Icon(Icons.remove_red_eye),
                         onPressed: () {
