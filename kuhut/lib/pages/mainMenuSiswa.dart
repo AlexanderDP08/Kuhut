@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:kuhut/pages/addcontact.dart';
 import 'package:kuhut/pages/resetpass.dart';
+import 'package:kuhut/pages/viewcontact.dart';
 
 class MainMenuSiswas extends StatefulWidget {
   final String siswa_name;
@@ -28,7 +30,29 @@ class _MainMenuSiswasState extends State<MainMenuSiswas> {
                   Navigator.push(context,MaterialPageRoute(
                     builder: (context) => ResetPass(siswaNameReset : widget.siswa_name )));
                   }
-              }, child: Text("reset password"))
+              }, 
+              child: Text("reset password")),
+
+              ElevatedButton(onPressed: (){
+                {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> AddContact()));
+                  }
+              }, 
+              child: Text("add contact")),
+
+              ElevatedButton(onPressed: (){
+                {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> Contact_View()));
+                  }
+              }, 
+              child: Text("View Contact")),
+
+              ElevatedButton(onPressed: (){
+                {
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> Contact_View()));
+                  }
+              }, 
+              child: Text("profile")),
             ],
           ),
         )
