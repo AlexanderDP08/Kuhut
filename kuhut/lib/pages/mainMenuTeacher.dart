@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kuhut/imagePath.dart';
 import 'package:kuhut/pages/PageAddSoal.dart';
+import 'package:kuhut/pages/pageSetExamDate.dart';
 
 class MainMenuTeacher extends StatefulWidget {
   final String name;
@@ -56,8 +57,13 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                     // Image.asset("images/kuhutExam.png"),
                     // Image.asset("images/kuhutExam.png"),
                     IconButton(
-                      onPressed: () {},
-                      icon: Image.asset(t_path.contactLogo),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => pageSetExamDate()));
+                      },
+                      icon: Image.asset(t_path.calender),
                       iconSize: 100,
                     ),
                     IconButton(

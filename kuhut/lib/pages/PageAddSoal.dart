@@ -24,42 +24,45 @@ class _PageAddSoalState extends State<PageAddSoal> {
       appBar: AppBar(
         title: Text("Page Add Soal"),
       ),
-      body: Column(
-        children: [
-          Text("Add Soal"),
-          TextField(
-            controller: _soal,
-            decoration: InputDecoration(hintText: "Pertanyaan"),
-          ),
-          TextField(
-            controller: _ansA,
-            decoration: InputDecoration(hintText: "Jawaban A"),
-          ),
-          TextField(
-            controller: _ansB,
-            decoration: InputDecoration(hintText: "Jawaban B"),
-          ),
-          TextField(
-            controller: _ansC,
-            decoration: InputDecoration(hintText: "Jawaban C"),
-          ),
-          TextField(
-            controller: _rightAns,
-            decoration: InputDecoration(hintText: "Jawaban Benar"),
-          ),
-          ElevatedButton(
-              onPressed: () {
-                final soalBaru = addSoal(
-                    soal: _soal.text,
-                    ansA: _ansA.text,
-                    ansB: _ansB.text,
-                    ansC: _ansC.text,
-                    righAns: _rightAns.text);
-                DatabaseTeacher.tambahSoal(item: soalBaru);
-                Navigator.pop(context);
-              },
-              child: Text("Add Soal"))
-        ],
+      body: Container(
+        margin: EdgeInsets.all(10),
+        child: Column(
+          children: [
+            Text("Add Soal"),
+            TextField(
+              controller: _soal,
+              decoration: InputDecoration(hintText: "Pertanyaan"),
+            ),
+            TextField(
+              controller: _ansA,
+              decoration: InputDecoration(hintText: "Jawaban A"),
+            ),
+            TextField(
+              controller: _ansB,
+              decoration: InputDecoration(hintText: "Jawaban B"),
+            ),
+            TextField(
+              controller: _ansC,
+              decoration: InputDecoration(hintText: "Jawaban C"),
+            ),
+            TextField(
+              controller: _rightAns,
+              decoration: InputDecoration(hintText: "Jawaban Benar"),
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  final soalBaru = addSoal(
+                      soal: _soal.text,
+                      ansA: _ansA.text,
+                      ansB: _ansB.text,
+                      ansC: _ansC.text,
+                      righAns: _rightAns.text);
+                  DatabaseTeacher.tambahSoal(dataSoal: soalBaru);
+                  Navigator.pop(context);
+                },
+                child: Text("Add Soal"))
+          ],
+        ),
       ),
     );
   }

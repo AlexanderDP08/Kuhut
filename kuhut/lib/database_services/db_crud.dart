@@ -3,11 +3,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:kuhut/database_services/dataClass.dart';
+import 'package:kuhut/main.dart';
 
+final db = FirebaseFirestore.instance;
+String kelas = "";
 CollectionReference tbUser = FirebaseFirestore.instance.collection("tbUser");
 CollectionReference tbTeacher =
     FirebaseFirestore.instance.collection("tbTeacher");
 CollectionReference soal = FirebaseFirestore.instance.collection("soal");
+String teacherName = get_user.text.substring(0, get_user.text.indexOf('@'));
 
 class DatabaseUser {
   //write, read
@@ -27,19 +31,29 @@ class DatabaseUser {
 
 class DatabaseTeacher {
   //add soal
-  static Future<void> tambahSoal({required addSoal item}) async {
-    DocumentReference docRef = tbTeacher.doc("Soal Test");
+  static Future<void> tambahSoal({required addSoal dataSoal}) async {
+    await db
+        .collection('tbUser')
+        .doc(get_user.text.toString())
+        .get()
+        .then((DocumentSnapshot dsData) {
+      kelas = dsData['mengajar_kelas'];
+      tbTeacher
+          .doc(teacherName)
+          .set({"mengajar_kelas": kelas, "name": teacherName})
+          .whenComplete(() => print("Data berhasil di input"))
+          .catchError((e) => print(e));
 
-    // await tbTeacher
-    //     .add({
-    //       "id": "15",
-    //       "name": "Bank Soal"
-    //     })
-    //     .whenComplete(() => print("Data berhasil di input"))
-    //     .catchError((e) => print(e));
+      tambahSoalGuruX(item: dataSoal);
+    });
+  }
+
+  static Future<void> tambahSoalGuruX({required addSoal item}) async {
+    DocumentReference docRef = tbTeacher.doc(teacherName);
 
     await docRef
-        .set(item.toJson())
+        .collection("Soal_Matematika_tgl9")
+        .add(item.toJson())
         .whenComplete(() => print("Data berhasil di input"))
         .catchError((e) => print(e));
   }

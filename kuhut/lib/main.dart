@@ -24,14 +24,14 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
+TextEditingController get_user = TextEditingController();
+TextEditingController get_pass = TextEditingController();
+
 class _MyAppState extends State<MyApp> {
   Future<FirebaseApp> _initFirebase() async {
     FirebaseApp firebaseApp = await Firebase.initializeApp();
     return firebaseApp;
   }
-
-  TextEditingController get_user = TextEditingController();
-  TextEditingController get_pass = TextEditingController();
 
   void continueDialog(String text, String content) {
     Widget cancelButton = TextButton(
