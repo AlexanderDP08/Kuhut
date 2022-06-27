@@ -4,8 +4,8 @@ import 'package:kuhut/main.dart';
 
 final db = FirebaseFirestore.instance;
 CollectionReference tbUser = FirebaseFirestore.instance.collection("tbUser");
-CollectionReference tbTeacher =
-    FirebaseFirestore.instance.collection("tbTeacher");
+CollectionReference tbTeacher = FirebaseFirestore.instance.collection("tbTeacher");
+CollectionReference tbSiswa = FirebaseFirestore.instance.collection("tbSiswa");
 CollectionReference events = FirebaseFirestore.instance.collection("events");
 CollectionReference soal = FirebaseFirestore.instance.collection("soal");
 String kelas = "";
@@ -13,8 +13,19 @@ String teacherName = get_user.text.substring(0, get_user.text.indexOf('@'));
 
 class DatabaseUser {
   //write, read
-  static Stream<QuerySnapshot> getUserData() {
+  static Stream<QuerySnapshot> getUserData(String text) {
     return tbUser.snapshots(); //returning snapshot data
+  }
+
+  static Stream<QuerySnapshot> getUserDataSiswa(String namanya) {
+    //return tbSiswa.snapshots(); //returning snapshot data
+    if(namanya == " ")
+      return tbSiswa.snapshots();
+    else
+      return tbSiswa
+      .orderBy("nama")
+      .startAt([namanya]).endAt([namanya + '\uf8ff'])
+      .snapshots();
   }
 
   static Future<void> ubahData({required Login item}) async {

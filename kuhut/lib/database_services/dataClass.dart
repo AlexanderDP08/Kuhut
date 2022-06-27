@@ -66,3 +66,33 @@ class Event {
 
   // String toString() => title;
 }
+
+class siswa{
+  final String itemNama;
+  final String itemKelas;
+  final String itemKelamin;
+  final String itemTelp;
+  final String itemBirthday;
+
+  siswa({required this.itemNama,required this.itemKelas,required this.itemKelamin,required this.itemTelp,required this.itemBirthday});
+
+  Map<String, dynamic> toJson(){
+    return {
+      "nama" : itemNama,
+      "kelas" : itemKelas,
+      "kelamin" : itemKelamin,
+      "telp" : itemTelp,
+      "birthday" : itemBirthday,
+    };
+  }
+
+  factory siswa.fromJson(Map<String, dynamic> json){
+    return siswa(
+      itemNama: json['nama'],
+      itemKelas: json['kelas'],
+      itemKelamin: json['kelamin'],
+      itemTelp: json['telp'],
+      itemBirthday: json['birthday']
+    );
+  }
+}
