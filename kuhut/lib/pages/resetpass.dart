@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kuhut/database_services/dataClass.dart';
@@ -40,13 +39,13 @@ class _ResetpassState extends State<ResetPass> {
   }
    void continueDialog(String text, String content) {
     Widget cancelButton = TextButton(
-      child: Text("Batal"),
+      child: const Text("Batal"),
       onPressed: () {
        dismiss();
       },
     );
      Widget confirmButton = TextButton(
-      child: Text("Ubah"),
+      child: const Text("Ubah"),
       onPressed: () {
         gantiPassword();
       },
@@ -70,14 +69,14 @@ class _ResetpassState extends State<ResetPass> {
     return MaterialApp(
       home: Scaffold(
           appBar: AppBar(
-            title: Text("Siswa "),
+            title: const Text("Siswa "),
           ),
           body: Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Welcome, "),
+                const Text("Welcome, "),
                 Text(widget.siswaNameReset),
                 TextField(
                   showCursor: true,
@@ -88,11 +87,11 @@ class _ResetpassState extends State<ResetPass> {
                       Icons.lock,
                       size: 35,
                     ),
-                      border: OutlineInputBorder(),
+                      border: const OutlineInputBorder(),
                       hintText: "Input Your New Password",
                       labelText: "New Password",
                       suffixIcon: IconButton(
-                        icon: Icon(Icons.remove_red_eye),
+                        icon: const Icon(Icons.remove_red_eye),
                         onPressed: () {
                           setState(() {
                             //hide =true?  hide = false : hide = true
@@ -105,7 +104,7 @@ class _ResetpassState extends State<ResetPass> {
                         },
                       )),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 TextField(
                   controller: get_pass2,
                   obscureText: hide,
@@ -115,11 +114,11 @@ class _ResetpassState extends State<ResetPass> {
                       Icons.lock,
                       size: 35,
                     ),
-                      border: OutlineInputBorder(),
+                      border: const OutlineInputBorder(),
                       hintText: "Input Your Repeat New Password",
                       labelText: "Repeat New Password",
                       suffixIcon: IconButton(
-                        icon: Icon(Icons.remove_red_eye),
+                        icon: const Icon(Icons.remove_red_eye),
                         onPressed: () {
                           setState(() {
                             //hide =true?  hide = false : hide = true
@@ -153,7 +152,7 @@ class _ResetpassState extends State<ResetPass> {
                  
                   // final dtBaru = Login(itemJudul: lvJudul, itemIsi: lvIsi+" oke");
                   // Database.ubahData(item: dtBaru);
-                }, child: Text("RESET")),
+                }, child: const Text("RESET")),
               ],
             ),
           )),

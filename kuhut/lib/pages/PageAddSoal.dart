@@ -19,6 +19,17 @@ class _PageAddSoalState extends State<PageAddSoal> {
   final _rightAns = TextEditingController();
 
   @override
+  void dispose() {
+    // TODO: implement dispose
+    _soal.dispose();
+    _ansA.dispose();
+    _ansB.dispose();
+    _ansC.dispose();
+    _rightAns.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

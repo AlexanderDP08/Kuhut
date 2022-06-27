@@ -18,7 +18,7 @@ class _Contact_ViewState extends State<Contact_View> {
             title: const Text("View Contact"),
           ),
           body: Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: Column(
               children: [
                 const Text("view contact ini"),

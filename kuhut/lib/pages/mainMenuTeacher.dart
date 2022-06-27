@@ -21,7 +21,7 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
     return MaterialApp(
       home: Scaffold(
           appBar: AppBar(
-            title: Text("Teacher Home"),
+            title: const Text("Teacher Home"),
           ),
           body: SingleChildScrollView(
             child: Column(
@@ -61,7 +61,7 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => pageSetExamDate()));
+                                builder: (context) => const pageSetExamDate()));
                       },
                       icon: Image.asset(t_path.calender),
                       iconSize: 100,
@@ -71,7 +71,7 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => PageAddSoal()));
+                                builder: (context) => const PageAddSoal()));
                       },
                       icon: Image.asset(t_path.createExam),
                       iconSize: 100,

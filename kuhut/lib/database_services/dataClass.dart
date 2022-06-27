@@ -49,3 +49,20 @@ class addSoal {
         righAns: json['rightAns']);
   }
 }
+
+class Event {
+  final String title;
+  final String date;
+
+  Event({required this.title, required this.date});
+
+  Map<String, dynamic> toJson() {
+    return {"title": title, "date": date};
+  }
+
+  factory Event.fromJson(Map<String, dynamic> json) {
+    return Event(title: json['title'], date: json['date']);
+  }
+
+  // String toString() => title;
+}

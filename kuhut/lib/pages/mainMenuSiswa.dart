@@ -17,13 +17,13 @@ class _MainMenuSiswasState extends State<MainMenuSiswas> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Siswa "),
+          title: const Text("Siswa "),
         ),
         body : Container(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Welcome, "),
+              const Text("Welcome, "),
               Text(widget.siswa_name),
               ElevatedButton(onPressed: (){
                 {
@@ -31,28 +31,28 @@ class _MainMenuSiswasState extends State<MainMenuSiswas> {
                     builder: (context) => ResetPass(siswaNameReset : widget.siswa_name )));
                   }
               }, 
-              child: Text("reset password")),
+              child: const Text("reset password")),
 
               ElevatedButton(onPressed: (){
                 {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=> AddContact()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> const AddContact()));
                   }
               }, 
-              child: Text("add contact")),
+              child: const Text("add contact")),
 
               ElevatedButton(onPressed: (){
                 {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=> Contact_View()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> const Contact_View()));
                   }
               }, 
-              child: Text("View Contact")),
+              child: const Text("View Contact")),
 
               ElevatedButton(onPressed: (){
                 {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=> Contact_View()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> const Contact_View()));
                   }
               }, 
-              child: Text("profile")),
+              child: const Text("profile")),
             ],
           ),
         )

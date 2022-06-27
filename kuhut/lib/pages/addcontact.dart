@@ -13,11 +13,11 @@ class _AddContactState extends State<AddContact> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-            title: Text("add contact "),
+            title: const Text("add contact "),
           ),
           body: Container(
             child: Column(
-              children: [
+              children: const [
                 Text("add contact ini")
               ],
             ),
