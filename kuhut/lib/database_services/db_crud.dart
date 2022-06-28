@@ -5,7 +5,7 @@ import 'package:kuhut/main.dart';
 final db = FirebaseFirestore.instance;
 CollectionReference tbUser = FirebaseFirestore.instance.collection("tbUser");
 CollectionReference tbTeacher = FirebaseFirestore.instance.collection("tbTeacher");
-CollectionReference tbSiswa = FirebaseFirestore.instance.collection("tbSiswa");
+CollectionReference tbUser2 = FirebaseFirestore.instance.collection("tbUser");
 CollectionReference events = FirebaseFirestore.instance.collection("events");
 CollectionReference soal = FirebaseFirestore.instance.collection("soal");
 String kelas = "";
@@ -20,9 +20,9 @@ class DatabaseUser {
   static Stream<QuerySnapshot> getUserDataSiswa(String namanya) {
     //return tbSiswa.snapshots(); //returning snapshot data
     if(namanya == " ")
-      return tbSiswa.snapshots();
+      return tbUser2.snapshots();
     else
-      return tbSiswa
+      return tbUser2
       .orderBy("nama")
       .startAt([namanya]).endAt([namanya + '\uf8ff'])
       .snapshots();

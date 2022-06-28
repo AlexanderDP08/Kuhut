@@ -16,6 +16,6 @@ class _MakeLetterState extends State<MakeLetter> {
           title: Text("Make Letter Feature"),
         ),
       )
-    )
+    );
   }
 }
