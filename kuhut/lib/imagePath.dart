@@ -20,5 +20,11 @@ class ImageLetterPath{
   String LetterImage03 = "images/iconLetter/3.png";
   String LetterImage04 = "images/iconLetter/4.png";
   String LetterImage05 = "images/iconLetter/5.png";
-  String LetterImage06 = "images/iconLetter/6.png";
+  String LetterImage06 = "images/iconLetter/6.png"; //need 1 lagi letter
+}
+
+class imagePathkelas{
+  String kelas_7 = "images/iconKelas/kelas_7.JPG";
+  String kelas_8 = "images/iconKelas/kelas_8.JPG";
+  String kelas_9 = "images/iconKelas/kelas_9.JPG";
 }

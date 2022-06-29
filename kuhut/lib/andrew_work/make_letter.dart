@@ -19,6 +19,8 @@ class SendLetter extends StatefulWidget {
 class _SendLetterState extends State<SendLetter> {
   var t_path = teacherImagePath();
   var letter_path = ImageLetterPath();
+
+  var iconKelasPath = imagePathkelas();
   var stateOfDisable = true;
   String labelJudul = "Judul (Disabled, set date first)";
   String labelKeterangan = "Keterangan (Disabled, set date first)";
@@ -30,7 +32,10 @@ class _SendLetterState extends State<SendLetter> {
 
   var ChoosenImage = ""; //image yang akan dipilih
   //setting warna button
+
+  var ChoosenClass = ""; //class yang dipilih
   Color redColor = Colors.red;Color redColor2 = Colors.red;Color redColor3 = Colors.red;Color redColor4 = Colors.red;Color redColor5 = Colors.red;Color redColor6 = Colors.red;
+  Color redKelas1 = Colors.red; Color redKelas2 = Colors.red; Color redKelas3 = Colors.red;
 
   void changePicked(Color warna){
       warna = Colors.green;
@@ -48,7 +53,7 @@ class _SendLetterState extends State<SendLetter> {
     print("Random Value : " + random.toString());
   }
 
-  showAlertDialog(BuildContext context, String title, String message) {
+  showAlertDialog(BuildContext context, String title, String message, String type) {
 
     // set up the button
     Widget okButton = TextButton(
@@ -57,16 +62,14 @@ class _SendLetterState extends State<SendLetter> {
          Navigator.of(context, rootNavigator: true).pop();
        },
     );
-
-    // set up the AlertDialog
-    CupertinoAlertDialog alert = CupertinoAlertDialog(
+    if (type == "Cupertino"){
+      CupertinoAlertDialog alert = CupertinoAlertDialog(
       title: Text(title),
       content: Text(message),
       actions: [
         okButton,
       ],
     );
-
     // show the dialog
     showDialog(
       context: context,
@@ -74,6 +77,25 @@ class _SendLetterState extends State<SendLetter> {
         return alert;
       },
     );
+    }
+    else{
+       AlertDialog alert = AlertDialog(
+      title: Text(title),
+      content: Text(message),
+      actions: [
+        okButton,
+      ],
+    );
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+    }
+    // set up the AlertDialog
+    
   }
 
   showImageDialog (BuildContext context, String pathImage, String title, String message){
@@ -156,6 +178,11 @@ class _SendLetterState extends State<SendLetter> {
       }
       // return null if the text is valid
       return null;
+  }
+  void setWarna(Color x, Color y, Color z){
+    x = Colors.red;
+    y = Colors.red;
+    z = Colors.green;
   }
   @override
   Widget build(BuildContext context) {
@@ -357,19 +384,61 @@ class _SendLetterState extends State<SendLetter> {
                   ]
                 ),
               ),
-              
+              const SizedBox(height: 50,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  //ngga pake function setting background image ga bisa setState color not refreshed on button
+                  ElevatedButton.icon(onPressed: (){
+                    setState(() {
+                      ChoosenClass = "7";
+                      //setWarna(redKelas2, redKelas1, redKelas3);
+                      redKelas1 = Colors.green;
+
+                      redKelas2 = Colors.red;
+                      redKelas3 = Colors.red;
+                    });
+                    
+                    
+                  }, icon: Image.asset(iconKelasPath.kelas_7, width: 30, height: 50,), label: Text(""), style: ButtonStyle(backgroundColor: MaterialStateProperty.all(redKelas1)),),
+                  ElevatedButton.icon(onPressed: (){
+                     setState(() {
+                      ChoosenClass = "8";
+                      
+                      redKelas2 = Colors.green;
+
+                      redKelas1 = Colors.red;
+                      redKelas3 = Colors.red;
+                    });
+          
+                  }, icon: Image.asset(iconKelasPath.kelas_8, width: 30, height: 50,), label: Text(""), style: ButtonStyle(backgroundColor: MaterialStateProperty.all(redKelas2)),),
+                  ElevatedButton.icon(onPressed: (){
+                    setState(() {
+                      ChoosenClass = "9";
+                      
+                      redKelas3 = Colors.green;
+                      
+                      redKelas1 = Colors.red;
+                      redKelas2 = Colors.red;
+                    });
+                    
+                  }, icon: Image.asset(iconKelasPath.kelas_9, width: 30, height: 50,), label: Text(""), style: ButtonStyle(backgroundColor: MaterialStateProperty.all(redKelas3)),)
+                ],
+              ),
               ElevatedButton(
                   onPressed: () {
-                    if (isiCek(get_title, get_desc, formattedDate) && ChoosenImage!="") {
+                    if (isiCek(get_title, get_desc, formattedDate) && ChoosenImage!="" && ChoosenClass!= "") {
                       print("Get Judul : " + get_title.text);
                       print("Get description : " + get_desc.text);
                       print("Get Exprire Date : " + formattedDate);
                       print("Choosen Image : " + ChoosenImage);
-
-                      LetterGuru choosenLetter = LetterGuru(judul: get_title.text, deskripsi: get_desc.text, expireDate: formattedDate, templateImage: ChoosenImage);
+                      print("Choosen Class : " + ChoosenClass);
+                      LetterGuru choosenLetter = LetterGuru(judul: get_title.text, deskripsi: get_desc.text, expireDate: formattedDate, templateImage: ChoosenImage, kelas: ChoosenClass);
                       DatabaseLetter.addLetter(letterGuru: choosenLetter);
+
+                      showAlertDialog(context, "Sukses", "Data Telah diinput ke database", "Other");
                     } else {
-                      showAlertDialog(context, "Fill all field", "Please fill out all the field here");
+                      showAlertDialog(context, "Fill all field", "Please fill out all the field here", "Cupertino");
                     }
                     setState(() {
                       stateOfDisable = false;

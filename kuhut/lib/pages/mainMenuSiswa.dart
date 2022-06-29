@@ -3,6 +3,8 @@ import 'package:kuhut/pages/addcontact.dart';
 import 'package:kuhut/pages/resetpass.dart';
 import 'package:kuhut/pages/viewcontact.dart';
 
+import '../andrew_work/st_viewletter.dart';
+
 class MainMenuSiswas extends StatefulWidget {
   final String siswa_name;
   const MainMenuSiswas({Key? key, required this.siswa_name}) : super(key: key);
@@ -53,6 +55,13 @@ class _MainMenuSiswasState extends State<MainMenuSiswas> {
                   }
               }, 
               child: const Text("profile")),
+
+              ElevatedButton(onPressed: (){
+                {
+                   Navigator.push(context, MaterialPageRoute(builder: (context)=> const ViewLetter()));
+                }
+              }, 
+              child: const Text("cek letter")),
             ],
           ),
         )
