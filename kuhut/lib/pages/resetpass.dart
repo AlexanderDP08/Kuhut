@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kuhut/database_services/dataClass.dart';
 import 'package:kuhut/database_services/db_crud.dart';
+import 'package:kuhut/main.dart';
 
 class ResetPass extends StatefulWidget {
   final String siswaNameReset;
@@ -29,7 +30,7 @@ class _ResetpassState extends State<ResetPass> {
     );
   }
   void gantiPassword(){
-      final dtbaru = Login(email: widget.siswaNameReset+("@siswa"), password: get_pass.text.toString());
+      final dtbaru = Login(email: get_user.text.toString(), password: get_pass.text.toString());
       DatabaseUser.ubahData(item: dtbaru);
       dismiss();
       createToast("Data berhasil dirubah", Colors.green, 2);
@@ -37,14 +38,14 @@ class _ResetpassState extends State<ResetPass> {
   void dismiss(){
     Navigator.of(context, rootNavigator: true).pop();
   }
-   void continueDialog(String text, String content) {
+  void continueDialog(String text, String content) {
     Widget cancelButton = TextButton(
       child: const Text("Batal"),
       onPressed: () {
-       dismiss();
+      dismiss();
       },
     );
-     Widget confirmButton = TextButton(
+    Widget confirmButton = TextButton(
       child: const Text("Ubah"),
       onPressed: () {
         gantiPassword();
@@ -139,7 +140,7 @@ class _ResetpassState extends State<ResetPass> {
                     //  DatabaseUser.ubahData(item: dtbaru);
                   }
                   else{
-                     Fluttertoast.showToast(
+                    Fluttertoast.showToast(
                         msg: "Repeat password tidak sama dengan set password",
                         toastLength: Toast.LENGTH_SHORT,
                         gravity: ToastGravity.CENTER,
@@ -149,7 +150,7 @@ class _ResetpassState extends State<ResetPass> {
                         fontSize: 16.0
                     );
                   }
-                 
+                
                   // final dtBaru = Login(itemJudul: lvJudul, itemIsi: lvIsi+" oke");
                   // Database.ubahData(item: dtBaru);
                 }, child: const Text("RESET")),

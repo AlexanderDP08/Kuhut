@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:kuhut/database_services/dataClass.dart';
 import 'package:kuhut/main.dart';
 
@@ -6,15 +7,35 @@ final db = FirebaseFirestore.instance;
 CollectionReference tbUser = FirebaseFirestore.instance.collection("tbUser");
 CollectionReference tbTeacher = FirebaseFirestore.instance.collection("tbTeacher");
 CollectionReference tbUser2 = FirebaseFirestore.instance.collection("tbUser");
+CollectionReference tbSiswaProfile = FirebaseFirestore.instance.collection("tbUser");
 CollectionReference events = FirebaseFirestore.instance.collection("events");
 CollectionReference soal = FirebaseFirestore.instance.collection("soal");
 String kelas = "";
+String kelass = "";
+String birthdays = "";
+String namas = "";
+String telps = "";
+String kelamins = "";
 String teacherName = get_user.text.substring(0, get_user.text.indexOf('@'));
 
 class DatabaseUser {
   //write, read
   static Stream<QuerySnapshot> getUserData(String text) {
     return tbUser.snapshots(); //returning snapshot data
+  }
+
+  static Future<void> getUserProfile(String atext) async{
+    await db
+        .collection('tbUser')
+        .doc(atext)
+        .get()
+        .then((DocumentSnapshot dsData) {
+      kelass = dsData['kelas'];
+      birthdays = dsData['bithday'];
+      telps = dsData['telp'];
+      namas = dsData['nama'];
+      kelamins = dsData['kelamin'];
+    });
   }
 
   static Stream<QuerySnapshot> getUserDataSiswa(String namanya) {
@@ -30,6 +51,30 @@ class DatabaseUser {
 
   static Future<void> ubahData({required Login item}) async {
     DocumentReference docRef = tbUser.doc(item.email);
+
+    await docRef
+        .update(item.toJson())
+        .whenComplete(() => print("data berhasil diubah"))
+        .catchError((e) => print(e));
+  }
+  static Future<void> ubahDataProfilenama({required editprofilenama item}) async {
+    DocumentReference docRef = tbUser.doc(item.aemail);
+
+    await docRef
+        .update(item.toJson())
+        .whenComplete(() => print("data berhasil diubah"))
+        .catchError((e) => print(e));
+  }
+  static Future<void> ubahDataProfileday({required editprofileday item}) async {
+    DocumentReference docRef = tbUser.doc(item.aemail);
+
+    await docRef
+        .update(item.toJson())
+        .whenComplete(() => print("data berhasil diubah"))
+        .catchError((e) => print(e));
+  }
+  static Future<void> ubahDataProfiletelp({required editprofiletelp item}) async {
+    DocumentReference docRef = tbUser.doc(item.aemail);
 
     await docRef
         .update(item.toJson())

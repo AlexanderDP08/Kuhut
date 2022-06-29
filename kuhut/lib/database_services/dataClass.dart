@@ -96,3 +96,58 @@ class siswa{
     );
   }
 }
+
+class editprofilenama {
+  final String anama;
+  final String aemail;
+
+  editprofilenama({required this.anama, required this.aemail});
+  //toJSON, or toDataClass Firebase
+  Map<String, dynamic> toJson() {
+    //json
+    return {"nama": anama, "email": aemail};
+  }
+
+  //form TambahData
+  //fromJSON
+  factory editprofilenama.fromJSON(Map<String, dynamic> json) {
+    return editprofilenama(anama: json['nama'], aemail: json['email']);
+  }
+}
+
+class editprofileday{
+  final String abirthday;
+  final String aemail;
+
+  editprofileday({required this.abirthday, required this.aemail});
+  //toJSON, or toDataClass Firebase
+  Map<String, dynamic> toJson() {
+    //json
+    return {"birthday": abirthday, "email": aemail};
+  }
+
+  //form TambahData
+  //fromJSON
+  factory editprofileday.fromJSON(Map<String, dynamic> json) {
+    return editprofileday( abirthday: json['birthday'], aemail: json['email']);
+  }
+}
+
+class editprofiletelp {
+  final String atelp;
+  final String aemail;
+
+  editprofiletelp({required this.atelp, required this.aemail});
+  //toJSON, or toDataClass Firebase
+  Map<String, dynamic> toJson() {
+    //json
+    return { "telp": atelp, "email": aemail};
+  }
+
+  //form TambahData
+  //fromJSON
+  factory editprofiletelp.fromJSON(Map<String, dynamic> json) {
+    return editprofiletelp(atelp: json['telp'], aemail: json['email']);
+  }
+}
+
