@@ -96,3 +96,28 @@ class siswa{
     );
   }
 }
+
+class LetterGuru{
+  final String judul;
+  final String deskripsi;
+  final String expireDate; 
+  final String templateImage;
+
+
+  LetterGuru({
+    required this.judul, required this.deskripsi, required this.expireDate, required this.templateImage
+  });
+
+  Map<String, dynamic> toJson(){
+    return {
+      "judul" : judul,
+      "deskripsi" : deskripsi,
+      "expireDate" : expireDate,
+      "templateImage" : templateImage
+    };
+  }
+  
+  factory LetterGuru.fromJSON(Map<String, dynamic> json){
+    return LetterGuru(judul: json['judul'], deskripsi: json['deskripsi'], expireDate: json['expireDate'], templateImage: json['templateImage']);
+  }
+}

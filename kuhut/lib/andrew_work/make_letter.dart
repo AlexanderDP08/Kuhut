@@ -1,8 +1,13 @@
 import 'dart:math';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:kuhut/database_services/dataClass.dart';
+import 'package:kuhut/database_services/db_crud.dart';
+import 'package:kuhut/imagePath.dart';
 import 'package:kuhut/main.dart';
+import 'package:photo_view/photo_view.dart';
 
 class SendLetter extends StatefulWidget {
   const SendLetter({Key? key}) : super(key: key);
@@ -12,6 +17,7 @@ class SendLetter extends StatefulWidget {
 }
 
 class _SendLetterState extends State<SendLetter> {
+  var t_path = teacherImagePath();
   var stateOfDisable = true;
   String labelJudul = "Judul (Disabled, set date first)";
   String labelKeterangan = "Keterangan (Disabled, set date first)";
@@ -21,7 +27,79 @@ class _SendLetterState extends State<SendLetter> {
   DateTime selectedDate = DateTime.now();
   String formattedDate = "";
 
-  String expDate = "null, pls set";
+  var ChoosenImage = ""; //image yang akan dipilih
+  //setting warna button
+  Color redColor = Colors.red;Color redColor2 = Colors.red;Color redColor3 = Colors.red;Color redColor4 = Colors.red;Color redColor5 = Colors.red;Color redColor6 = Colors.red;
+
+  void changePicked(Color warna){
+      warna = Colors.green;
+  }
+  
+
+  void ContinueDialog(String tipe){
+    Widget cancelButton = TextButton(
+      child: Text("Batal"),
+      onPressed: (){
+        Navigator.of(context, rootNavigator: true).pop();
+      },
+    );
+
+    var random = new Random().nextInt(2);
+    print("Random Value : " + random.toString());
+  }
+
+  showAlertDialog(BuildContext context, String title, String message) {
+
+    // set up the button
+    Widget okButton = TextButton(
+      child: Text("OK"),
+      onPressed: () {
+         Navigator.of(context, rootNavigator: true).pop();
+       },
+    );
+
+    // set up the AlertDialog
+    CupertinoAlertDialog alert = CupertinoAlertDialog(
+      title: Text(title),
+      content: Text(message),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
+  showImageDialog (BuildContext context, String pathImage, String title, String message){
+    Widget get_img = Image.asset(pathImage);
+    Widget okButton = TextButton(
+      child: Text("OK"),
+      onPressed: () {
+         Navigator.of(context, rootNavigator: true).pop();
+       },
+    );
+
+    AlertDialog alert = AlertDialog(
+      title: Text(title),
+      content: Text(message),
+      actions: [
+        get_img,
+        okButton
+      ],
+    );
+    showDialog(context: context, builder: (BuildContext context){
+      return alert;
+    });
+  }
+  
+
+  String expDate = "set expired date";
   var _text = '';
 
   var _text2 = '';
@@ -44,6 +122,7 @@ class _SendLetterState extends State<SendLetter> {
         print("Hari yang dipilih : " + formattedDate);
         expDate = "Expiring : " + formattedDate;
         labelJudul = "Judul";
+        labelKeterangan = "Keterangan";
       });
     }
   }
@@ -126,28 +205,177 @@ class _SendLetterState extends State<SendLetter> {
                     errorText: _errorTextKeterangan),
                     onChanged: (text) => setState(() => _text2),
               ),
-              Text("Expired Date : "),
+              const SizedBox(height: 20,),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue)
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children : [
+                    Column(
+                      children: [
+                        GestureDetector(child: Image.asset(t_path.attendance, width: 50, height: 100,), onTap: (){
+                          showImageDialog(context, t_path.attendance, "Preview Template 1", "Zoomed Image");
+                        },), 
+                        ElevatedButton(onPressed: (){
+                         setState(() {//gak bisa di parsing function
+                           redColor = Colors.green;
+
+                           redColor2 = Colors.red;
+                           redColor3 = Colors.red;
+                           redColor4 = Colors.red;
+                           redColor5 = Colors.red;
+                           redColor6 = Colors.red;
+                             ChoosenImage = "1";
+                         });
+                           
+                        }, child: Text("Pick"), style: ButtonStyle(backgroundColor: MaterialStateProperty.all(redColor)))
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        GestureDetector(child: Image.asset(t_path.attendance, width: 50, height: 100,), onTap: (){
+                          showImageDialog(context, t_path.attendance, "Preview Template 2", "Zoomed Image");
+                        },),
+                        ElevatedButton(onPressed: (){
+                           setState(() {//gak bisa di parsing function
+                           redColor2 = Colors.green;
+
+                           redColor = Colors.red;
+                           redColor3 = Colors.red;
+                           redColor4 = Colors.red;
+                           redColor5 = Colors.red;
+                           redColor6 = Colors.red;
+                             ChoosenImage = "2";
+                         });
+                        }, child: Text("Pick"), style: ButtonStyle(backgroundColor: MaterialStateProperty.all(redColor2)))
+                      ],
+                    )
+                      
+                  ]
+                ),
+              ),
+                Container(
+                   decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue)
+                ),
+                  child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children : [
+                    Column(
+                      children: [
+                        GestureDetector(child: Image.asset(t_path.attendance, width: 50, height: 100,), onTap: (){
+                          showImageDialog(context, t_path.attendance, "Preview Template 3", "Zoomed Image");
+                        },),
+                        ElevatedButton(onPressed: (){
+                           setState(() {//gak bisa di parsing function
+                           redColor3 = Colors.green;
+
+                           redColor = Colors.red;
+                           redColor2 = Colors.red;
+                           redColor4 = Colors.red;
+                           redColor5 = Colors.red;
+                           redColor6 = Colors.red;
+
+                          ChoosenImage = "3";
+                         });
+                        }, child: Text("Pick"), style: ButtonStyle(backgroundColor: MaterialStateProperty.all(redColor3)))
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        GestureDetector(child: Image.asset(t_path.attendance, width: 50, height: 100,), onTap: (){
+                          showImageDialog(context, t_path.attendance, "Preview Template 4", "Zoomed Image");
+                        },),
+                        ElevatedButton(onPressed: (){
+                           setState(() {//gak bisa di parsing function
+                           redColor4 = Colors.green;
+
+                           redColor = Colors.red;
+                           redColor2 = Colors.red;
+                           redColor3 = Colors.red;
+                           redColor5 = Colors.red;
+                           redColor6 = Colors.red;
+                             ChoosenImage = "4";
+                         });
+                        }, child: Text("Pick"), style: ButtonStyle(backgroundColor: MaterialStateProperty.all(redColor4)))
+                      ],
+                    )
+                      
+                  ]
+                              ),
+                ),Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.blue)
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children : [
+                    Column(
+                      children: [
+                       GestureDetector(child: Image.asset(t_path.attendance, width: 50, height: 100,), onTap: (){
+                          showImageDialog(context, t_path.attendance, "Preview Template 5", "Zoomed Image");
+                        },),
+                        ElevatedButton(onPressed: (){
+                          changePicked(redColor5);
+                           setState(() {//gak bisa di parsing function
+                           redColor5 = Colors.green;
+
+                           redColor = Colors.red;
+                           redColor2 = Colors.red;
+                           redColor3 = Colors.red;
+                           redColor4 = Colors.red;
+                           redColor6 = Colors.red;
+                              ChoosenImage = "5";
+                         });
+                        }, child: Text("Pick"), style: ButtonStyle(backgroundColor: MaterialStateProperty.all(redColor5)))
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        GestureDetector(child: Image.asset(t_path.attendance, width: 50, height: 100,), onTap: (){
+                          showImageDialog(context, t_path.attendance, "Preview Template 6", "Zoomed Image");
+                        },),
+                       ElevatedButton(onPressed: (){
+                         setState(() {//gak bisa di parsing function
+                           redColor6 = Colors.green;
+
+                           redColor  = Colors.red;
+                           redColor2 = Colors.red;
+                           redColor3 = Colors.red;
+                           redColor4 = Colors.red;
+                           redColor5 = Colors.red;
+
+                           ChoosenImage = "6";
+                         });
+                       }, child: Text("Pick"), style: ButtonStyle(backgroundColor: MaterialStateProperty.all(redColor6)))
+                      ],
+                    )
+                      
+                  ]
+                ),
+              ),
+              
               ElevatedButton(
                   onPressed: () {
-                    // print("formatted date : " + formattedDate);
-                    // if (formattedDate!=""){
-                    //   setState(() {
-                    //     stateOfDisable = false;
-                    //   });
-                    // }
-                    // if (isiCek(get_title, get_desc, formattedDate)) {
-                    //   print("Get Judul : " + get_title.text);
-                    //   print("Get description : " + get_desc.text);
-                    //   print("Get Exprire Date : " + formattedDate);
-                    // } else {
-                    //   print("Masukkan semua input terlebih dahulu");
-                    // }
+                    if (isiCek(get_title, get_desc, formattedDate) && ChoosenImage!="") {
+                      print("Get Judul : " + get_title.text);
+                      print("Get description : " + get_desc.text);
+                      print("Get Exprire Date : " + formattedDate);
+                      print("Choosen Image : " + ChoosenImage);
+
+                      LetterGuru choosenLetter = LetterGuru(judul: get_title.text, deskripsi: get_desc.text, expireDate: formattedDate, templateImage: ChoosenImage);
+                      DatabaseLetter.addLetter(letterGuru: choosenLetter);
+                    } else {
+                      showAlertDialog(context, "Fill all field", "Please fill out all the field here");
+                    }
                     setState(() {
                       stateOfDisable = false;
                       labelKeterangan = "absdad";
                     });
                   },
-                  child: Text("Input Letter"))
+                  child: Text("Input Letter")),
             ],
           ),
         ),

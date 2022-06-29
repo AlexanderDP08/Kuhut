@@ -75,3 +75,17 @@ class DatabaseTeacher {
         .catchError((e) => print(e));
   }
 }
+
+class DatabaseLetter{
+  //add letter
+    static Future<void> addLetter({required LetterGuru letterGuru}) async {
+    CollectionReference pathLetter = FirebaseFirestore.instance.collection("Letter");
+    DocumentReference docRef = pathLetter.doc();
+   
+    await pathLetter
+        //.collection("asd")
+        .add(letterGuru.toJson())
+        .whenComplete(() => print("Data berhasil di input"))
+        .catchError((e) => print(e));
+  }
+}
