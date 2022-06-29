@@ -17,10 +17,9 @@ class AddContact extends StatefulWidget {
 
 TextEditingController get_namas = TextEditingController();
 TextEditingController get_telps = TextEditingController();
-TextEditingController get_days = TextEditingController();
-DateTime selectedDate = DateTime(2001);
+DateTime selectedDate = DateTime(1500);
 String formattedDate = "";
-String expDate = "null, pls set";
+String expDate = "Date";
 var stateOfDisable = true;
 String labelJudul = "Judul (Disabled, set date first)";
 String labelKeterangan = "Keterangan (Disabled, set date first)";
@@ -59,19 +58,19 @@ class _AddContactState extends State<AddContact> {
   void gantiPassword() {
     if (get_namas.text.toString() == "") {
       if (get_telps.text.toString() == "") {
-        if (get_days.text.toString() == "") {
+        if (formattedDate.toString() == "") {
           //
         } else {
           //day
           final dtbaru = editprofileday(
-              abirthday: get_days.text.toString(),
+              abirthday: formattedDate.toString(),
               aemail: get_user.text.toString());
           DatabaseUser.ubahDataProfileday(item: dtbaru);
           dismiss();
           createToast("Data berhasil dirubah", Colors.green, 2);
         }
       } else {
-        if (get_days.text.toString() == "") {
+        if (formattedDate.toString() == "") {
           //telp
           final dtbaru = editprofiletelp(
               atelp: get_telps.text.toString(),
@@ -82,7 +81,7 @@ class _AddContactState extends State<AddContact> {
         } else {
           //telp day
           final dtbaru = editprofileday(
-              abirthday: get_days.text.toString(),
+              abirthday: formattedDate.toString(),
               aemail: get_user.text.toString());
           DatabaseUser.ubahDataProfileday(item: dtbaru);
           dismiss();
@@ -98,7 +97,7 @@ class _AddContactState extends State<AddContact> {
       }
     } else {
       if (get_telps.text.toString() == "") {
-        if (get_days.text.toString() == "") {
+        if (formattedDate.toString() == "") {
           //nama
           final dtbaru = editprofilenama(
               anama: get_namas.text.toString(),
@@ -116,14 +115,14 @@ class _AddContactState extends State<AddContact> {
           createToast("Data berhasil dirubah", Colors.green, 2);
 
           final dtbaru2 = editprofileday(
-              abirthday: get_days.text.toString(),
+              abirthday: formattedDate.toString(),
               aemail: get_user.text.toString());
           DatabaseUser.ubahDataProfileday(item: dtbaru2);
           dismiss();
           createToast("Data berhasil dirubah", Colors.green, 2);
         }
       } else {
-        if (get_days.text.toString() == "") {
+        if (formattedDate.toString() == "") {
           //nama telp
           final dtbaru = editprofilenama(
               anama: get_namas.text.toString(),
@@ -155,7 +154,7 @@ class _AddContactState extends State<AddContact> {
           createToast("Data berhasil dirubah", Colors.green, 2);
 
           final dtbaru3 = editprofileday(
-              abirthday: get_days.text.toString(),
+              abirthday: formattedDate.toString(),
               aemail: get_user.text.toString());
           DatabaseUser.ubahDataProfileday(item: dtbaru3);
           dismiss();
@@ -239,15 +238,6 @@ class _AddContactState extends State<AddContact> {
                 ),
               ),
               const SizedBox(height: 20),
-              TextField(
-                showCursor: true,
-                controller: get_days,
-                decoration: const InputDecoration(
-                  border: const OutlineInputBorder(),
-                  hintText: "Edit Day",
-                  labelText: "Day",
-                ),
-              ),
               ElevatedButton(
                   onPressed: () {
                     continueDialog("Change Password",

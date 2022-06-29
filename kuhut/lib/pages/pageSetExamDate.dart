@@ -1,10 +1,12 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:kuhut/database_services/dataClass.dart';
 import 'package:kuhut/database_services/db_crud.dart';
+import 'package:kuhut/main.dart';
 
 class pageSetExamDate extends StatefulWidget {
   const pageSetExamDate({Key? key}) : super(key: key);
@@ -18,6 +20,7 @@ class _pageSetExamDateState extends State<pageSetExamDate> {
   CalendarFormat format = CalendarFormat.month;
   DateTime selectedDay = DateTime.now();
   DateTime focusedDay = DateTime.now();
+  String selectedDayFormatted = "";
 
   TextEditingController _eventController = TextEditingController();
 
@@ -31,11 +34,19 @@ class _pageSetExamDateState extends State<pageSetExamDate> {
     return selectedEvents[date] ?? [];
   }
 
+  Stream<QuerySnapshot<Object?>> onSearch() {
+    setState(() {});
+    selectedDayFormatted = DateFormat('dd-MM-yyyy').format(focusedDay);
+    return DatabaseTeacher.getDate(selectedDayFormatted);
+  }
+
   @override
   void dispose() {
     _eventController.dispose();
     super.dispose();
   }
+
+  int _jumlah = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -64,14 +75,14 @@ class _pageSetExamDateState extends State<pageSetExamDate> {
                 selectedDay = selectDay;
                 focusedDay = focusDay;
               });
-              String formattedDate = DateFormat('dd-MM-yyyy').format(selectDay);
-              print(formattedDate);
+              selectedDayFormatted = DateFormat('dd-MM-yyyy').format(selectDay);
+              print(selectedDayFormatted);
             },
             selectedDayPredicate: (DateTime date) {
               return isSameDay(selectedDay, date);
             },
 
-            eventLoader: _getEventsfromDay,
+            // eventLoader: _getEventsfromDay,
 
             //To style the Calendar
             calendarStyle: CalendarStyle(
@@ -109,13 +120,59 @@ class _pageSetExamDateState extends State<pageSetExamDate> {
               ),
             ),
           ),
-          ..._getEventsfromDay(selectedDay).map(
-            (Event event) => ListTile(
-              title: Text(
-                event.title,
-              ),
+          Expanded(
+            child: StreamBuilder<QuerySnapshot>(
+              stream: onSearch(),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Text('ERROR');
+                } else if (snapshot.hasData || snapshot.data != null) {
+                  return ListView.separated(
+                      shrinkWrap: true,
+                      itemBuilder: ((context, index) {
+                        DocumentSnapshot dsData = snapshot.data!.docs[index];
+                        String lvJudul = dsData['title'];
+                        String lvGuru = dsData['teacher'];
+                        _jumlah = snapshot.data!.docs.length;
+                        return ListTile(
+                          // onTap: () {
+                          //   final dtBaru = itemCatatan(
+                          //       itemJudul: lvJudul, itemIsi: lvIsi + "n");
+                          //   // Database.ubahData(item: dtBaru);
+                          //   Navigator.push(
+                          //       context,
+                          //       MaterialPageRoute(
+                          //           builder: (context) => detData(
+                          //                 dataDet: dtBaru,
+                          //               )));
+                          // },
+                          // onLongPress: () {
+                          //   Database.hapusData(judulhapus: lvJudul);
+                          // },
+                          title: Text(lvJudul),
+                          subtitle: Text(lvGuru),
+                        );
+                      }),
+                      separatorBuilder: (context, index) =>
+                          SizedBox(height: 8.0),
+                      itemCount: snapshot.data!.docs.length);
+                }
+                return Center(
+                  child: CircularProgressIndicator(
+                    valueColor:
+                        AlwaysStoppedAnimation<Color>(Colors.pinkAccent),
+                  ),
+                );
+              },
             ),
           ),
+          // ..._getEventsfromDay(selectedDay).map(
+          //   (Event event) => ListTile(
+          //     title: Text(
+          //       event.title,
+          //     ),
+          //   ),
+          // ),
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
@@ -139,22 +196,26 @@ class _pageSetExamDateState extends State<pageSetExamDate> {
                     if (selectedEvents[selectedDay] != null) {
                       String formattedDate =
                           DateFormat('dd-MM-yyyy').format(selectedDay);
-                      selectedEvents[selectedDay]?.add(
-                        Event(
-                            title: _eventController.text.toString(),
-                            date: formattedDate),
-                      );
+                      // selectedEvents[selectedDay]?.add(
+                      //   Event(
+                      //       title: _eventController.text.toString(),
+                      //       date: formattedDate),
+                      // );
                       final data = Event(
-                          title: _eventController.text, date: formattedDate);
+                          title: _eventController.text,
+                          date: formattedDate,
+                          name: teacherName);
                       DatabaseTeacher.setDate(event: data);
                     } else {
                       String formattedDate =
                           DateFormat('dd-MM-yyyy').format(selectedDay);
-                      selectedEvents[selectedDay] = [
-                        Event(title: _eventController.text, date: formattedDate)
-                      ];
+                      // selectedEvents[selectedDay] = [
+                      //   Event(title: _eventController.text, date: formattedDate)
+                      // ];
                       final data = Event(
-                          title: _eventController.text, date: formattedDate);
+                          title: _eventController.text,
+                          date: formattedDate,
+                          name: teacherName);
                       DatabaseTeacher.setDate(event: data);
                     }
                   }

@@ -53,18 +53,18 @@ class addSoal {
 class Event {
   final String title;
   final String date;
+  final String name;
 
-  Event({required this.title, required this.date});
+  Event({required this.title, required this.date, required this.name});
 
   Map<String, dynamic> toJson() {
-    return {"title": title, "date": date};
+    return {"title": title, "date": date, "teacher": name};
   }
 
   factory Event.fromJson(Map<String, dynamic> json) {
-    return Event(title: json['title'], date: json['date']);
+    return Event(
+        title: json['title'], date: json['date'], name: json['teacher']);
   }
-
-  // String toString() => title;
 }
 
 class siswa{
@@ -151,3 +151,27 @@ class editprofiletelp {
   }
 }
 
+class LetterGuru{
+  final String judul;
+  final String deskripsi;
+  final String expireDate; 
+  final String templateImage;
+
+
+  LetterGuru({
+    required this.judul, required this.deskripsi, required this.expireDate, required this.templateImage
+  });
+
+  Map<String, dynamic> toJson(){
+    return {
+      "judul" : judul,
+      "deskripsi" : deskripsi,
+      "expireDate" : expireDate,
+      "templateImage" : templateImage
+    };
+  }
+  
+  factory LetterGuru.fromJSON(Map<String, dynamic> json){
+    return LetterGuru(judul: json['judul'], deskripsi: json['deskripsi'], expireDate: json['expireDate'], templateImage: json['templateImage']);
+  }
+}

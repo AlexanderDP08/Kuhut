@@ -13,3 +13,12 @@ class teacherImagePath {
   String viewScore = "images/iconMenuTeacher/ngambil_asal/viewScore.jpg";
   String calender = "images/iconMenuTeacher/ngambil_asal/asset_calender.png";
 }
+
+class ImageLetterPath{
+  String LetterImage01 = "images/iconLetter/1.png";
+  String LetterImage02 = "images/iconLetter/2.png";
+  String LetterImage03 = "images/iconLetter/3.png";
+  String LetterImage04 = "images/iconLetter/4.png";
+  String LetterImage05 = "images/iconLetter/5.png";
+  String LetterImage06 = "images/iconLetter/6.png";
+}

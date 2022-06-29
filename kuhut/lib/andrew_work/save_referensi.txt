@@ -3,3 +3,7 @@ https://stackoverflow.com/questions/44490622/disable-a-text-edit-field-in-flutte
 Validasi text field ketika belum ada yang terpenuhi, setState() boolean di textfield enable tidak bekerja
 https://codewithandrea.com/articles/flutter-text-field-form-validation/ 
 
+Alert Button
+https://stackoverflow.com/questions/53844052/how-to-make-an-alertdialog-in-flutter
+
+flutter pub add photo_view
