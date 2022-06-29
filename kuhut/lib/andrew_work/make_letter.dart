@@ -18,6 +18,7 @@ class SendLetter extends StatefulWidget {
 
 class _SendLetterState extends State<SendLetter> {
   var t_path = teacherImagePath();
+  var letter_path = ImageLetterPath();
   var stateOfDisable = true;
   String labelJudul = "Judul (Disabled, set date first)";
   String labelKeterangan = "Keterangan (Disabled, set date first)";
@@ -35,7 +36,6 @@ class _SendLetterState extends State<SendLetter> {
       warna = Colors.green;
   }
   
-
   void ContinueDialog(String tipe){
     Widget cancelButton = TextButton(
       child: Text("Batal"),
@@ -77,7 +77,7 @@ class _SendLetterState extends State<SendLetter> {
   }
 
   showImageDialog (BuildContext context, String pathImage, String title, String message){
-    Widget get_img = Image.asset(pathImage);
+    Widget get_img = Image.asset(pathImage, width: 500, height: 300,);
     Widget okButton = TextButton(
       child: Text("OK"),
       onPressed: () {
@@ -215,8 +215,8 @@ class _SendLetterState extends State<SendLetter> {
                   children : [
                     Column(
                       children: [
-                        GestureDetector(child: Image.asset(t_path.attendance, width: 50, height: 100,), onTap: (){
-                          showImageDialog(context, t_path.attendance, "Preview Template 1", "Zoomed Image");
+                        GestureDetector(child: Image.asset(letter_path.LetterImage01, width: 50, height: 100,), onTap: (){
+                          showImageDialog(context, letter_path.LetterImage01, "Preview Template 1", "Zoomed Image");
                         },), 
                         ElevatedButton(onPressed: (){
                          setState(() {//gak bisa di parsing function
@@ -235,8 +235,8 @@ class _SendLetterState extends State<SendLetter> {
                     ),
                     Column(
                       children: [
-                        GestureDetector(child: Image.asset(t_path.attendance, width: 50, height: 100,), onTap: (){
-                          showImageDialog(context, t_path.attendance, "Preview Template 2", "Zoomed Image");
+                        GestureDetector(child: Image.asset(letter_path.LetterImage02, width: 50, height: 100,), onTap: (){
+                          showImageDialog(context, letter_path.LetterImage02, "Preview Template 2", "Zoomed Image");
                         },),
                         ElevatedButton(onPressed: (){
                            setState(() {//gak bisa di parsing function
@@ -265,8 +265,8 @@ class _SendLetterState extends State<SendLetter> {
                   children : [
                     Column(
                       children: [
-                        GestureDetector(child: Image.asset(t_path.attendance, width: 50, height: 100,), onTap: (){
-                          showImageDialog(context, t_path.attendance, "Preview Template 3", "Zoomed Image");
+                        GestureDetector(child: Image.asset(letter_path.LetterImage03, width: 50, height: 100,), onTap: (){
+                          showImageDialog(context,letter_path.LetterImage03, "Preview Template 3", "Zoomed Image");
                         },),
                         ElevatedButton(onPressed: (){
                            setState(() {//gak bisa di parsing function
@@ -285,8 +285,8 @@ class _SendLetterState extends State<SendLetter> {
                     ),
                     Column(
                       children: [
-                        GestureDetector(child: Image.asset(t_path.attendance, width: 50, height: 100,), onTap: (){
-                          showImageDialog(context, t_path.attendance, "Preview Template 4", "Zoomed Image");
+                        GestureDetector(child: Image.asset(letter_path.LetterImage04, width: 50, height: 100,), onTap: (){
+                          showImageDialog(context, letter_path.LetterImage04, "Preview Template 4", "Zoomed Image");
                         },),
                         ElevatedButton(onPressed: (){
                            setState(() {//gak bisa di parsing function
@@ -302,9 +302,8 @@ class _SendLetterState extends State<SendLetter> {
                         }, child: Text("Pick"), style: ButtonStyle(backgroundColor: MaterialStateProperty.all(redColor4)))
                       ],
                     )
-                      
                   ]
-                              ),
+                  ),
                 ),Container(
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.blue)
@@ -314,8 +313,9 @@ class _SendLetterState extends State<SendLetter> {
                   children : [
                     Column(
                       children: [
-                       GestureDetector(child: Image.asset(t_path.attendance, width: 50, height: 100,), onTap: (){
-                          showImageDialog(context, t_path.attendance, "Preview Template 5", "Zoomed Image");
+                       GestureDetector(child: Image.asset(letter_path.LetterImage05, width: 50, height: 100,), onTap: (){
+                          //showImageDialog(context, letter_path.LetterImage05, "Preview Template 5", "Zoomed Image");
+                            Expanded(child: showImageDialog(context, letter_path.LetterImage05, "Preview Template 5", "Zoomed Image"));
                         },),
                         ElevatedButton(onPressed: (){
                           changePicked(redColor5);
@@ -335,7 +335,8 @@ class _SendLetterState extends State<SendLetter> {
                     Column(
                       children: [
                         GestureDetector(child: Image.asset(t_path.attendance, width: 50, height: 100,), onTap: (){
-                          showImageDialog(context, t_path.attendance, "Preview Template 6", "Zoomed Image");
+                          Expanded(child: showImageDialog(context, t_path.attendance, "Preview Template 6", "Zoomed Image"));
+                          
                         },),
                        ElevatedButton(onPressed: (){
                          setState(() {//gak bisa di parsing function

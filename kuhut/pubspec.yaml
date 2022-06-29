@@ -70,7 +70,11 @@ flutter:
     - images/iconMenuTeacher/ngambil_asal/scheduleImage.jfif
     - images/iconMenuTeacher/ngambil_asal/sendLetter.jpg
     - images/iconMenuTeacher/ngambil_asal/viewScore.jpg
-    - images/iconMenuTeacher/ngambil_asal/asset_calender.png
+    - images/iconLetter/1.png
+    - images/iconLetter/2.png
+    - images/iconLetter/3.png
+    - images/iconLetter/4.png
+    - images/iconLetter/5.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
