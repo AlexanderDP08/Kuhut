@@ -43,6 +43,7 @@ class _SendLetterState extends State<SendLetter> {
         stateOfDisable = false;
         print("Hari yang dipilih : " + formattedDate);
         expDate = "Expiring : " + formattedDate;
+        labelJudul = "Judul";
       });
     }
   }
