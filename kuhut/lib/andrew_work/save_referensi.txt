@@ -1,0 +1,5 @@
+https://stackoverflow.com/questions/44490622/disable-a-text-edit-field-in-flutter
+
+Validasi text field ketika belum ada yang terpenuhi, setState() boolean di textfield enable tidak bekerja
+https://codewithandrea.com/articles/flutter-text-field-form-validation/ 
+
