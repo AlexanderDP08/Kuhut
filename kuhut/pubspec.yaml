@@ -35,12 +35,10 @@ dependencies:
   firebase_core: ^1.17.1
   flutter:
     sdk: flutter
+  flutter_launch: ^0.3.0
   fluttertoast: ^8.0.9
   intl: ^0.17.0
   table_calendar: ^3.0.6
-
-dev_dependencies:
-
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -49,6 +47,8 @@ dev_dependencies:
   flutter_lints: ^1.0.0
   flutter_test:
     sdk: flutter
+  url_launcher: ^6.1.4
+  photo_view: ^0.14.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -72,7 +72,11 @@ flutter:
     - images/iconMenuTeacher/ngambil_asal/scheduleImage.jfif
     - images/iconMenuTeacher/ngambil_asal/sendLetter.jpg
     - images/iconMenuTeacher/ngambil_asal/viewScore.jpg
-    - images/iconMenuTeacher/ngambil_asal/asset_calender.png
+    - images/iconLetter/1.png
+    - images/iconLetter/2.png
+    - images/iconLetter/3.png
+    - images/iconLetter/4.png
+    - images/iconLetter/5.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -5,8 +5,8 @@ import 'package:kuhut/main.dart';
 
 final db = FirebaseFirestore.instance;
 CollectionReference tbUser = FirebaseFirestore.instance.collection("tbUser");
-CollectionReference tbTeacher =
-    FirebaseFirestore.instance.collection("tbTeacher");
+CollectionReference tbTeacher = FirebaseFirestore.instance.collection("tbTeacher");
+CollectionReference tbUser2 = FirebaseFirestore.instance.collection("tbUser");
 CollectionReference events = FirebaseFirestore.instance.collection("events");
 CollectionReference tbSoal = FirebaseFirestore.instance.collection("tbSoal");
 // String kelas = "";
@@ -15,8 +15,19 @@ String teacherName = get_user.text.substring(0, get_user.text.indexOf('@'));
 
 class DatabaseUser {
   //write, read
-  static Stream<QuerySnapshot> getUserData() {
+  static Stream<QuerySnapshot> getUserData(String text) {
     return tbUser.snapshots(); //returning snapshot data
+  }
+
+  static Stream<QuerySnapshot> getUserDataSiswa(String namanya) {
+    //return tbSiswa.snapshots(); //returning snapshot data
+    if(namanya == " ")
+      return tbUser2.snapshots();
+    else
+      return tbUser2
+      .orderBy("nama")
+      .startAt([namanya]).endAt([namanya + '\uf8ff'])
+      .snapshots();
   }
 
   static Future<void> ubahData({required Login item}) async {
@@ -111,5 +122,19 @@ class DatabaseTeacher {
           .orderBy("teacher")
           .startAt([teacherName]).endAt([teacherName + '\uf8ff']).snapshots();
     }
+  }
+}
+
+class DatabaseLetter{
+  //add letter
+    static Future<void> addLetter({required LetterGuru letterGuru}) async {
+    CollectionReference pathLetter = FirebaseFirestore.instance.collection("Letter");
+    DocumentReference docRef = pathLetter.doc();
+   
+    await pathLetter
+        //.collection("asd")
+        .add(letterGuru.toJson())
+        .whenComplete(() => print("Data berhasil di input"))
+        .catchError((e) => print(e));
   }
 }

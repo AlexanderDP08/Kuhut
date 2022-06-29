@@ -66,3 +66,58 @@ class Event {
         title: json['title'], date: json['date'], name: json['teacher']);
   }
 }
+
+class siswa{
+  final String itemNama;
+  final String itemKelas;
+  final String itemKelamin;
+  final String itemTelp;
+  final String itemBirthday;
+
+  siswa({required this.itemNama,required this.itemKelas,required this.itemKelamin,required this.itemTelp,required this.itemBirthday});
+
+  Map<String, dynamic> toJson(){
+    return {
+      "nama" : itemNama,
+      "kelas" : itemKelas,
+      "kelamin" : itemKelamin,
+      "telp" : itemTelp,
+      "birthday" : itemBirthday,
+    };
+  }
+
+  factory siswa.fromJson(Map<String, dynamic> json){
+    return siswa(
+      itemNama: json['nama'],
+      itemKelas: json['kelas'],
+      itemKelamin: json['kelamin'],
+      itemTelp: json['telp'],
+      itemBirthday: json['birthday']
+    );
+  }
+}
+
+class LetterGuru{
+  final String judul;
+  final String deskripsi;
+  final String expireDate; 
+  final String templateImage;
+
+
+  LetterGuru({
+    required this.judul, required this.deskripsi, required this.expireDate, required this.templateImage
+  });
+
+  Map<String, dynamic> toJson(){
+    return {
+      "judul" : judul,
+      "deskripsi" : deskripsi,
+      "expireDate" : expireDate,
+      "templateImage" : templateImage
+    };
+  }
+  
+  factory LetterGuru.fromJSON(Map<String, dynamic> json){
+    return LetterGuru(judul: json['judul'], deskripsi: json['deskripsi'], expireDate: json['expireDate'], templateImage: json['templateImage']);
+  }
+}
