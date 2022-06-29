@@ -3,6 +3,8 @@ import 'package:kuhut/imagePath.dart';
 import 'package:kuhut/pages/PageAddSoal.dart';
 import 'package:kuhut/pages/pageSetExamDate.dart';
 
+import '../andrew_work/make_letter.dart';
+
 class MainMenuTeacher extends StatefulWidget {
   final String name;
   const MainMenuTeacher({Key? key, required this.name}) : super(key: key);
@@ -91,6 +93,23 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                     IconButton(
                       onPressed: () {},
                       icon: Image.asset(t_path.profileLogo),
+                      iconSize: 100,
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    // Image.asset("images/kuhutExam.png"),
+                    // Image.asset("images/kuhutExam.png"),
+                    IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SendLetter()));
+                      },
+                      icon: Image.asset(t_path.sendLetter),
                       iconSize: 100,
                     ),
                   ],
