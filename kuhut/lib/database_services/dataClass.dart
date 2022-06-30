@@ -188,3 +188,21 @@ class LetterGuru {
         templateImage: json['templateImage']);
   }
 }
+  // LetterGuru({
+  //   required this.judul, required this.deskripsi, required this.expireDate, required this.templateImage, required this.kelas
+  // });
+
+  // Map<String, dynamic> toJson(){
+  //   return {
+  //     "judul" : judul,
+  //     "deskripsi" : deskripsi,
+  //     "expireDate" : expireDate,
+  //     "templateImage" : templateImage,
+  //     "kelas" : kelas
+  //   };
+  // }
+  
+  // factory LetterGuru.fromJSON(Map<String, dynamic> json){
+  //   return LetterGuru(judul: json['judul'], deskripsi: json['deskripsi'], expireDate: json['expireDate'], templateImage: json['templateImage'], kelas: json['kelas']);
+  // }
+

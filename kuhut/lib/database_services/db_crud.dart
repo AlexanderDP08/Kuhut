@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:kuhut/database_services/dataClass.dart';
 import 'package:kuhut/main.dart';
@@ -12,6 +13,7 @@ CollectionReference tbSiswaProfile =
     FirebaseFirestore.instance.collection("tbUser");
 CollectionReference events = FirebaseFirestore.instance.collection("events");
 CollectionReference soal = FirebaseFirestore.instance.collection("soal");
+
 String kelas = "";
 String kelass = "";
 String birthdays = "";
@@ -30,17 +32,24 @@ class DatabaseUser {
     return tbUser.snapshots(); //returning snapshot data
   }
 
-  static Future<void> getUserProfile(String atext) async {
-    await db
-        .collection('tbUser')
-        .doc(atext)
-        .get()
-        .then((DocumentSnapshot dsData) {
-      kelass = dsData['kelas'];
-      birthdays = dsData['bithday'];
-      telps = dsData['telp'];
-      namas = dsData['nama'];
-      kelamins = dsData['kelamin'];
+  static Future<void> dapatprofile(String a) async {
+    await db.collection("tbUser").doc(a).get().then((DocumentSnapshot ds) {
+      kelass = ds['kelas'];
+      print(kelass);
+
+      birthdays = ds['birthday'];
+      print(kelass);
+
+      telps = ds['telp'];
+      print(kelass);
+
+      namas = ds['nama'];
+      print(kelass);
+
+      kelamins = ds['kelamin'];
+      print(kelass);
+    }).catchError((e) {
+      print(e);
     });
   }
 
@@ -165,6 +174,51 @@ class DatabaseTeacher {
   }
 }
 
+// class DatabaseLetter {
+//   //add letter
+//   static Future<void> addLetter({required LetterGuru letterGuru}) async {
+//     CollectionReference pathLetter =
+//         FirebaseFirestore.instance.collection("Letter");
+// // CollectionReference allSoal = FirebaseFirestore.instance
+// //     .collection("tbTeacher")
+// //     .doc("alex")
+// //     .collection("tbSoal")
+// //     .doc("fisika_9_tgl")
+// //     .collection("soal");
+//   }
+// }
+
+CollectionReference allSoal =
+    FirebaseFirestore.instance.collection("tbTeacher");
+
+class DataBaseSoal {
+  // static Stream<QuerySnapshot<Map<String, dynamic>>> getSoal(
+  //   String namaGuru,
+  //   String namaSubjek,
+  //   String kelas,
+  //   String tanggal,
+  // ) {
+  //   return tbTeacher
+  //       .doc(namaGuru)
+  //       .collection("tbSoal")
+  //       .doc("fisika_9_tgl")
+  //       .collection("soal")
+  //       .snapshots();
+  // }
+  static Stream<QuerySnapshot<Object?>> getSoal(
+      String mapel, String jenjang, String tgl, String guru) {
+    return allSoal
+        .doc(guru)
+        .collection("tbSoal")
+        .doc("${mapel}_${jenjang}_$tgl")
+        .collection("soal")
+        .snapshots(); //returning snapshot data
+  }
+}
+
+CollectionReference pathLetterz =
+    FirebaseFirestore.instance.collection("Letter");
+
 class DatabaseLetter {
   //add letter
   static Future<void> addLetter({required LetterGuru letterGuru}) async {
@@ -177,5 +231,16 @@ class DatabaseLetter {
         .add(letterGuru.toJson())
         .whenComplete(() => print("Data berhasil di input"))
         .catchError((e) => print(e));
+  }
+
+  //view letter with specified class
+  static Stream<QuerySnapshot> getAllLetter(String kelas) {
+    //return pathLetterz.snapshots();
+    if (kelas == " ")
+      return pathLetterz.snapshots();
+    else
+      return pathLetterz
+          .orderBy("kelas")
+          .startAt([kelas]).endAt([kelas + '\uf8ff']).snapshots();
   }
 }
