@@ -32,6 +32,14 @@ class _MyAppState extends State<MyApp> {
     return firebaseApp;
   }
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    get_user.dispose();
+    get_pass.dispose();
+    super.dispose();
+  }
+
   void continueDialog(String text, String content) {
     Widget cancelButton = TextButton(
       child: Text("Batal"),
@@ -95,7 +103,7 @@ class _MyAppState extends State<MyApp> {
         title: Text("Kuhut"),
       ),
       body: GestureDetector(
-        onTap: (){
+        onTap: () {
           FocusScope.of(context).requestFocus(new FocusNode());
         },
         child: Container(
@@ -146,7 +154,7 @@ class _MyAppState extends State<MyApp> {
                     print(getStats);
                     String reserved =
                         (getInstance(get_user.text.toString(), "reverse"));
-      
+
                     db
                         .collection('tbUser')
                         .doc(get_user.text.toString())
