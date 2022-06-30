@@ -135,7 +135,6 @@ class _PageAddSoalState extends State<PageAddSoal> {
                     ans_0: _ansA.text,
                     ans_1: _ansB.text,
                     ans_2: _ansC.text,
-                    ans_3: _ansC.text,
                     c_ans: _rightAns.text);
                 DatabaseTeacher.tambahSoal(dataSoal: soalBaru, tanggal: pickDate);
                 Navigator.pop(context);
