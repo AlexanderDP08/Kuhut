@@ -91,8 +91,8 @@ class _PageAddSoalState extends State<PageAddSoal> {
                           Scaffold.of(context).showSnackBar(snackBar);
                           setState(() {
                             selected = currentSoal;
-                            pickDate = selected.substring(
-                                selected.toString().indexOf('_') + 1);
+                            pickDate =
+                                selected.substring(selected.toString().indexOf('_') + 1);
                             print(pickDate);
                           });
                         },
@@ -132,12 +132,12 @@ class _PageAddSoalState extends State<PageAddSoal> {
               onPressed: () {
                 final soalBaru = addSoal(
                     soal: _soal.text,
-                    ansA: _ansA.text,
-                    ansB: _ansB.text,
-                    ansC: _ansC.text,
-                    righAns: _rightAns.text);
-                DatabaseTeacher.tambahSoal(
-                    dataSoal: soalBaru, tanggal: pickDate);
+                    ans_0: _ansA.text,
+                    ans_1: _ansB.text,
+                    ans_2: _ansC.text,
+                    ans_3: _ansC.text,
+                    c_ans: _rightAns.text);
+                DatabaseTeacher.tambahSoal(dataSoal: soalBaru, tanggal: pickDate);
                 Navigator.pop(context);
               },
               child: Text("Add Soal"))

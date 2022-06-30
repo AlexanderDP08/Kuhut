@@ -18,35 +18,39 @@ class Login {
 
 class addSoal {
   final String soal;
-  final String ansA;
-  final String ansB;
-  final String ansC;
-  final String righAns;
+  final String ans_0;
+  final String ans_1;
+  final String ans_2;
+  final String ans_3;
+  final String c_ans;
 
   addSoal(
       {required this.soal,
-      required this.ansA,
-      required this.ansB,
-      required this.ansC,
-      required this.righAns});
+      required this.ans_0,
+      required this.ans_1,
+      required this.ans_2,
+      required this.ans_3,
+      required this.c_ans});
 
   Map<String, dynamic> toJson() {
     return {
       "soal": soal,
-      "ansA": ansA,
-      "ansB": ansB,
-      "ansC": ansC,
-      "rightAns": righAns
+      "ans_0": ans_0,
+      "ans_1": ans_1,
+      "ans_2": ans_2,
+      "ans_3": ans_3,
+      "c_ans": c_ans
     };
   }
 
   factory addSoal.fromJson(Map<String, dynamic> json) {
     return addSoal(
         soal: json['soal'],
-        ansA: json['ansA'],
-        ansB: json['ansB'],
-        ansC: json['ansC'],
-        righAns: json['rightAns']);
+        ans_0: json['ans_0'],
+        ans_1: json['ans_1'],
+        ans_2: json['ans_2'],
+        ans_3: json['ans_3'],
+        c_ans: json['c_ans']);
   }
 }
 
@@ -67,33 +71,37 @@ class Event {
   }
 }
 
-class siswa{
+class siswa {
   final String itemNama;
   final String itemKelas;
   final String itemKelamin;
   final String itemTelp;
   final String itemBirthday;
 
-  siswa({required this.itemNama,required this.itemKelas,required this.itemKelamin,required this.itemTelp,required this.itemBirthday});
+  siswa(
+      {required this.itemNama,
+      required this.itemKelas,
+      required this.itemKelamin,
+      required this.itemTelp,
+      required this.itemBirthday});
 
-  Map<String, dynamic> toJson(){
+  Map<String, dynamic> toJson() {
     return {
-      "nama" : itemNama,
-      "kelas" : itemKelas,
-      "kelamin" : itemKelamin,
-      "telp" : itemTelp,
-      "birthday" : itemBirthday,
+      "nama": itemNama,
+      "kelas": itemKelas,
+      "kelamin": itemKelamin,
+      "telp": itemTelp,
+      "birthday": itemBirthday,
     };
   }
 
-  factory siswa.fromJson(Map<String, dynamic> json){
+  factory siswa.fromJson(Map<String, dynamic> json) {
     return siswa(
-      itemNama: json['nama'],
-      itemKelas: json['kelas'],
-      itemKelamin: json['kelamin'],
-      itemTelp: json['telp'],
-      itemBirthday: json['birthday']
-    );
+        itemNama: json['nama'],
+        itemKelas: json['kelas'],
+        itemKelamin: json['kelamin'],
+        itemTelp: json['telp'],
+        itemBirthday: json['birthday']);
   }
 }
 

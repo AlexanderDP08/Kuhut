@@ -32,14 +32,6 @@ class _MyAppState extends State<MyApp> {
     return firebaseApp;
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    get_user.dispose();
-    get_pass.dispose();
-    super.dispose();
-  }
-
   void continueDialog(String text, String content) {
     Widget cancelButton = TextButton(
       child: Text("Batal"),
@@ -146,14 +138,11 @@ class _MyAppState extends State<MyApp> {
                 label: Text("Login"),
                 onPressed: () {
                   final db = FirebaseFirestore.instance;
-                  if (check_text(
-                          get_user.text.toString(), get_pass.text.toString()) ==
+                  if (check_text(get_user.text.toString(), get_pass.text.toString()) ==
                       true) {
-                    String getStats =
-                        (getInstance(get_user.text.toString(), "standard"));
+                    String getStats = (getInstance(get_user.text.toString(), "standard"));
                     print(getStats);
-                    String reserved =
-                        (getInstance(get_user.text.toString(), "reverse"));
+                    String reserved = (getInstance(get_user.text.toString(), "reverse"));
 
                     db
                         .collection('tbUser')
@@ -189,8 +178,7 @@ class _MyAppState extends State<MyApp> {
                       }
                     });
                   } else {
-                    continueDialog(
-                        "Input All", "Please Input all the Field Here");
+                    continueDialog("Input All", "Please Input all the Field Here");
                   }
                 },
               ),

@@ -10,6 +10,7 @@ CollectionReference tbUser2 = FirebaseFirestore.instance.collection("tbUser");
 CollectionReference tbSiswaProfile = FirebaseFirestore.instance.collection("tbUser");
 CollectionReference events = FirebaseFirestore.instance.collection("events");
 CollectionReference soal = FirebaseFirestore.instance.collection("soal");
+
 String kelas = "";
 String kelass = "";
 String birthdays = "";
@@ -43,13 +44,12 @@ class DatabaseUser {
 
   static Stream<QuerySnapshot> getUserDataSiswa(String namanya) {
     //return tbSiswa.snapshots(); //returning snapshot data
-    if(namanya == " ")
+    if (namanya == " ")
       return tbUser2.snapshots();
     else
       return tbUser2
-      .orderBy("nama")
-      .startAt([namanya]).endAt([namanya + '\uf8ff'])
-      .snapshots();
+          .orderBy("nama")
+          .startAt([namanya]).endAt([namanya + '\uf8ff']).snapshots();
   }
 
   static Future<void> ubahData({required Login item}) async {
@@ -171,12 +171,38 @@ class DatabaseTeacher {
   }
 }
 
-class DatabaseLetter{
+CollectionReference allSoal = FirebaseFirestore.instance
+    .collection("tbTeacher")
+    .doc("alex")
+    .collection("tbSoal")
+    .doc("fisika_9_tgl")
+    .collection("soal");
+
+class DataBaseSoal {
+  // static Stream<QuerySnapshot<Map<String, dynamic>>> getSoal(
+  //   String namaGuru,
+  //   String namaSubjek,
+  //   String kelas,
+  //   String tanggal,
+  // ) {
+  //   return tbTeacher
+  //       .doc(namaGuru)
+  //       .collection("tbSoal")
+  //       .doc("fisika_9_tgl")
+  //       .collection("soal")
+  //       .snapshots();
+  // }
+  static Stream<QuerySnapshot<Object?>> getSoal() {
+    return allSoal.snapshots(); //returning snapshot data
+  }
+}
+
+class DatabaseLetter {
   //add letter
-    static Future<void> addLetter({required LetterGuru letterGuru}) async {
+  static Future<void> addLetter({required LetterGuru letterGuru}) async {
     CollectionReference pathLetter = FirebaseFirestore.instance.collection("Letter");
     DocumentReference docRef = pathLetter.doc();
-   
+
     await pathLetter
         //.collection("asd")
         .add(letterGuru.toJson())
