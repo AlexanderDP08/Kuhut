@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kuhut/pages/addcontact.dart';
+import 'package:kuhut/pages/profilecontact.dart';
 import 'package:kuhut/pages/resetpass.dart';
 import 'package:kuhut/pages/viewcontact.dart';
 
@@ -35,7 +36,8 @@ class _MainMenuSiswasState extends State<MainMenuSiswas> {
 
               ElevatedButton(onPressed: (){
                 {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=> const AddContact()));
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context)=> AddContact(siswaNameResetProfile: widget.siswa_name)));
                   }
               }, 
               child: const Text("add contact")),
@@ -49,7 +51,8 @@ class _MainMenuSiswasState extends State<MainMenuSiswas> {
 
               ElevatedButton(onPressed: (){
                 {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=> const Contact_View()));
+                    Navigator.push(context,MaterialPageRoute(
+                    builder: (context) => profilnya(siswaNameResetProfile : widget.siswa_name )));
                   }
               }, 
               child: const Text("profile")),

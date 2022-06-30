@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kuhut/imagePath.dart';
 import 'package:kuhut/pages/PageAddSoal.dart';
+import 'package:kuhut/pages/addcontact.dart';
 import 'package:kuhut/pages/pageSetExamDate.dart';
+import 'package:kuhut/pages/profilecontact.dart';
+import 'package:kuhut/pages/resetpass.dart';
+import 'package:kuhut/pages/viewcontact.dart';
 
 import '../andrew_work/make_letter.dart';
 
@@ -115,6 +119,36 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                     ),
                   ],
                 ),
+                ElevatedButton(onPressed: (){
+                {
+                  Navigator.push(context,MaterialPageRoute(
+                    builder: (context) => ResetPass(siswaNameReset : widget.name )));
+                  }
+              }, 
+              child: const Text("reset password")),
+
+              ElevatedButton(onPressed: (){
+                {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context)=> AddContact(siswaNameResetProfile: widget.name)));
+                  }
+              }, 
+              child: const Text("add contact")),
+
+              ElevatedButton(onPressed: (){
+                {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> const Contact_View()));
+                  }
+              }, 
+              child: const Text("View Contact")),
+
+              ElevatedButton(onPressed: (){
+                {
+                    Navigator.push(context,MaterialPageRoute(
+                    builder: (context) => profilnya(siswaNameResetProfile : widget.name )));
+                  }
+              }, 
+              child: const Text("profile")),
               ],
             ),
           )),
