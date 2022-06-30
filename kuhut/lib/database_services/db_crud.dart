@@ -10,7 +10,6 @@ CollectionReference tbUser2 = FirebaseFirestore.instance.collection("tbUser");
 CollectionReference tbSiswaProfile = FirebaseFirestore.instance.collection("tbUser");
 CollectionReference events = FirebaseFirestore.instance.collection("events");
 CollectionReference soal = FirebaseFirestore.instance.collection("soal");
-CollectionReference pathLetterz = FirebaseFirestore.instance.collection("Letter");
 
 String kelas = "";
 String kelass = "";
@@ -29,12 +28,8 @@ class DatabaseUser {
     return tbUser.snapshots(); //returning snapshot data
   }
 
-  static Future<void> getUserProfile(String atext) async{
-    await db
-        .collection('tbUser')
-        .doc(atext)
-        .get()
-        .then((DocumentSnapshot dsData) {
+  static Future<void> getUserProfile(String atext) async {
+    await db.collection('tbUser').doc(atext).get().then((DocumentSnapshot dsData) {
       kelass = dsData['kelas'];
       birthdays = dsData['bithday'];
       telps = dsData['telp'];
@@ -61,6 +56,7 @@ class DatabaseUser {
         .whenComplete(() => print("data berhasil diubah"))
         .catchError((e) => print(e));
   }
+
   static Future<void> ubahDataProfilenama({required editprofilenama item}) async {
     DocumentReference docRef = tbUser.doc(item.aemail);
 
@@ -69,6 +65,7 @@ class DatabaseUser {
         .whenComplete(() => print("data berhasil diubah"))
         .catchError((e) => print(e));
   }
+
   static Future<void> ubahDataProfileday({required editprofileday item}) async {
     DocumentReference docRef = tbUser.doc(item.aemail);
 
@@ -77,6 +74,7 @@ class DatabaseUser {
         .whenComplete(() => print("data berhasil diubah"))
         .catchError((e) => print(e));
   }
+
   static Future<void> ubahDataProfiletelp({required editprofiletelp item}) async {
     DocumentReference docRef = tbUser.doc(item.aemail);
 
@@ -102,11 +100,7 @@ class DatabaseTeacher {
       String mapel = dsData['mengajar_mapel'];
       tbTeacher
           .doc(teacherName)
-          .set({
-            "name": teacherName,
-            "mengajar_kelas": kelas,
-            "mengajar_mapel": mapel
-          })
+          .set({"name": teacherName, "mengajar_kelas": kelas, "mengajar_mapel": mapel})
           .whenComplete(() => print("Data berhasil di input" + teacherName))
           .catchError((e) => print(e));
       docRef
@@ -116,8 +110,7 @@ class DatabaseTeacher {
           .whenComplete(() => print("Data berhasil di input"))
           .catchError((e) => print(e));
 
-      tambahSoalGuruX(
-          item: dataSoal, mapel_: mapel, kelas_: kelas, date_: tanggal);
+      tambahSoalGuruX(item: dataSoal, mapel_: mapel, kelas_: kelas, date_: tanggal);
     });
   }
 
@@ -172,12 +165,14 @@ class DatabaseTeacher {
   }
 }
 
-CollectionReference allSoal = FirebaseFirestore.instance
-    .collection("tbTeacher")
-    .doc("alex")
-    .collection("tbSoal")
-    .doc("fisika_9_tgl")
-    .collection("soal");
+// CollectionReference allSoal = FirebaseFirestore.instance
+//     .collection("tbTeacher")
+//     .doc("alex")
+//     .collection("tbSoal")
+//     .doc("fisika_9_tgl")
+//     .collection("soal");
+
+CollectionReference allSoal = FirebaseFirestore.instance.collection("tbTeacher");
 
 class DataBaseSoal {
   // static Stream<QuerySnapshot<Map<String, dynamic>>> getSoal(
@@ -193,10 +188,18 @@ class DataBaseSoal {
   //       .collection("soal")
   //       .snapshots();
   // }
-  static Stream<QuerySnapshot<Object?>> getSoal() {
-    return allSoal.snapshots(); //returning snapshot data
+  static Stream<QuerySnapshot<Object?>> getSoal(
+      String mapel, String jenjang, String tgl, String guru) {
+    return allSoal
+        .doc(guru)
+        .collection("tbSoal")
+        .doc("${mapel}_${jenjang}_$tgl")
+        .collection("soal")
+        .snapshots(); //returning snapshot data
   }
 }
+
+CollectionReference pathLetterz = FirebaseFirestore.instance.collection("Letter");
 
 class DatabaseLetter {
   //add letter
@@ -212,15 +215,13 @@ class DatabaseLetter {
   }
 
   //view letter with specified class
-    static Stream<QuerySnapshot> getAllLetter(String kelas) {
-      //return pathLetterz.snapshots(); 
-       if(kelas == " ")
+  static Stream<QuerySnapshot> getAllLetter(String kelas) {
+    //return pathLetterz.snapshots();
+    if (kelas == " ")
       return pathLetterz.snapshots();
     else
       return pathLetterz
-      .orderBy("kelas")
-      .startAt([kelas]).endAt([kelas + '\uf8ff'])
-      .snapshots();
+          .orderBy("kelas")
+          .startAt([kelas]).endAt([kelas + '\uf8ff']).snapshots();
   }
 }
-
