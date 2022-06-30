@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:kuhut/database_services/dataClass.dart';
 import 'package:kuhut/main.dart';
@@ -28,13 +29,39 @@ class DatabaseUser {
     return tbUser.snapshots(); //returning snapshot data
   }
 
-  static Future<void> getUserProfile(String atext) async {
+  // static Stream<QuerySnapshot> getUserDataProfile() {
+  //   return tbUser.snapshots(); //returning snapshot data
+  // }
+
+  static Future<String> getUserProfile(String atext) async {
     await db.collection('tbUser').doc(atext).get().then((DocumentSnapshot dsData) {
       kelass = dsData['kelas'];
       birthdays = dsData['bithday'];
       telps = dsData['telp'];
       namas = dsData['nama'];
       kelamins = dsData['kelamin'];
+    });
+    return kelass;
+  }
+
+  static Future<void> dapatprofile(String a) async {
+    await db.collection("tbUser").doc(a).get().then((DocumentSnapshot ds) {
+      kelass = ds['kelas'];
+      print(kelass);
+
+      birthdays = ds['birthday'];
+      print(kelass);
+
+      telps = ds['telp'];
+      print(kelass);
+
+      namas = ds['nama'];
+      print(kelass);
+
+      kelamins = ds['kelamin'];
+      print(kelass);
+    }).catchError((e) {
+      print(e);
     });
   }
 
