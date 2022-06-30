@@ -22,31 +22,35 @@ class addSoal {
   final String ansB;
   final String ansC;
   final String righAns;
+  final String namaGuru;
 
   addSoal(
       {required this.soal,
       required this.ansA,
       required this.ansB,
       required this.ansC,
-      required this.righAns});
+      required this.righAns,
+      required this.namaGuru});
 
   Map<String, dynamic> toJson() {
     return {
       "soal": soal,
-      "ansA": ansA,
-      "ansB": ansB,
-      "ansC": ansC,
-      "rightAns": righAns
+      "ans_0": ansA,
+      "ans_1": ansB,
+      "ans_2": ansC,
+      "c_ans": righAns,
+      "guru": namaGuru
     };
   }
 
   factory addSoal.fromJson(Map<String, dynamic> json) {
     return addSoal(
         soal: json['soal'],
-        ansA: json['ansA'],
-        ansB: json['ansB'],
-        ansC: json['ansC'],
-        righAns: json['rightAns']);
+        ansA: json['ans_0'],
+        ansB: json['ans_1'],
+        ansC: json['ans_2'],
+        righAns: json['c_ans'],
+        namaGuru: json['guru']);
   }
 }
 
@@ -67,33 +71,37 @@ class Event {
   }
 }
 
-class siswa{
+class siswa {
   final String itemNama;
   final String itemKelas;
   final String itemKelamin;
   final String itemTelp;
   final String itemBirthday;
 
-  siswa({required this.itemNama,required this.itemKelas,required this.itemKelamin,required this.itemTelp,required this.itemBirthday});
+  siswa(
+      {required this.itemNama,
+      required this.itemKelas,
+      required this.itemKelamin,
+      required this.itemTelp,
+      required this.itemBirthday});
 
-  Map<String, dynamic> toJson(){
+  Map<String, dynamic> toJson() {
     return {
-      "nama" : itemNama,
-      "kelas" : itemKelas,
-      "kelamin" : itemKelamin,
-      "telp" : itemTelp,
-      "birthday" : itemBirthday,
+      "nama": itemNama,
+      "kelas": itemKelas,
+      "kelamin": itemKelamin,
+      "telp": itemTelp,
+      "birthday": itemBirthday,
     };
   }
 
-  factory siswa.fromJson(Map<String, dynamic> json){
+  factory siswa.fromJson(Map<String, dynamic> json) {
     return siswa(
-      itemNama: json['nama'],
-      itemKelas: json['kelas'],
-      itemKelamin: json['kelamin'],
-      itemTelp: json['telp'],
-      itemBirthday: json['birthday']
-    );
+        itemNama: json['nama'],
+        itemKelas: json['kelas'],
+        itemKelamin: json['kelamin'],
+        itemTelp: json['telp'],
+        itemBirthday: json['birthday']);
   }
 }
 
@@ -115,7 +123,7 @@ class editprofilenama {
   }
 }
 
-class editprofileday{
+class editprofileday {
   final String abirthday;
   final String aemail;
 
@@ -129,7 +137,7 @@ class editprofileday{
   //form TambahData
   //fromJSON
   factory editprofileday.fromJSON(Map<String, dynamic> json) {
-    return editprofileday( abirthday: json['birthday'], aemail: json['email']);
+    return editprofileday(abirthday: json['birthday'], aemail: json['email']);
   }
 }
 
@@ -141,7 +149,7 @@ class editprofiletelp {
   //toJSON, or toDataClass Firebase
   Map<String, dynamic> toJson() {
     //json
-    return { "telp": atelp, "email": aemail};
+    return {"telp": atelp, "email": aemail};
   }
 
   //form TambahData
@@ -151,27 +159,32 @@ class editprofiletelp {
   }
 }
 
-class LetterGuru{
+class LetterGuru {
   final String judul;
   final String deskripsi;
-  final String expireDate; 
+  final String expireDate;
   final String templateImage;
 
+  LetterGuru(
+      {required this.judul,
+      required this.deskripsi,
+      required this.expireDate,
+      required this.templateImage});
 
-  LetterGuru({
-    required this.judul, required this.deskripsi, required this.expireDate, required this.templateImage
-  });
-
-  Map<String, dynamic> toJson(){
+  Map<String, dynamic> toJson() {
     return {
-      "judul" : judul,
-      "deskripsi" : deskripsi,
-      "expireDate" : expireDate,
-      "templateImage" : templateImage
+      "judul": judul,
+      "deskripsi": deskripsi,
+      "expireDate": expireDate,
+      "templateImage": templateImage
     };
   }
-  
-  factory LetterGuru.fromJSON(Map<String, dynamic> json){
-    return LetterGuru(judul: json['judul'], deskripsi: json['deskripsi'], expireDate: json['expireDate'], templateImage: json['templateImage']);
+
+  factory LetterGuru.fromJSON(Map<String, dynamic> json) {
+    return LetterGuru(
+        judul: json['judul'],
+        deskripsi: json['deskripsi'],
+        expireDate: json['expireDate'],
+        templateImage: json['templateImage']);
   }
 }

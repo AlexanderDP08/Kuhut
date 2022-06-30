@@ -20,9 +20,11 @@ class _PageAddSoalState extends State<PageAddSoal> {
   final _ansB = TextEditingController();
   final _ansC = TextEditingController();
   final _rightAns = TextEditingController();
+  final db = FirebaseFirestore.instance;
   var selected;
   int _jumlah = 0;
   String pickDate = "";
+  String pickTitle = "";
 
   // final Stream<QuerySnapshot> _streamDropDown = FirebaseFirestore.instance
   //     .collection('events')
@@ -91,9 +93,14 @@ class _PageAddSoalState extends State<PageAddSoal> {
                           Scaffold.of(context).showSnackBar(snackBar);
                           setState(() {
                             selected = currentSoal;
-                            pickDate = selected.substring(
+                            pickDate = selected.toString().substring(
                                 selected.toString().indexOf('_') + 1);
+                            pickTitle = selected
+                                .toString()
+                                .substring(0, selected.toString().indexOf('_'));
+                            print(selected);
                             print(pickDate);
+                            print(pickTitle);
                           });
                         },
                         value: selected,
@@ -130,14 +137,22 @@ class _PageAddSoalState extends State<PageAddSoal> {
           ),
           ElevatedButton(
               onPressed: () {
-                final soalBaru = addSoal(
-                    soal: _soal.text,
-                    ansA: _ansA.text,
-                    ansB: _ansB.text,
-                    ansC: _ansC.text,
-                    righAns: _rightAns.text);
-                DatabaseTeacher.tambahSoal(
-                    dataSoal: soalBaru, tanggal: pickDate);
+                db
+                    .collection("tbUser")
+                    .doc(get_user.text.toString())
+                    .get()
+                    .then((DocumentSnapshot data) {
+                  String jenjang = data['mengajar_kelas'];
+                  final soalBaru = addSoal(
+                      soal: _soal.text,
+                      ansA: _ansA.text,
+                      ansB: _ansB.text,
+                      ansC: _ansC.text,
+                      righAns: _rightAns.text,
+                      namaGuru: teacherName);
+                  DatabaseTeacher.tambahSoal(
+                      dataSoal: soalBaru, tanggal: pickDate);
+                });
                 Navigator.pop(context);
               },
               child: Text("Add Soal"))
