@@ -35,7 +35,7 @@ class _SendLetterState extends State<SendLetter> {
 
   var ChoosenClass = ""; //class yang dipilih
   Color redColor = Colors.red;Color redColor2 = Colors.red;Color redColor3 = Colors.red;Color redColor4 = Colors.red;Color redColor5 = Colors.red;Color redColor6 = Colors.red;
-  Color redKelas1 = Colors.red; Color redKelas2 = Colors.red; Color redKelas3 = Colors.red;
+  Color redKelas1 = Colors.red; Color redKelas2 = Colors.red; Color redKelas3 = Colors.red; Color redKelasAll = Colors.red;
 
   void changePicked(Color warna){
       warna = Colors.green;
@@ -422,7 +422,22 @@ class _SendLetterState extends State<SendLetter> {
                       redKelas2 = Colors.red;
                     });
                     
-                  }, icon: Image.asset(iconKelasPath.kelas_9, width: 30, height: 50,), label: Text(""), style: ButtonStyle(backgroundColor: MaterialStateProperty.all(redKelas3)),)
+                  }, icon: Image.asset(iconKelasPath.kelas_9, width: 30, height: 50,), label: Text(""), style: ButtonStyle(backgroundColor: MaterialStateProperty.all(redKelas3)),),
+
+                  ElevatedButton.icon(onPressed: (){
+                    setState(() {
+                      ChoosenClass = "All";
+                      
+                      redKelasAll = Colors.green;
+                      redKelas3 = Colors.red;
+                      
+                      redKelas1 = Colors.red;
+                      redKelas2 = Colors.red;
+                    });
+                    
+                  }, icon: Image.asset(iconKelasPath.kelas_9, width: 30, height: 50,), label: Text(""), style: ButtonStyle(backgroundColor: MaterialStateProperty.all(redKelasAll)),)
+
+                  
                 ],
               ),
               ElevatedButton(

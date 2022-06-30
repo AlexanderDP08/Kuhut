@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kuhut/andrew_work/st_lvtitle_let.dart';
 import 'package:kuhut/pages/addcontact.dart';
 import 'package:kuhut/pages/resetpass.dart';
 import 'package:kuhut/pages/viewcontact.dart';
@@ -7,7 +8,8 @@ import '../andrew_work/st_viewletter.dart';
 
 class MainMenuSiswas extends StatefulWidget {
   final String siswa_name;
-  const MainMenuSiswas({Key? key, required this.siswa_name}) : super(key: key);
+  final String siswa_kelas;
+  const MainMenuSiswas({Key? key, required this.siswa_name, required this.siswa_kelas}) : super(key: key);
 
   @override
   State<MainMenuSiswas> createState() => _MainMenuSiswasState();
@@ -26,7 +28,7 @@ class _MainMenuSiswasState extends State<MainMenuSiswas> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text("Welcome, "),
-              Text(widget.siswa_name),
+              Text(widget.siswa_name + "Kelas : " + widget.siswa_kelas),
               ElevatedButton(onPressed: (){
                 {
                   Navigator.push(context,MaterialPageRoute(
@@ -62,6 +64,13 @@ class _MainMenuSiswasState extends State<MainMenuSiswas> {
                 }
               }, 
               child: const Text("cek letter")),
+
+               ElevatedButton(onPressed: (){
+                {
+                   Navigator.push(context, MaterialPageRoute(builder: (context)=>  LetterListView(getSiswaKelas: widget.siswa_kelas,)));
+                }
+              }, 
+              child: const Text("Letter List View")),
             ],
           ),
         )

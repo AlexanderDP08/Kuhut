@@ -154,6 +154,7 @@ class _MyAppState extends State<MyApp> {
                         .then((DocumentSnapshot dsData) {
                       String email = dsData['email'];
                       String password = dsData['password'];
+                      String kelas = dsData['kelas'];
                       if (get_user.text.toString() == email) {
                         if (get_pass.text.toString() == password) {
                           //cek if guru or siswa based on email
@@ -170,6 +171,7 @@ class _MyAppState extends State<MyApp> {
                                 MaterialPageRoute(
                                     builder: (context) => MainMenuSiswas(
                                           siswa_name: reserved,
+                                          siswa_kelas: kelas,
                                         )));
                           } else {
                             createToast("Input instance", Colors.red, 1);

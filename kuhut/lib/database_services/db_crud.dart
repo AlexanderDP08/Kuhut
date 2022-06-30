@@ -8,6 +8,7 @@ CollectionReference tbTeacher = FirebaseFirestore.instance.collection("tbTeacher
 CollectionReference tbUser2 = FirebaseFirestore.instance.collection("tbUser");
 CollectionReference events = FirebaseFirestore.instance.collection("events");
 CollectionReference soal = FirebaseFirestore.instance.collection("soal");
+CollectionReference pathLetterz = FirebaseFirestore.instance.collection("Letter");
 String kelas = "";
 String teacherName = get_user.text.substring(0, get_user.text.indexOf('@'));
 
@@ -88,4 +89,16 @@ class DatabaseLetter{
         .whenComplete(() => print("Data berhasil di input"))
         .catchError((e) => print(e));
   }
-}
+
+  //view letter with specified class
+    static Stream<QuerySnapshot> getAllLetter(String kelas) {
+      //return pathLetterz.snapshots(); 
+       if(kelas == " ")
+      return pathLetterz.snapshots();
+    else
+      return pathLetterz
+      .orderBy("kelas")
+      .startAt([kelas]).endAt([kelas + '\uf8ff'])
+      .snapshots();
+  }
+  }
