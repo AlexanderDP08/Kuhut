@@ -93,8 +93,13 @@ class _MainMenuSiswasState extends State<MainMenuSiswas> {
                   child: const Text("Letter List View")),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: ((context) => const MenuSoal())));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: ((context) => MenuSoal(
+                                nama: widget.siswa_name,
+                                kelas: widget.siswa_kelas,
+                              ))));
                 },
                 child: const Text("Kerja Soal"),
               )

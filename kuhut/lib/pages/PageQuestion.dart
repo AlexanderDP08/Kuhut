@@ -1,19 +1,27 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kuhut/database_services/db_crud.dart';
+import 'package:kuhut/main.dart';
+import 'package:kuhut/pages/mainMenuSiswa.dart';
 
 class ButtonSoal extends StatelessWidget {
-  final String dmapel;
   final String djenjang;
-  final String dtgl;
+  final String dnamaSoal;
+  final String dnama;
+  final String dkelas;
   final String dguru;
+  final String dtgl;
 
   const ButtonSoal({
     Key? key,
-    required this.dmapel,
     required this.djenjang,
-    required this.dtgl,
+    required this.dnamaSoal,
+    required this.dnama,
+    required this.dkelas,
     required this.dguru,
+    required this.dtgl,
   }) : super(key: key);
 
   @override
@@ -23,15 +31,22 @@ class ButtonSoal extends StatelessWidget {
       children: [
         ElevatedButton(
           onPressed: () {
+            print("Nama Guru: " + dguru);
+            //masukan absen ke db
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) =>
-                    Soal(mapel: dmapel, jenjang: djenjang, tgl: dtgl, guru: dguru),
+                builder: (context) => Soal(
+                  jenjang: djenjang,
+                  namaSoal: dnamaSoal,
+                  kelas: dkelas,
+                  nama: dnama,
+                  guru: dguru,
+                ),
               ),
             );
           },
-          child: Text("Tes ${dmapel.toUpperCase()}"),
+          child: Text("Tes $dnamaSoal"),
         ),
       ],
     );
@@ -39,29 +54,73 @@ class ButtonSoal extends StatelessWidget {
 }
 
 class MenuSoal extends StatefulWidget {
-  const MenuSoal({Key? key}) : super(key: key);
+  final String nama;
+  final String kelas;
+
+  const MenuSoal({
+    Key? key,
+    required this.nama,
+    required this.kelas,
+  }) : super(key: key);
 
   @override
   State<MenuSoal> createState() => _MenuSoalState();
 }
 
 class _MenuSoalState extends State<MenuSoal> {
+  Stream<QuerySnapshot<Object?>> onSearch() {
+    setState(() {});
+    return DataBaseSoal.getEvent(widget.kelas);
+  }
+
   @override
   Widget build(BuildContext context) {
+    int listSize = 0;
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: const Text("Pilih Soal"),
         ),
-        body: Container(
-          child: ListView.separated(
-              itemBuilder: (context, index) {
-                return const ButtonSoal(
-                    dmapel: "fisika", djenjang: "9", dtgl: "20-05-2022", dguru: "alex");
-              },
-              separatorBuilder: ((context, index) => SizedBox(height: 8)),
-              itemCount: 10),
+        body: StreamBuilder<QuerySnapshot>(
+          stream: onSearch(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Text('Error');
+            } else if (snapshot.hasData || snapshot.data != null) {
+              return ListView.separated(
+                itemBuilder: (context, index) {
+                  DocumentSnapshot dsData = snapshot.data!.docs[index];
+                  String dtJenjang = dsData['jenjang'];
+                  if (widget.kelas == dtJenjang) {
+                    String dtTitle = dsData['title'];
+                    String dtGuru = dsData['teacher'];
+                    String dtTgl = dsData['date'];
+                    const SizedBox(height: 8);
+                    return ButtonSoal(
+                      djenjang: widget.kelas,
+                      dnamaSoal: dtTitle,
+                      dnama: widget.nama,
+                      dkelas: widget.kelas,
+                      dguru: dtGuru,
+                      dtgl: dtTgl,
+                    );
+                  }
+                  return const Text("Data Not Found");
+                },
+                separatorBuilder: (context, index) => SizedBox(height: 8),
+                itemCount: snapshot.data!.docs.length,
+              );
+            }
+            return Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  Colors.pinkAccent,
+                ),
+              ),
+            );
+          },
         ),
       ),
     );
@@ -69,16 +128,18 @@ class _MenuSoalState extends State<MenuSoal> {
 }
 
 class Soal extends StatefulWidget {
-  final String mapel;
   final String jenjang;
-  final String tgl;
+  final String namaSoal;
+  final String nama;
+  final String kelas;
   final String guru;
 
   const Soal({
     Key? key,
-    required this.mapel,
     required this.jenjang,
-    required this.tgl,
+    required this.namaSoal,
+    required this.nama,
+    required this.kelas,
     required this.guru,
   }) : super(key: key);
 
@@ -89,12 +150,16 @@ class Soal extends StatefulWidget {
 class _SoalState extends State<Soal> {
   late String _character = "";
   int nomer = 0;
-  final String _soal = "";
-  final List<String>? _ans = ["", "", "", ""];
+  String _soal = "";
+  final List<String>? _ans = ["", "", ""];
+  String kunciJwb = "";
+  int dscore = 0;
+
+  int listSize = 0;
 
   Stream<QuerySnapshot<Object?>> onSearch() {
     setState(() {});
-    return DataBaseSoal.getSoal(widget.mapel, widget.jenjang, widget.tgl, widget.guru);
+    return DataBaseSoal.getSoal(widget.guru);
   }
 
   @override
@@ -114,12 +179,11 @@ class _SoalState extends State<Soal> {
               return ListView.separated(
                 itemBuilder: (context, index) {
                   DocumentSnapshot dsData = snapshot.data!.docs[nomer];
-                  String _soal = dsData['soal'];
-                  String CAns = dsData['c_ans'];
+                  _soal = dsData['soal'];
                   _ans![0] = dsData['ans_0'];
                   _ans![1] = dsData['ans_1'];
                   _ans![2] = dsData['ans_2'];
-                  _ans![3] = dsData['ans_3'];
+                  kunciJwb = dsData['c_ans'];
                   return Column(
                     children: [
                       Container(
@@ -171,19 +235,6 @@ class _SoalState extends State<Soal> {
                           },
                         ),
                       ),
-                      ListTile(
-                        title: Text(_ans![3]),
-                        leading: Radio(
-                          value: _ans![3],
-                          groupValue: _character,
-                          onChanged: (value) {
-                            setState(() {
-                              _character = value.toString();
-                            });
-                            print(value);
-                          },
-                        ),
-                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -204,7 +255,24 @@ class _SoalState extends State<Soal> {
                             onPressed: () {
                               setState(() {
                                 if (nomer >= snapshot.data!.docs.length - 1) {
+                                  if (_character == kunciJwb) {
+                                    setState(() {
+                                      dscore++;
+                                    });
+                                  }
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => EndMenuSoal(
+                                              score: dscore.toString(),
+                                              dnama: widget.nama,
+                                              dkelas: widget.kelas)));
                                 } else {
+                                  if (_character == kunciJwb) {
+                                    setState(() {
+                                      dscore++;
+                                    });
+                                  }
                                   print("Max Array Size: ${snapshot.data!.docs.length}");
                                   nomer++;
                                   print("Nomer: $nomer");
@@ -231,6 +299,56 @@ class _SoalState extends State<Soal> {
               ),
             );
           },
+        ),
+      ),
+    );
+  }
+}
+
+class EndMenuSoal extends StatefulWidget {
+  final String score;
+  final String dnama;
+  final String dkelas;
+
+  const EndMenuSoal({
+    Key? key,
+    required this.score,
+    required this.dnama,
+    required this.dkelas,
+  }) : super(key: key);
+
+  @override
+  State<EndMenuSoal> createState() => _EndMenuSoalState();
+}
+
+class _EndMenuSoalState extends State<EndMenuSoal> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Tes Selesai"),
+        ),
+        body: Container(
+          padding: const EdgeInsets.all(40),
+          child: Center(
+            child: Column(
+              children: [
+                Text("Tes Selesai"),
+                Text("Nilai mu: ${widget.score}"),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MainMenuSiswas(
+                                  siswa_name: widget.dnama, siswa_kelas: widget.dkelas)));
+                    },
+                    child: Text("Back To MainMenu"))
+              ],
+            ),
+          ),
         ),
       ),
     );
