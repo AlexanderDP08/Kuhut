@@ -188,8 +188,8 @@ class DatabaseTeacher {
 //   }
 // }
 
-CollectionReference allSoal =
-    FirebaseFirestore.instance.collection("tbTeacher");
+CollectionReference allSoal = FirebaseFirestore.instance.collection("tbSoal");
+CollectionReference allEvent = FirebaseFirestore.instance.collection("events");
 
 class DataBaseSoal {
   // static Stream<QuerySnapshot<Map<String, dynamic>>> getSoal(
@@ -205,16 +205,19 @@ class DataBaseSoal {
   //       .collection("soal")
   //       .snapshots();
   // }
-  static Stream<QuerySnapshot<Object?>> getSoal(
-      String mapel, String jenjang, String tgl, String guru) {
-    return allSoal
-        .doc(guru)
-        .collection("tbSoal")
-        .doc("${mapel}_${jenjang}_$tgl")
-        .collection("soal")
-        .snapshots(); //returning snapshot data
+  static Stream<QuerySnapshot<Object?>> getSoal(String nama_guru) {
+    return allSoal.orderBy("guru").startAt([nama_guru]).endAt(
+        [nama_guru + '\uf8ff']).snapshots(); //returning snapshot data
+  }
+
+  static Stream<QuerySnapshot<Object?>> getEvent(String jenjang) {
+    return events
+        .orderBy("jenjang")
+        .startAt([jenjang]).endAt([jenjang + '\uf8ff']).snapshots();
   }
 }
+
+class DatabaseAbsensi {}
 
 CollectionReference pathLetterz =
     FirebaseFirestore.instance.collection("Letter");

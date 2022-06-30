@@ -164,19 +164,22 @@ class LetterGuru {
   final String deskripsi;
   final String expireDate;
   final String templateImage;
+  final String kelas;
 
   LetterGuru(
       {required this.judul,
       required this.deskripsi,
       required this.expireDate,
-      required this.templateImage});
+      required this.templateImage,
+      required this.kelas});
 
   Map<String, dynamic> toJson() {
     return {
       "judul": judul,
       "deskripsi": deskripsi,
       "expireDate": expireDate,
-      "templateImage": templateImage
+      "templateImage": templateImage,
+      "kelas": kelas
     };
   }
 
@@ -185,7 +188,8 @@ class LetterGuru {
         judul: json['judul'],
         deskripsi: json['deskripsi'],
         expireDate: json['expireDate'],
-        templateImage: json['templateImage']);
+        templateImage: json['templateImage'],
+        kelas: json['kelas']);
   }
 }
   // LetterGuru({
