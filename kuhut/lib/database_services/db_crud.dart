@@ -30,9 +30,9 @@ class DatabaseUser {
     return tbUser.snapshots(); //returning snapshot data
   }
 
-  // static Stream<QuerySnapshot> getUserDataProfile() {
-  //   return tbUser.snapshots(); //returning snapshot data
-  // }
+  static Stream<QuerySnapshot> getUserDataProfile() {
+    return tbUser.snapshots(); //returning snapshot data
+  }
 
   static Future<String> getUserProfile(String atext) async{
     await db
@@ -59,16 +59,16 @@ class DatabaseUser {
       print(kelass);
 
       birthdays = ds['birthday'];
-      print(kelass);
+      print(birthdays);
 
       telps = ds['telp'];
-      print(kelass);
+      print(telps);
 
       namas = ds['nama'];
-      print(kelass);
+      print(namas);
 
       kelamins = ds['kelamin'];
-      print(kelass);
+      print(kelamins);
 
     }).catchError((e){
       print(e);

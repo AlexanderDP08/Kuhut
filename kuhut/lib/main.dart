@@ -94,97 +94,186 @@ class _MyAppState extends State<MyApp> {
       appBar: AppBar(
         title: Text("Kuhut"),
       ),
+      floatingActionButton:
+          Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+          FloatingActionButton(
+            child: //Icon(
+            //   Icons.lock,
+            //   color: Colors.white,
+            //   size: 32,
+            // ),
+            CircleAvatar(
+              radius: 25,
+              backgroundImage: AssetImage('images/iconMenuSiswa/C14190136.jpg'),
+            ),
+            onPressed: () {
+              {}
+            },
+            backgroundColor: Colors.transparent,
+          ),
+          SizedBox(
+            width: 5,
+          ),
+          FloatingActionButton(
+            child: //Icon(
+            //   Icons.lock,
+            //   color: Colors.white,
+            //   size: 32,
+            // ),
+            CircleAvatar(
+              radius: 25,
+              backgroundImage: AssetImage('images/iconMenuSiswa/C14190136.jpg'),
+            ),
+            onPressed: () {
+              {}
+            },
+            backgroundColor: Colors.transparent,
+          ),
+          SizedBox(
+            width: 5,
+          ),
+          FloatingActionButton(
+            child: //Icon(
+            //   Icons.lock,
+            //   color: Colors.white,
+            //   size: 32,
+            // ),
+            CircleAvatar(
+              radius: 25,
+              backgroundImage: AssetImage('images/iconMenuSiswa/C14190136.jpg'),
+            ),
+            onPressed: () {
+              {}
+            },
+            backgroundColor: Colors.transparent,
+          ),
+          SizedBox(
+            width: 5,
+          ),
+          FloatingActionButton(
+            child: //Icon(
+            //   Icons.lock,
+            //   color: Colors.white,
+            //   size: 32,
+            // ),
+            CircleAvatar(
+              radius: 25,
+              backgroundImage: AssetImage('images/iconMenuSiswa/C14190136.jpg'),
+            ),
+            onPressed: () {
+              {}
+            },
+            backgroundColor: Colors.transparent,
+          ),
+        ]),
       body: GestureDetector(
         onTap: () {
           FocusScope.of(context).requestFocus(new FocusNode());
         },
+        
         child: Container(
-          padding: EdgeInsets.only(top: 50),
-          child: Column(
-            children: [
-              Image.asset(
-                "images/kuhutExam.png",
-              ),
-              TextField(
-                controller: get_user,
-                decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.person),
-                    border: OutlineInputBorder(),
-                    hintText: "Username"),
-              ),
-              TextField(
-                controller: get_pass,
-                obscureText: hide,
-                decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.lock),
-                    border: OutlineInputBorder(),
-                    hintText: "Password",
-                    suffixIcon: IconButton(
-                      icon: Icon(Icons.remove_red_eye),
-                      onPressed: () {
-                        setState(() {
-                          //hide =true?  hide = false : hide = true
-                          if (hide == true) {
-                            hide = false;
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("images/iconMenuSiswa/back.jpg"),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                
+                Image.asset(
+                  "images/kuhutExam.png",
+                ),
+                TextField(
+                  controller: get_user,
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.person),
+                      border: OutlineInputBorder(),
+                      hintText: "Username"),
+                ),
+                SizedBox(height: 15,),
+                TextField(
+                  controller: get_pass,
+                  obscureText: hide,
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(Icons.lock),
+                      border: OutlineInputBorder(),
+                      hintText: "Password",
+                      suffixIcon: IconButton(
+                        icon: Icon(Icons.remove_red_eye),
+                        onPressed: () {
+                          setState(() {
+                            //hide =true?  hide = false : hide = true
+                            if (hide == true) {
+                              hide = false;
+                            } else {
+                              hide = true;
+                            }
+                          });
+                        },
+                      )),
+                ),
+                SizedBox(height: 25,),
+                ElevatedButton.icon(
+                  icon: Icon(Icons.login),
+                  label: Text("Login"),
+                  onPressed: () {
+                    final db = FirebaseFirestore.instance;
+                    if (check_text(
+                            get_user.text.toString(), get_pass.text.toString()) ==
+                        true) {
+                      String getStats =
+                          (getInstance(get_user.text.toString(), "standard"));
+                      print(getStats);
+                      String reserved =
+                          (getInstance(get_user.text.toString(), "reverse"));
+          
+                      db
+                          .collection('tbUser')
+                          .doc(get_user.text.toString())
+                          .get()
+                          .then((DocumentSnapshot dsData) {
+                        String email = dsData['email'];
+                        String password = dsData['password'];
+                        String kelas = dsData['kelas'];
+                        if (get_user.text.toString() == email) {
+                          if (get_pass.text.toString() == password) {
+                            //cek if guru or siswa based on email
+                            if (getStats == "teacher") {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MainMenuTeacher(
+                                            name: reserved,
+                                            kelaslah: kelas,
+                                          )));
+                            } else if (getStats == "siswa") {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MainMenuSiswas(
+                                            siswa_name: reserved,
+                                            siswa_kelas: kelas,
+                                          )));
+                            } else {
+                              createToast("Input instance", Colors.red, 1);
+                            }
                           } else {
-                            hide = true;
+                            //flutter toast Invalid Password/ganti di text
+                            createToast("Invalid Password", Colors.red, 1);
                           }
-                        });
-                      },
-                    )),
-              ),
-              ElevatedButton.icon(
-                icon: Icon(Icons.login),
-                label: Text("Login"),
-                onPressed: () {
-                  final db = FirebaseFirestore.instance;
-                  if (check_text(get_user.text.toString(), get_pass.text.toString()) ==
-                      true) {
-                    String getStats = (getInstance(get_user.text.toString(), "standard"));
-                    print(getStats);
-                    String reserved = (getInstance(get_user.text.toString(), "reverse"));
-
-                    db
-                        .collection('tbUser')
-                        .doc(get_user.text.toString())
-                        .get()
-                        .then((DocumentSnapshot dsData) {
-                      String email = dsData['email'];
-                      String password = dsData['password'];
-                      String kelas = dsData['kelas'];
-                      if (get_user.text.toString() == email) {
-                        if (get_pass.text.toString() == password) {
-                          //cek if guru or siswa based on email
-                          if (getStats == "teacher") {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MainMenuTeacher(
-                                          name: reserved,
-                                        )));
-                          } else if (getStats == "siswa") {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MainMenuSiswas(
-                                          siswa_name: reserved,
-                                          siswa_kelas: kelas,
-                                        )));
-                          } else {
-                            createToast("Input instance", Colors.red, 1);
-                          }
-                        } else {
-                          //flutter toast Invalid Password/ganti di text
-                          createToast("Invalid Password", Colors.red, 1);
                         }
-                      }
-                    });
-                  } else {
-                    continueDialog("Input All", "Please Input all the Field Here");
-                  }
-                },
-              ),
-            ],
+                      });
+                    } else {
+                      continueDialog(
+                          "Input All", "Please Input all the Field Here");
+                    }
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

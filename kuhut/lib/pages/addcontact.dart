@@ -7,8 +7,8 @@ import 'package:kuhut/main.dart';
 import 'package:kuhut/pages/viewcontact.dart';
 
 class AddContact extends StatefulWidget {
-  final String siswaNameResetProfile;
-  const AddContact({Key? key, required this.siswaNameResetProfile})
+  final String siswaNameResetProfile2;
+  const AddContact({Key? key, required this.siswaNameResetProfile2})
       : super(key: key);
 
   @override
@@ -211,30 +211,41 @@ class _AddContactState extends State<AddContact> {
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [
-              const Text("add contact ini"),
+              const Text("EDIT PROFILE",
+              style: TextStyle(fontSize: 30),),
+              SizedBox(height: 40),
               ElevatedButton.icon(
                   onPressed: () {
                     _selectDate(context);
                   },
                   icon: Icon(Icons.date_range),
                   label: Text(expDate)),
+                  SizedBox(height: 20),
               TextField(
                 showCursor: true,
                 controller: get_namas,
                 decoration: const InputDecoration(
+                  icon: Icon(
+                        Icons.account_circle,
+                        size: 35,
+                      ),
                   border: OutlineInputBorder(),
                   hintText: "Edit Name",
                   labelText: "Name",
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 15),
               TextField(
                 showCursor: true,
                 controller: get_telps,
                 decoration: const InputDecoration(
+                  icon: Icon(
+                        Icons.contact_page_rounded,
+                        size: 35,
+                      ),
                   border: const OutlineInputBorder(),
                   hintText: "Edit Number",
-                  labelText: "Number",
+                  labelText: "Contact",
                 ),
               ),
               const SizedBox(height: 20),
