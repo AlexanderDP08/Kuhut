@@ -18,39 +18,39 @@ class Login {
 
 class addSoal {
   final String soal;
-  final String ans_0;
-  final String ans_1;
-  final String ans_2;
-  final String ans_3;
-  final String c_ans;
+  final String ansA;
+  final String ansB;
+  final String ansC;
+  final String righAns;
+  final String namaGuru;
 
   addSoal(
       {required this.soal,
-      required this.ans_0,
-      required this.ans_1,
-      required this.ans_2,
-      required this.ans_3,
-      required this.c_ans});
+      required this.ansA,
+      required this.ansB,
+      required this.ansC,
+      required this.righAns,
+      required this.namaGuru});
 
   Map<String, dynamic> toJson() {
     return {
       "soal": soal,
-      "ans_0": ans_0,
-      "ans_1": ans_1,
-      "ans_2": ans_2,
-      "ans_3": ans_3,
-      "c_ans": c_ans
+      "ans_0": ansA,
+      "ans_1": ansB,
+      "ans_2": ansC,
+      "c_ans": righAns,
+      "guru": namaGuru
     };
   }
 
   factory addSoal.fromJson(Map<String, dynamic> json) {
     return addSoal(
         soal: json['soal'],
-        ans_0: json['ans_0'],
-        ans_1: json['ans_1'],
-        ans_2: json['ans_2'],
-        ans_3: json['ans_3'],
-        c_ans: json['c_ans']);
+        ansA: json['ans_0'],
+        ansB: json['ans_1'],
+        ansC: json['ans_2'],
+        righAns: json['c_ans'],
+        namaGuru: json['guru']);
   }
 }
 
@@ -123,7 +123,7 @@ class editprofilenama {
   }
 }
 
-class editprofileday{
+class editprofileday {
   final String abirthday;
   final String aemail;
 
@@ -137,7 +137,7 @@ class editprofileday{
   //form TambahData
   //fromJSON
   factory editprofileday.fromJSON(Map<String, dynamic> json) {
-    return editprofileday( abirthday: json['birthday'], aemail: json['email']);
+    return editprofileday(abirthday: json['birthday'], aemail: json['email']);
   }
 }
 
@@ -149,7 +149,7 @@ class editprofiletelp {
   //toJSON, or toDataClass Firebase
   Map<String, dynamic> toJson() {
     //json
-    return { "telp": atelp, "email": aemail};
+    return {"telp": atelp, "email": aemail};
   }
 
   //form TambahData
@@ -159,16 +159,16 @@ class editprofiletelp {
   }
 }
 
-class LetterGuru{
+class LetterGuru {
   final String judul;
   final String deskripsi;
-  final String expireDate; 
+  final String expireDate;
   final String templateImage;
   final String kelas;
-
+  final String expireDateFormatted;
 
   LetterGuru({
-    required this.judul, required this.deskripsi, required this.expireDate, required this.templateImage, required this.kelas
+    required this.judul, required this.deskripsi, required this.expireDate, required this.templateImage, required this.kelas, required this.expireDateFormatted
   });
 
   Map<String, dynamic> toJson(){
@@ -177,11 +177,13 @@ class LetterGuru{
       "deskripsi" : deskripsi,
       "expireDate" : expireDate,
       "templateImage" : templateImage,
-      "kelas" : kelas
+      "kelas" : kelas,
+      "expiredDateForamtted" : expireDateFormatted
     };
   }
   
   factory LetterGuru.fromJSON(Map<String, dynamic> json){
-    return LetterGuru(judul: json['judul'], deskripsi: json['deskripsi'], expireDate: json['expireDate'], templateImage: json['templateImage'], kelas: json['kelas']);
+    return LetterGuru(judul: json['judul'], deskripsi: json['deskripsi'], expireDate: json['expireDate'], templateImage: json['templateImage'], kelas: json['kelas'],
+    expireDateFormatted : json['expireDateFormatted']);
   }
 }

@@ -21,8 +21,12 @@ class _pageSetExamDateState extends State<pageSetExamDate> {
   DateTime selectedDay = DateTime.now();
   DateTime focusedDay = DateTime.now();
   String selectedDayFormatted = "";
+  String jenjagDB = "";
 
   TextEditingController _eventController = TextEditingController();
+  TextEditingController _jenjangController = TextEditingController();
+
+  final db = FirebaseFirestore.instance;
 
   @override
   void initState() {
@@ -222,7 +226,7 @@ class _pageSetExamDateState extends State<pageSetExamDate> {
                   Navigator.pop(context);
                   _eventController.clear();
                   setState(() {});
-                  return;
+                  // return;
                 },
               ),
             ],
