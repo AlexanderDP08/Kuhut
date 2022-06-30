@@ -165,10 +165,11 @@ class LetterGuru{
   final String expireDate; 
   final String templateImage;
   final String kelas;
+  final String expireDateFormatted;
 
 
   LetterGuru({
-    required this.judul, required this.deskripsi, required this.expireDate, required this.templateImage, required this.kelas
+    required this.judul, required this.deskripsi, required this.expireDate, required this.templateImage, required this.kelas, required this.expireDateFormatted
   });
 
   Map<String, dynamic> toJson(){
@@ -177,11 +178,13 @@ class LetterGuru{
       "deskripsi" : deskripsi,
       "expireDate" : expireDate,
       "templateImage" : templateImage,
-      "kelas" : kelas
+      "kelas" : kelas,
+      "expiredDateForamtted" : expireDateFormatted
     };
   }
   
   factory LetterGuru.fromJSON(Map<String, dynamic> json){
-    return LetterGuru(judul: json['judul'], deskripsi: json['deskripsi'], expireDate: json['expireDate'], templateImage: json['templateImage'], kelas: json['kelas']);
+    return LetterGuru(judul: json['judul'], deskripsi: json['deskripsi'], expireDate: json['expireDate'], templateImage: json['templateImage'], kelas: json['kelas'],
+    expireDateFormatted : json['expireDateFormatted']);
   }
 }

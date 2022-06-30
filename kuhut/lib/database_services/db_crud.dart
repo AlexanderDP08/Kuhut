@@ -223,4 +223,3 @@ class DatabaseLetter {
       .snapshots();
   }
 }
-

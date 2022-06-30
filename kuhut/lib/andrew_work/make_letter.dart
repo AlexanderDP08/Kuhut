@@ -29,6 +29,7 @@ class _SendLetterState extends State<SendLetter> {
   TextEditingController get_date = TextEditingController();
   DateTime selectedDate = DateTime.now();
   String formattedDate = "";
+  String dateTimeFormatted = "";
 
   var ChoosenImage = ""; //image yang akan dipilih
   //setting warna button
@@ -143,6 +144,7 @@ class _SendLetterState extends State<SendLetter> {
         stateOfDisable = false;
         print("Hari yang dipilih : " + formattedDate);
         expDate = "Expiring : " + formattedDate;
+        dateTimeFormatted = DateFormat("yyyy-MM-dd hh:mm:ss").format(selectedDate);
         labelJudul = "Judul";
         labelKeterangan = "Keterangan";
       });
@@ -183,6 +185,24 @@ class _SendLetterState extends State<SendLetter> {
     x = Colors.red;
     y = Colors.red;
     z = Colors.green;
+  }
+
+  void resetColor(){
+      get_title.text = "";
+      get_desc.text = "";
+      ChoosenClass = "";
+      ChoosenImage = "";
+      redColor = Colors.red;
+      redColor2 = Colors.red;
+      redColor3 = Colors.red;
+      redColor4 = Colors.red;
+      redColor5 = Colors.red;
+      redColor6 = Colors.red;
+
+      redKelas1 = Colors.red;
+      redKelas2 = Colors.red;
+      redKelas3 = Colors.red;
+      redKelasAll = Colors.red;
   }
   @override
   Widget build(BuildContext context) {
@@ -392,9 +412,9 @@ class _SendLetterState extends State<SendLetter> {
                   ElevatedButton.icon(onPressed: (){
                     setState(() {
                       ChoosenClass = "7";
-                      //setWarna(redKelas2, redKelas1, redKelas3);
-                      redKelas1 = Colors.green;
 
+                      redKelas1 = Colors.green;
+                      redKelasAll = Colors.red;
                       redKelas2 = Colors.red;
                       redKelas3 = Colors.red;
                     });
@@ -406,7 +426,7 @@ class _SendLetterState extends State<SendLetter> {
                       ChoosenClass = "8";
                       
                       redKelas2 = Colors.green;
-
+                      redKelasAll = Colors.red;
                       redKelas1 = Colors.red;
                       redKelas3 = Colors.red;
                     });
@@ -415,9 +435,9 @@ class _SendLetterState extends State<SendLetter> {
                   ElevatedButton.icon(onPressed: (){
                     setState(() {
                       ChoosenClass = "9";
-                      
+
+                      redKelasAll = Colors.red;
                       redKelas3 = Colors.green;
-                      
                       redKelas1 = Colors.red;
                       redKelas2 = Colors.red;
                     });
@@ -430,14 +450,11 @@ class _SendLetterState extends State<SendLetter> {
                       
                       redKelasAll = Colors.green;
                       redKelas3 = Colors.red;
-                      
                       redKelas1 = Colors.red;
                       redKelas2 = Colors.red;
                     });
                     
-                  }, icon: Image.asset(iconKelasPath.kelas_9, width: 30, height: 50,), label: Text(""), style: ButtonStyle(backgroundColor: MaterialStateProperty.all(redKelasAll)),)
-
-                  
+                  }, icon: Image.asset(iconKelasPath.kelas_all, width: 30, height: 50,), label: Text(""), style: ButtonStyle(backgroundColor: MaterialStateProperty.all(redKelasAll)),)
                 ],
               ),
               ElevatedButton(
@@ -448,10 +465,14 @@ class _SendLetterState extends State<SendLetter> {
                       print("Get Exprire Date : " + formattedDate);
                       print("Choosen Image : " + ChoosenImage);
                       print("Choosen Class : " + ChoosenClass);
-                      LetterGuru choosenLetter = LetterGuru(judul: get_title.text, deskripsi: get_desc.text, expireDate: formattedDate, templateImage: ChoosenImage, kelas: ChoosenClass);
+                      LetterGuru choosenLetter = LetterGuru(judul: get_title.text, deskripsi: get_desc.text, expireDate: formattedDate, templateImage: ChoosenImage, kelas: ChoosenClass, expireDateFormatted: dateTimeFormatted,);
                       DatabaseLetter.addLetter(letterGuru: choosenLetter);
 
                       showAlertDialog(context, "Sukses", "Data Telah diinput ke database", "Other");
+
+                      setState(() { 
+                        resetColor();
+                      });
                     } else {
                       showAlertDialog(context, "Fill all field", "Please fill out all the field here", "Cupertino");
                     }

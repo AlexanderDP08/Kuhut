@@ -30,7 +30,6 @@ class _MainMenuSiswasState extends State<MainMenuSiswas> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Text("Welcome, "),
-<<<<<<< HEAD
               Text(widget.siswa_name + "Kelas : " + widget.siswa_kelas),
               ElevatedButton(onPressed: (){
                 {
@@ -42,7 +41,7 @@ class _MainMenuSiswasState extends State<MainMenuSiswas> {
 
               ElevatedButton(onPressed: (){
                 {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=> const AddContact()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>  AddContact(siswaNameResetProfile: widget.siswa_name,)));
                   }
               }, 
               child: const Text("add contact")),
@@ -61,12 +60,12 @@ class _MainMenuSiswasState extends State<MainMenuSiswas> {
               }, 
               child: const Text("profile")),
 
-              ElevatedButton(onPressed: (){
-                {
-                   Navigator.push(context, MaterialPageRoute(builder: (context)=> const ViewLetter()));
-                }
-              }, 
-              child: const Text("cek letter")),
+              // ElevatedButton(onPressed: (){
+              //   {
+              //      Navigator.push(context, MaterialPageRoute(builder: (context)=> const ViewLetter(message: '',)));
+              //   }
+              // }, 
+              // child: const Text("cek letter")),
 
                ElevatedButton(onPressed: (){
                 {
@@ -74,7 +73,6 @@ class _MainMenuSiswasState extends State<MainMenuSiswas> {
                 }
               }, 
               child: const Text("Letter List View")),
-=======
               Text(widget.siswa_name),
               ElevatedButton(
                   onPressed: () {
@@ -132,7 +130,6 @@ class _MainMenuSiswasState extends State<MainMenuSiswas> {
                 },
                 child: const Text("Kerja Soal"),
               )
->>>>>>> aa335cda2a95841c67583b3fd0e1bb55127bc275
             ],
           ),
         ),
