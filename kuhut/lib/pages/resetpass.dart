@@ -18,7 +18,7 @@ TextEditingController get_pass2 = TextEditingController();
 bool hide = true;
 
 class _ResetpassState extends State<ResetPass> {
-  void createToast(String message, Color warna, int time){
+  void createToast(String message, Color warna, int time) {
     Fluttertoast.showToast(
         msg: message,
         toastLength: Toast.LENGTH_SHORT,
@@ -26,23 +26,26 @@ class _ResetpassState extends State<ResetPass> {
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.black,
         textColor: warna,
-        fontSize: 16.0
-    );
+        fontSize: 16.0);
   }
-  void gantiPassword(){
-      final dtbaru = Login(email: get_user.text.toString(), password: get_pass.text.toString());
-      DatabaseUser.ubahData(item: dtbaru);
-      dismiss();
-      createToast("Data berhasil dirubah", Colors.green, 2);
+
+  void gantiPassword() {
+    final dtbaru = Login(
+        email: get_user.text.toString(), password: get_pass.text.toString());
+    DatabaseUser.ubahData(item: dtbaru);
+    dismiss();
+    createToast("Data berhasil dirubah", Colors.green, 2);
   }
-  void dismiss(){
+
+  void dismiss() {
     Navigator.of(context, rootNavigator: true).pop();
   }
+
   void continueDialog(String text, String content) {
     Widget cancelButton = TextButton(
       child: const Text("Batal"),
       onPressed: () {
-      dismiss();
+        dismiss();
       },
     );
     Widget confirmButton = TextButton(
@@ -65,6 +68,7 @@ class _ResetpassState extends State<ResetPass> {
       },
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -73,21 +77,28 @@ class _ResetpassState extends State<ResetPass> {
             title: const Text("Siswa "),
           ),
           body: Container(
+            
             padding: const EdgeInsets.all(20),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text("Welcome, "),
-                Text(widget.siswaNameReset),
+                
+                Text(
+                  "Welcome, " + widget.siswaNameReset,
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 40,
+                ),
                 TextField(
                   showCursor: true,
                   controller: get_pass,
                   obscureText: hide,
                   decoration: InputDecoration(
-                    icon: const Icon(
-                      Icons.lock,
-                      size: 35,
-                    ),
+                      icon: const Icon(
+                        Icons.lock,
+                        size: 35,
+                      ),
                       border: const OutlineInputBorder(),
                       hintText: "Input Your New Password",
                       labelText: "New Password",
@@ -112,9 +123,9 @@ class _ResetpassState extends State<ResetPass> {
                   showCursor: true,
                   decoration: InputDecoration(
                       icon: const Icon(
-                      Icons.lock,
-                      size: 35,
-                    ),
+                        Icons.lock,
+                        size: 35,
+                      ),
                       border: const OutlineInputBorder(),
                       hintText: "Input Your Repeat New Password",
                       labelText: "Repeat New Password",
@@ -132,28 +143,31 @@ class _ResetpassState extends State<ResetPass> {
                         },
                       )),
                 ),
-                
-                ElevatedButton(onPressed: (){
-                  if (get_pass.text.toString() == get_pass2.text.toString()){
-                    continueDialog("Change Password", "Apakah anda yakin ingin mengganti password anda?");
-                    //  final dtbaru = Login(email: widget.siswaNameReset+("@siswa"), password: get_pass.text.toString());
-                    //  DatabaseUser.ubahData(item: dtbaru);
-                  }
-                  else{
-                    Fluttertoast.showToast(
-                        msg: "Repeat password tidak sama dengan set password",
-                        toastLength: Toast.LENGTH_SHORT,
-                        gravity: ToastGravity.CENTER,
-                        timeInSecForIosWeb: 1,
-                        backgroundColor: Colors.black,
-                        textColor: Colors.red,
-                        fontSize: 16.0
-                    );
-                  }
-                
-                  // final dtBaru = Login(itemJudul: lvJudul, itemIsi: lvIsi+" oke");
-                  // Database.ubahData(item: dtBaru);
-                }, child: const Text("RESET")),
+                const SizedBox(height: 30),
+                ElevatedButton(
+                    onPressed: () {
+                      if (get_pass.text.toString() ==
+                          get_pass2.text.toString()) {
+                        continueDialog("Change Password",
+                            "Apakah anda yakin ingin mengganti password anda?");
+                        //  final dtbaru = Login(email: widget.siswaNameReset+("@siswa"), password: get_pass.text.toString());
+                        //  DatabaseUser.ubahData(item: dtbaru);
+                      } else {
+                        Fluttertoast.showToast(
+                            msg:
+                                "Repeat password tidak sama dengan set password",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.black,
+                            textColor: Colors.red,
+                            fontSize: 16.0);
+                      }
+
+                      // final dtBaru = Login(itemJudul: lvJudul, itemIsi: lvIsi+" oke");
+                      // Database.ubahData(item: dtBaru);
+                    },
+                    child: const Text("RESET")),
               ],
             ),
           )),

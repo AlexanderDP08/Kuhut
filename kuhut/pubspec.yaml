@@ -49,6 +49,8 @@ dependencies:
     sdk: flutter
   url_launcher: ^6.1.4
   photo_view: ^0.14.0
+  flutter_svg: ^1.0.3
+  loading_indicator: ^3.0.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -72,15 +74,21 @@ flutter:
     - images/iconMenuTeacher/ngambil_asal/scheduleImage.jfif
     - images/iconMenuTeacher/ngambil_asal/sendLetter.jpg
     - images/iconMenuTeacher/ngambil_asal/viewScore.jpg
+    - images/iconMenuTeacher/ngambil_asal/asset_calender.png
     - images/iconLetter/1.png
     - images/iconLetter/2.png
     - images/iconLetter/3.png
     - images/iconLetter/4.png
     - images/iconLetter/5.png
     - images/iconMenuSiswa/header.png
+    - images/iconMenuSiswa/top_header.png
+    - images/iconMenuSiswa/top.png
+    - images/iconMenuSiswa/back.jpg
+    - images/iconMenuSiswa/C14190136.jpg
     - images/iconKelas/kelas_7.JPG
     - images/iconKelas/kelas_8.JPG
     - images/iconKelas/kelas_9.JPG
+    - images/iconKelas/kelas_all.JPG
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

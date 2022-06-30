@@ -27,4 +27,5 @@ class imagePathkelas{
   String kelas_7 = "images/iconKelas/kelas_7.JPG";
   String kelas_8 = "images/iconKelas/kelas_8.JPG";
   String kelas_9 = "images/iconKelas/kelas_9.JPG";
+  String kelas_all = "images/iconKelas/kelas_all.JPG";
 }
