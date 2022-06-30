@@ -95,7 +95,7 @@ class _MyAppState extends State<MyApp> {
         title: Text("Kuhut"),
       ),
       body: GestureDetector(
-        onTap: (){
+        onTap: () {
           FocusScope.of(context).requestFocus(new FocusNode());
         },
         child: Container(
@@ -138,15 +138,12 @@ class _MyAppState extends State<MyApp> {
                 label: Text("Login"),
                 onPressed: () {
                   final db = FirebaseFirestore.instance;
-                  if (check_text(
-                          get_user.text.toString(), get_pass.text.toString()) ==
+                  if (check_text(get_user.text.toString(), get_pass.text.toString()) ==
                       true) {
-                    String getStats =
-                        (getInstance(get_user.text.toString(), "standard"));
+                    String getStats = (getInstance(get_user.text.toString(), "standard"));
                     print(getStats);
-                    String reserved =
-                        (getInstance(get_user.text.toString(), "reverse"));
-      
+                    String reserved = (getInstance(get_user.text.toString(), "reverse"));
+
                     db
                         .collection('tbUser')
                         .doc(get_user.text.toString())
@@ -154,6 +151,7 @@ class _MyAppState extends State<MyApp> {
                         .then((DocumentSnapshot dsData) {
                       String email = dsData['email'];
                       String password = dsData['password'];
+                      String kelas = dsData['kelas'];
                       if (get_user.text.toString() == email) {
                         if (get_pass.text.toString() == password) {
                           //cek if guru or siswa based on email
@@ -170,6 +168,7 @@ class _MyAppState extends State<MyApp> {
                                 MaterialPageRoute(
                                     builder: (context) => MainMenuSiswas(
                                           siswa_name: reserved,
+                                          siswa_kelas: kelas,
                                         )));
                           } else {
                             createToast("Input instance", Colors.red, 1);
@@ -181,8 +180,7 @@ class _MyAppState extends State<MyApp> {
                       }
                     });
                   } else {
-                    continueDialog(
-                        "Input All", "Please Input all the Field Here");
+                    continueDialog("Input All", "Please Input all the Field Here");
                   }
                 },
               ),

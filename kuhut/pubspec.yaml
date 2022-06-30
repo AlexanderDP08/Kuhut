@@ -78,6 +78,9 @@ flutter:
     - images/iconLetter/4.png
     - images/iconLetter/5.png
     - images/iconMenuSiswa/header.png
+    - images/iconKelas/kelas_7.JPG
+    - images/iconKelas/kelas_8.JPG
+    - images/iconKelas/kelas_9.JPG
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
