@@ -3,24 +3,37 @@ import 'package:flutter/material.dart';
 import 'package:kuhut/database_services/db_crud.dart';
 
 class ButtonSoal extends StatelessWidget {
-  final String mapel;
-  final String jenjang;
-  final String tgl;
-  final String guru;
+  final String dmapel;
+  final String djenjang;
+  final String dtgl;
+  final String dguru;
 
   const ButtonSoal({
     Key? key,
-    required this.mapel,
-    required this.jenjang,
-    required this.tgl,
-    required this.guru,
+    required this.dmapel,
+    required this.djenjang,
+    required this.dtgl,
+    required this.dguru,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {},
-      child: Text("Tes ${mapel.toUpperCase()}"),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    Soal(mapel: dmapel, jenjang: djenjang, tgl: dtgl, guru: dguru),
+              ),
+            );
+          },
+          child: Text("Tes ${dmapel.toUpperCase()}"),
+        ),
+      ],
     );
   }
 }
@@ -44,11 +57,8 @@ class _MenuSoalState extends State<MenuSoal> {
         body: Container(
           child: ListView.separated(
               itemBuilder: (context, index) {
-                return Column(
-                  children: const [
-                    Text("Tes"),
-                  ],
-                );
+                return const ButtonSoal(
+                    dmapel: "fisika", djenjang: "9", dtgl: "20-05-2022", dguru: "alex");
               },
               separatorBuilder: ((context, index) => SizedBox(height: 8)),
               itemCount: 10),
@@ -79,7 +89,7 @@ class Soal extends StatefulWidget {
 class _SoalState extends State<Soal> {
   late String _character = "";
   int nomer = 0;
-  String _soal = "";
+  final String _soal = "";
   final List<String>? _ans = ["", "", "", ""];
 
   Stream<QuerySnapshot<Object?>> onSearch() {
@@ -112,13 +122,13 @@ class _SoalState extends State<Soal> {
                   _ans![3] = dsData['ans_3'];
                   return Column(
                     children: [
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        "${nomer + 1}. $_soal",
-                        style: const TextStyle(
-                          fontSize: 20,
+                      Container(
+                        padding: const EdgeInsets.all(12),
+                        child: Text(
+                          "${nomer + 1}. $_soal",
+                          style: const TextStyle(
+                            fontSize: 20,
+                          ),
                         ),
                       ),
                       const SizedBox(height: 10),
