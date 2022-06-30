@@ -2,14 +2,74 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kuhut/database_services/db_crud.dart';
 
+class ButtonSoal extends StatelessWidget {
+  final String mapel;
+  final String jenjang;
+  final String tgl;
+  final String guru;
+
+  const ButtonSoal({
+    Key? key,
+    required this.mapel,
+    required this.jenjang,
+    required this.tgl,
+    required this.guru,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () {},
+      child: Text("Tes ${mapel.toUpperCase()}"),
+    );
+  }
+}
+
+class MenuSoal extends StatefulWidget {
+  const MenuSoal({Key? key}) : super(key: key);
+
+  @override
+  State<MenuSoal> createState() => _MenuSoalState();
+}
+
+class _MenuSoalState extends State<MenuSoal> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text("Pilih Soal"),
+        ),
+        body: Container(
+          child: ListView.separated(
+              itemBuilder: (context, index) {
+                return Column(
+                  children: const [
+                    Text("Tes"),
+                  ],
+                );
+              },
+              separatorBuilder: ((context, index) => SizedBox(height: 8)),
+              itemCount: 10),
+        ),
+      ),
+    );
+  }
+}
+
 class Soal extends StatefulWidget {
-  final String soal;
-  final List<String> ans;
+  final String mapel;
+  final String jenjang;
+  final String tgl;
+  final String guru;
 
   const Soal({
     Key? key,
-    required this.soal,
-    required this.ans,
+    required this.mapel,
+    required this.jenjang,
+    required this.tgl,
+    required this.guru,
   }) : super(key: key);
 
   @override
@@ -24,7 +84,7 @@ class _SoalState extends State<Soal> {
 
   Stream<QuerySnapshot<Object?>> onSearch() {
     setState(() {});
-    return DataBaseSoal.getSoal();
+    return DataBaseSoal.getSoal(widget.mapel, widget.jenjang, widget.tgl, widget.guru);
   }
 
   @override
