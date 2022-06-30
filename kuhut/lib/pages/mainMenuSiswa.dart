@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kuhut/andrew_work/st_lvtitle_let.dart';
+import 'package:kuhut/pages/PageScore.dart';
 import 'package:kuhut/pages/addcontact.dart';
 import 'package:kuhut/pages/profilecontact.dart';
 import 'package:kuhut/pages/resetpass.dart';
@@ -102,6 +103,15 @@ class _MainMenuSiswasState extends State<MainMenuSiswas> {
                               ))));
                 },
                 child: const Text("Kerja Soal"),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: ((context) => ScorePage(nama: widget.siswa_name))));
+                },
+                child: const Text("Lihat Nilai"),
               )
             ],
           ),

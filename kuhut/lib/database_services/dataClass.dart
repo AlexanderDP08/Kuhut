@@ -36,11 +36,72 @@ class addSoal {
 
   factory addSoal.fromJson(Map<String, dynamic> json) {
     return addSoal(
-        soal: json['soal'],
-        ans_0: json['ans_0'],
-        ans_1: json['ans_1'],
-        ans_2: json['ans_2'],
-        c_ans: json['c_ans']);
+      soal: json['soal'],
+      ans_0: json['ans_0'],
+      ans_1: json['ans_1'],
+      ans_2: json['ans_2'],
+      c_ans: json['c_ans'],
+    );
+  }
+}
+
+class Absen {
+  final String absen;
+  final String nama;
+  final String mapel;
+
+  Absen({
+    required this.absen,
+    required this.nama,
+    required this.mapel,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      "absen": absen,
+      "nama": nama,
+      "mapel": mapel,
+    };
+  }
+
+  factory Absen.fromJson(Map<String, dynamic> json) {
+    return Absen(
+      absen: json['absen'],
+      nama: json['nama'],
+      mapel: json['mapel'],
+    );
+  }
+}
+
+class Score {
+  final String guru;
+  final String mapel;
+  final String nama;
+  final String score;
+
+  Score({
+    required this.guru,
+    required this.mapel,
+    required this.nama,
+    required this.score,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      "guru": guru,
+      "mapel": mapel,
+      "nama": nama,
+      "score": score,
+    };
+  }
+
+  factory Score.fromJson(Map<String, dynamic> json) {
+    return Score(
+      guru: json['score'],
+      mapel: json['mapel'],
+      nama: json['nama'],
+      score: json['score'],
+    );
   }
 }
 

@@ -201,6 +201,7 @@ class DatabaseTeacher {
 
 CollectionReference allSoal = FirebaseFirestore.instance.collection("tbSoal");
 CollectionReference allEvent = FirebaseFirestore.instance.collection("events");
+CollectionReference tbScore = FirebaseFirestore.instance.collection("tbUser");
 
 class DataBaseSoal {
   // static Stream<QuerySnapshot<Map<String, dynamic>>> getSoal(
@@ -225,6 +226,24 @@ class DataBaseSoal {
     return events
         .orderBy("jenjang")
         .startAt([jenjang]).endAt([jenjang + '\uf8ff']).snapshots();
+  }
+
+  static Future<void> addScore({required Score item}) async {
+    DocumentReference docRef =
+        tbScore.doc("${item.nama}@siswa").collection("tbScore").doc(item.mapel);
+
+    await docRef
+        .set(item.toJson())
+        .whenComplete(() => print("Data Added"))
+        .catchError((e) => print(e));
+  }
+
+  static Stream<QuerySnapshot<Object?>> getScore(String nama) {
+    return tbScore.doc(nama + "@siswa").collection("tbScore").snapshots();
+  }
+
+  static Stream<QuerySnapshot<Object?>> setAbsen(String nama) {
+    return tbScore.doc(nama + "@siswa").collection("tbAbsen").snapshots();
   }
 }
 
