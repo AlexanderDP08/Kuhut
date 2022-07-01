@@ -70,16 +70,17 @@ class _Contact_ViewState extends State<Contact_View> {
           children: [
             const DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
+                  image: DecorationImage(
+                      image: NetworkImage("https://png.pngtree.com/thumb_back/fw800/background/20201223/pngtree-purple-minimalist-watercolor-education-background-image_512200.jpg"), 
+                      fit: BoxFit.cover)),
               margin: EdgeInsets.all(0.0),
               padding: EdgeInsets.all(0.0),
               child: Center(
                 child: Text(
-                  "MENU",
+                  "KuhutExam",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 24,
                   ),
                 ),

@@ -251,8 +251,8 @@ class _AddContactState extends State<AddContact> {
               const SizedBox(height: 20),
               ElevatedButton(
                   onPressed: () {
-                    continueDialog("Change Password",
-                        "Apakah anda yakin ingin mengganti password anda?");
+                    continueDialog("Change Edit",
+                        "Apakah anda yakin ingin mengganti settingan anda?");
                   },
                   child: const Text("EDIT")),
             ],
