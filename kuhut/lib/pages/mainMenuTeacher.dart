@@ -401,7 +401,13 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                                 ),
                               ),
                               GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => SendLetter(
+                                              )));
+                                },
                                 child: Card(
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8)),

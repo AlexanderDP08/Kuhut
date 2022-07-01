@@ -14,6 +14,65 @@ class LetterListView extends StatefulWidget {
 }
 
 class _LetterListViewState extends State<LetterListView> {
+
+  bool isExpired(DateTime now, DateTime expired){
+    if(DateTime.now().isAfter(expired)){
+      return true;
+    }
+    return false;
+  }
+  void deleteExpired(String id_firestore){
+    FirebaseFirestore.instance.collection('Letter').doc(id_firestore).delete();
+  }
+
+  void dismiss(){
+     Navigator.of(context, rootNavigator: true).pop();
+  }
+  showAlertDialog(BuildContext context, String option, String delete_id) {
+
+  Widget cancelButton = TextButton(
+    child: Text("Cancel"),
+    onPressed:  () {
+       dismiss();
+    },
+  );
+  Widget continueButton = TextButton(
+    child: Text("OK"),
+    onPressed:  () {
+      deleteExpired(delete_id);
+      dismiss();
+    },
+  );
+
+  AlertDialog alert = AlertDialog(
+    title: Text("Delete data"),
+    content: Text("Are you sure want to delete the expired data?"),
+    actions: [
+      cancelButton,
+      continueButton,
+    ],
+  );
+  AlertDialog alert_ok = AlertDialog(
+    title: Text("Cannot"),
+    content: Text("Cannot delete if the letter isn't expired!"),
+    actions: [
+      cancelButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      if (option =="two_opt"){
+        return alert;
+      }
+      else{
+        return alert_ok;
+      }
+    },
+  );
+}
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -55,9 +114,14 @@ class _LetterListViewState extends State<LetterListView> {
                     String expireDate = dsData['expiredDateForamtted'];
                     Color listTileWarna = Colors.white;
                     print(DateTime.now());
-                    if (DateTime.now().isAfter(DateTime.parse(expireDate))){
-                      listTileWarna = Colors.grey;
-                      lvJudul += "(expired)";
+                    // if (DateTime.now().isAfter(DateTime.parse(expireDate))){
+                    //   listTileWarna = Colors.grey;
+                    //   lvJudul += "(expired)";
+                    // }
+                    bool is_not_valid= isExpired(DateTime.now(), DateTime.parse(expireDate));
+                    if (is_not_valid){
+                       listTileWarna = Colors.grey;
+                       lvJudul += "(expired)";
                     }
                     return ListTile(
                       tileColor: listTileWarna,
@@ -81,7 +145,18 @@ class _LetterListViewState extends State<LetterListView> {
                                 builder: (context) =>
                                     ViewLetter(title: dsData['judul'], message: dsData['deskripsi'], letterOption: dsData['templateImage'], )));
                               },
-                              icon: Icon(Icons.remove_red_eye))
+                              icon: Icon(Icons.remove_red_eye)),
+                                IconButton(
+                              onPressed: () {
+                                if (is_not_valid){
+                                  print("Bisa di delete");
+                                  showAlertDialog(context, "two_opt", dsData.id);
+                                }
+                                else{
+                                  showAlertDialog(context, "else", "null");
+                                }
+                              },
+                              icon: Icon(Icons.delete))
                         ],
                       ),
                     );
