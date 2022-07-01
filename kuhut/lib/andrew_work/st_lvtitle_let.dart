@@ -14,7 +14,7 @@ class LetterListView extends StatefulWidget {
 }
 
 class _LetterListViewState extends State<LetterListView> {
-
+  Color recycleBin = Colors.grey;
   bool isExpired(DateTime now, DateTime expired){
     if(DateTime.now().isAfter(expired)){
       return true;
@@ -122,14 +122,12 @@ class _LetterListViewState extends State<LetterListView> {
                     if (is_not_valid){
                        listTileWarna = Colors.grey;
                        lvJudul += "(expired)";
+                       recycleBin = Colors.red;
                     }
                     return ListTile(
                       tileColor: listTileWarna,
                       leading: Icon(Icons.mail_sharp),
                       onTap: () {
-                        
-                      },
-                      onLongPress: () {
                         
                       },
                       title: Text(lvJudul),
@@ -156,7 +154,7 @@ class _LetterListViewState extends State<LetterListView> {
                                   showAlertDialog(context, "else", "null");
                                 }
                               },
-                              icon: Icon(Icons.delete))
+                              icon: Icon(Icons.delete), color: recycleBin,)
                         ],
                       ),
                     );
