@@ -14,12 +14,8 @@ import '../andrew_work/st_viewletter.dart';
 class MainMenuSiswas extends StatefulWidget {
   final String siswa_name;
   final String siswa_kelas;
-<<<<<<< HEAD
   const MainMenuSiswas(
       {Key? key, required this.siswa_name, required this.siswa_kelas})
-=======
-  const MainMenuSiswas({Key? key, required this.siswa_name, required this.siswa_kelas})
->>>>>>> 2f60b36c17399a1a17217dbe6dbbb123b1724c26
       : super(key: key);
 
   @override
@@ -34,11 +30,10 @@ class _MainMenuSiswasState extends State<MainMenuSiswas> {
         appBar: AppBar(
           title: const Text("Siswa "),
         ),
-        body: Container(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        drawer: Drawer(
+          child: ListView(
+          padding: EdgeInsets.all(0.0),
             children: [
-<<<<<<< HEAD
               const DrawerHeader(
                 decoration: BoxDecoration(
                   color: Colors.blue,
@@ -60,15 +55,15 @@ class _MainMenuSiswasState extends State<MainMenuSiswas> {
                 leading: Icon(Icons.house),
                 title: Text("HOME"),
                 onTap: () {
-                  {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MainMenuSiswas(
-                                  siswa_name: widget.siswa_name,
-                                  siswa_kelas: widget.siswa_kelas,
-                                )));
-                  }
+                  // {
+                  //   Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //           builder: (context) => MainMenuSiswas(
+                  //                 siswa_name: widget.siswa_name,
+                  //                 siswa_kelas: widget.siswa_kelas,
+                  //               )));
+                  // }
                 },
               ),
               ListTile(
@@ -101,8 +96,7 @@ class _MainMenuSiswasState extends State<MainMenuSiswas> {
                 title: Text("LOG OUT"),
                 onTap: () {
                   {
-                    Navigator.pop(
-                        context,);
+                    Navigator.of(context).popUntil((route) => route.isFirst);
                   }
                 },
               ),
@@ -229,194 +223,6 @@ class _MainMenuSiswasState extends State<MainMenuSiswas> {
               ],
             ),
           )),
-      // appBar: AppBar(
-      //   title: const Text("Siswa "),
-      // ),
-      // body: Container(
-      //   child: Column(
-      //     crossAxisAlignment: CrossAxisAlignment.start,
-      //     children: [
-      //       const Text("Welcome, "),
-      //       Text(widget.siswa_name + "Kelas : " + widget.siswa_kelas),
-      //       ElevatedButton(onPressed: (){
-      //         {
-      //           Navigator.push(context,MaterialPageRoute(
-      //             builder: (context) => ResetPass(siswaNameReset : widget.siswa_name )));
-      //           }
-      //       },
-      //       child: const Text("reset password")),
-
-      //       ElevatedButton(onPressed: (){
-      //         {
-      //           Navigator.push(context, MaterialPageRoute(builder: (context)=> const AddContact()));
-      //           }
-      //       },
-      //       child: const Text("add contact")),
-
-      //       ElevatedButton(onPressed: (){
-      //         {
-      //           Navigator.push(context, MaterialPageRoute(builder: (context)=> const Contact_View()));
-      //           }
-      //       },
-      //       child: const Text("View Contact")),
-
-      //       ElevatedButton(onPressed: (){
-      //         {
-      //             Navigator.push(context, MaterialPageRoute(builder: (context)=> const Contact_View()));
-      //           }
-      //       },
-      //       child: const Text("profile")),
-
-      //       ElevatedButton(onPressed: (){
-      //         {
-      //            Navigator.push(context, MaterialPageRoute(builder: (context)=> const ViewLetter()));
-      //         }
-      //       },
-      //       child: const Text("cek letter")),
-
-      //        ElevatedButton(onPressed: (){
-      //         {
-      //            Navigator.push(context, MaterialPageRoute(builder: (context)=>  LetterListView(getSiswaKelas: widget.siswa_kelas,)));
-      //         }
-      //       },
-      //       child: const Text("Letter List View")),
-      //       Text(widget.siswa_name),
-      //       ElevatedButton(
-      //           onPressed: () {
-      //             {
-      //               Navigator.push(
-      //                   context,
-      //                   MaterialPageRoute(
-      //                       builder: (context) =>
-      //                           ResetPass(siswaNameReset: widget.siswa_name)));
-      //             }
-      //           },
-      //           child: const Text("reset password")),
-      //       ElevatedButton(
-      //           onPressed: () {
-      //             {
-      //               Navigator.push(
-      //                   context,
-      //                   MaterialPageRoute(
-      //                       builder: (context) =>
-      //                           AddContact(siswaNameResetProfile: widget.siswa_name)));
-      //             }
-      //           },
-      //           child: const Text("add contact")),
-      //       ElevatedButton(
-      //           onPressed: () {
-      //             {
-      //               Navigator.push(context,
-      //                   MaterialPageRoute(builder: (context) => const Contact_View()));
-      //             }
-      //           },
-      //           child: const Text("View Contact")),
-      //       ElevatedButton(
-      //           onPressed: () {
-      //             {
-      //               Navigator.push(
-      //                   context,
-      //                   MaterialPageRoute(
-      //                       builder: (context) =>
-      //                           profilnya(siswaNameResetProfile: widget.siswa_name)));
-      //             }
-      //           },
-      //           child: const Text("profile")),
-      //       ElevatedButton(
-      //         onPressed: () {
-      //           String soal = "Soal Nomer";
-      //           List<String>? ans = [];
-      //           ans.add("Ans 1");
-      //           ans.add("Ans 2");
-      //           ans.add("Ans 3");
-      //           ans.add("Ans 4");
-      //           Navigator.push(
-      //               context,
-      //               MaterialPageRoute(
-      //                   builder: ((context) => Soal(soal: soal, ans: ans))));
-      //         },
-      //         child: const Text("Kerja Soal"),
-      //       )
-      //     ],
-      //   ),
-      // ),
-=======
-              const Text("Welcome, "),
-              Text(widget.siswa_name + "Kelas : " + widget.siswa_kelas),
-              ElevatedButton(
-                  onPressed: () {
-                    {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  ResetPass(siswaNameReset: widget.siswa_name)));
-                    }
-                  },
-                  child: const Text("reset password")),
-              ElevatedButton(
-                  onPressed: () {
-                    {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const AddContact(
-                                    siswaNameResetProfile: '',
-                                  )));
-                    }
-                  },
-                  child: const Text("add contact")),
-              ElevatedButton(
-                  onPressed: () {
-                    {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => const Contact_View()));
-                    }
-                  },
-                  child: const Text("View Contact")),
-              ElevatedButton(
-                  onPressed: () {
-                    {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => const Contact_View()));
-                    }
-                  },
-                  child: const Text("profile")),
-               ElevatedButton(onPressed: (){
-                {
-                   Navigator.push(context, MaterialPageRoute(builder: (context)=>  LetterListView(getSiswaKelas: widget.siswa_kelas,)));
-                }
-              }, 
-              child: const Text("Letter List View")),
-              ElevatedButton(
-                  onPressed: () {
-                    {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => LetterListView(
-                                    getSiswaKelas: widget.siswa_kelas,
-                                  )));
-                    }
-                  },
-                  child: const Text("Letter List View")),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: ((context) => MenuSoal(
-                                nama: widget.siswa_name,
-                                kelas: widget.siswa_kelas,
-                              ))));
-                },
-                child: const Text("Kerja Soal"),
-              )
-            ],
-          ),
-        ),
-      ),
->>>>>>> 2f60b36c17399a1a17217dbe6dbbb123b1724c26
     );
   }
 }

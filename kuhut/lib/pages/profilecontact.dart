@@ -100,16 +100,23 @@ class _profilnyaState extends State<profilnya> {
               title: Text("HOME"),
               onTap: () {
                 {
-                  if(widget.siswaKelasResetProfile == "0"){
+                  if (widget.siswaKelasResetProfile == "7" ||
+                      widget.siswaKelasResetProfile == "8" ||
+                      widget.siswaKelasResetProfile == "9") {
                     Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => MainMenuTeacher(name: widget.siswaNameResetProfile, kelaslah: widget.siswaKelasResetProfile,)));
-                  } else{
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MainMenuSiswas(
+                                siswa_name: widget.siswaNameResetProfile,
+                                siswa_kelas: widget.siswaKelasResetProfile)));
+                  } else {
                     Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => MainMenuSiswas(siswa_name: widget.siswaNameResetProfile, siswa_kelas: widget.siswaKelasResetProfile)));
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MainMenuTeacher(
+                                  name: widget.siswaNameResetProfile,
+                                  kelaslah: widget.siswaKelasResetProfile,
+                                )));
                   }
                 }
               },
@@ -148,8 +155,7 @@ class _profilnyaState extends State<profilnya> {
                 title: Text("LOG OUT"),
                 onTap: () {
                   {
-                  Navigator.pop(
-                        context,);
+                  Navigator.of(context).popUntil((route) => route.isFirst);
                   }
                 },
               ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kuhut/imagePath.dart';
 import 'package:kuhut/pages/PageAddSoal.dart';
+import 'package:kuhut/pages/PageQuestion.dart';
 import 'package:kuhut/pages/absensi.dart';
 import 'package:kuhut/pages/addcontact.dart';
 import 'package:kuhut/pages/pageSetExamDate.dart';
@@ -14,7 +15,8 @@ import 'mainMenuSiswa.dart';
 class MainMenuTeacher extends StatefulWidget {
   final String name;
   final String kelaslah;
-  const MainMenuTeacher({Key? key, required this.name, required this.kelaslah}) : super(key: key);
+  const MainMenuTeacher({Key? key, required this.name, required this.kelaslah})
+      : super(key: key);
 
   @override
   State<MainMenuTeacher> createState() => _MainMenuTeacherState();
@@ -24,7 +26,6 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
   var fontsize = 20.0;
 
   var t_path = teacherImagePath();
-
 
   @override
   Widget build(BuildContext context) {
@@ -127,7 +128,7 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
     //               Navigator.push(context,MaterialPageRoute(
     //                 builder: (context) => ResetPass(siswaNameReset : widget.name )));
     //               }
-    //           }, 
+    //           },
     //           child: const Text("reset password")),
 
     //           ElevatedButton(onPressed: (){
@@ -135,14 +136,14 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
     //               Navigator.push(context, MaterialPageRoute(
     //                 builder: (context)=> AddContact(siswaNameResetProfile2: widget.name)));
     //               }
-    //           }, 
+    //           },
     //           child: const Text("add contact")),
 
     //           ElevatedButton(onPressed: (){
     //             {
     //               Navigator.push(context, MaterialPageRoute(builder: (context)=>  Contact_View(siswaNameResetcontact: widget.name, siswaKelasResetContact: widget.kelaslah,)));
     //               }
-    //           }, 
+    //           },
     //           child: const Text("View Contact")),
 
     //           ElevatedButton(onPressed: (){
@@ -150,7 +151,7 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
     //                 Navigator.push(context,MaterialPageRoute(
     //                 builder: (context) => profilnya(siswaNameResetProfile : widget.name, siswaKelasResetProfile: widget.kelaslah, )));
     //               }
-    //           }, 
+    //           },
     //           child: const Text("profile")),
     //           ],
     //         ),
@@ -186,15 +187,15 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                 leading: Icon(Icons.house),
                 title: Text("HOME"),
                 onTap: () {
-                  {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MainMenuTeacher(
-                                  name: widget.name,
-                                  kelaslah: widget.kelaslah,
-                                )));
-                  }
+                  // {
+                  //   Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //           builder: (context) => MainMenuTeacher(
+                  //                 name: widget.name,
+                  //                 kelaslah: widget.kelaslah,
+                  //               )));
+                  // }
                 },
               ),
               ListTile(
@@ -206,7 +207,9 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => profilnya(
-                                siswaNameResetProfile: widget.name, siswaKelasResetProfile: widget.kelaslah,)));
+                                  siswaNameResetProfile: widget.name,
+                                  siswaKelasResetProfile: widget.kelaslah,
+                                )));
                   }
                 },
               ),
@@ -218,7 +221,10 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => Contact_View(siswaNameResetcontact: widget.name, siswaKelasResetContact: widget.kelaslah,)));
+                            builder: (context) => Contact_View(
+                                  siswaNameResetcontact: widget.name,
+                                  siswaKelasResetContact: widget.kelaslah,
+                                )));
                   }
                 },
               ),
@@ -227,8 +233,7 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                 title: Text("LOG OUT"),
                 onTap: () {
                   {
-                    Navigator.pop(
-                        context,);
+                    Navigator.of(context).popUntil((route) => route.isFirst);
                   }
                 },
               ),
@@ -241,8 +246,7 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           alignment: Alignment.topCenter,
-                          image:
-                              AssetImage('images/iconMenuSiswa/top.png'))),
+                          image: AssetImage('images/iconMenuSiswa/top.png'))),
                 ),
                 SafeArea(
                   child: Padding(
@@ -290,7 +294,15 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                             crossAxisCount: 2,
                             children: [
                               GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                pageSetExamDate()));
+                                  }
+                                },
                                 child: Card(
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8)),
@@ -312,9 +324,9 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                                   ),
                                 ),
                               ),
-
                               GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                },
                                 child: Card(
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8)),
@@ -341,7 +353,10 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => Absensi(siswaNameAbsen: widget.name, siswaKelasAbsen: widget.kelaslah)));
+                                          builder: (context) => Absensi(
+                                              siswaNameAbsen: widget.name,
+                                              siswaKelasAbsen:
+                                                  widget.kelaslah)));
                                 },
                                 child: Card(
                                   shape: RoundedRectangleBorder(
@@ -388,7 +403,15 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                                 ),
                               ),
                               GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                SendLetter()));
+                                  }
+                                },
                                 child: Card(
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8)),

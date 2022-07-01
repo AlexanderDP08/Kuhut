@@ -14,13 +14,14 @@ import '../main.dart';
 class Contact_View extends StatefulWidget {
   final String siswaNameResetcontact;
   final String siswaKelasResetContact;
-  const Contact_View({Key? key,required this.siswaNameResetcontact,
-      required this.siswaKelasResetContact}) : super(key: key);
+  const Contact_View(
+      {Key? key,
+      required this.siswaNameResetcontact,
+      required this.siswaKelasResetContact})
+      : super(key: key);
 
   @override
   State<Contact_View> createState() => _Contact_ViewState();
-
-
 }
 
 //String lvtelp = "";
@@ -63,7 +64,7 @@ class _Contact_ViewState extends State<Contact_View> {
         appBar: AppBar(
           title: const Text("View Contact"),
         ),
-                drawer: Drawer(
+        drawer: Drawer(
             child: ListView(
           padding: EdgeInsets.all(0.0),
           children: [
@@ -89,16 +90,23 @@ class _Contact_ViewState extends State<Contact_View> {
               title: Text("HOME"),
               onTap: () {
                 {
-                  if(widget.siswaKelasResetContact == "0"){
+                  if (widget.siswaKelasResetContact == "7" ||
+                      widget.siswaKelasResetContact == "8" ||
+                      widget.siswaKelasResetContact == "9") {
                     Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => MainMenuTeacher(name: widget.siswaNameResetcontact, kelaslah: widget.siswaKelasResetContact,)));
-                  } else{
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MainMenuSiswas(
+                                siswa_name: widget.siswaNameResetcontact,
+                                siswa_kelas: widget.siswaKelasResetContact)));
+                  } else {
                     Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => MainMenuSiswas(siswa_name: widget.siswaNameResetcontact, siswa_kelas: widget.siswaKelasResetContact)));
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MainMenuTeacher(
+                                  name: widget.siswaNameResetcontact,
+                                  kelaslah: widget.siswaKelasResetContact,
+                                )));
                   }
                 }
               },
@@ -128,20 +136,24 @@ class _Contact_ViewState extends State<Contact_View> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => Contact_View(siswaNameResetcontact: widget.siswaNameResetcontact, siswaKelasResetContact: widget.siswaKelasResetContact,)));
+                          builder: (context) => Contact_View(
+                                siswaNameResetcontact:
+                                    widget.siswaNameResetcontact,
+                                siswaKelasResetContact:
+                                    widget.siswaKelasResetContact,
+                              )));
                 }
               },
             ),
             ListTile(
-                leading: Icon(Icons.exit_to_app_rounded),
-                title: Text("LOG OUT"),
-                onTap: () {
-                  {
-                    Navigator.pop(
-                        context,);
-                  }
-                },
-              ),
+              leading: Icon(Icons.exit_to_app_rounded),
+              title: Text("LOG OUT"),
+              onTap: () {
+                {
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                }
+              },
+            ),
           ],
         )),
         body: Container(
@@ -203,7 +215,8 @@ class _Contact_ViewState extends State<Contact_View> {
                                         onPressed: () {
                                           emailOpen(lvmail);
                                         },
-                                        icon: Icon(Icons.attach_email_outlined)),
+                                        icon:
+                                            Icon(Icons.attach_email_outlined)),
                                     IconButton(
                                         onPressed: () {
                                           whatsAppOpen(lvtelp);
@@ -227,7 +240,8 @@ class _Contact_ViewState extends State<Contact_View> {
                                         onPressed: () {
                                           emailOpen(lvmail);
                                         },
-                                        icon: Icon(Icons.attach_email_outlined)),
+                                        icon:
+                                            Icon(Icons.attach_email_outlined)),
                                     IconButton(
                                         onPressed: () {
                                           whatsAppOpen(lvtelp);
@@ -251,7 +265,8 @@ class _Contact_ViewState extends State<Contact_View> {
                                         onPressed: () {
                                           emailOpen(lvmail);
                                         },
-                                        icon: Icon(Icons.attach_email_outlined)),
+                                        icon:
+                                            Icon(Icons.attach_email_outlined)),
                                     IconButton(
                                         onPressed: () {
                                           whatsAppOpen(lvtelp);
@@ -275,7 +290,8 @@ class _Contact_ViewState extends State<Contact_View> {
                                         onPressed: () {
                                           emailOpen(lvmail);
                                         },
-                                        icon: Icon(Icons.attach_email_outlined)),
+                                        icon:
+                                            Icon(Icons.attach_email_outlined)),
                                     IconButton(
                                         onPressed: () {
                                           whatsAppOpen(lvtelp);
