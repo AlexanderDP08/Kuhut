@@ -2,12 +2,13 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:kuhut/database_services/dataClass.dart';
 import 'package:kuhut/database_services/db_crud.dart';
 import 'package:kuhut/main.dart';
 import 'package:kuhut/pages/mainMenuSiswa.dart';
 
-class ButtonSoal extends StatelessWidget {
+class ButtonSoal extends StatefulWidget {
   final String djenjang;
   final String dnamaSoal;
   final String dnama;
@@ -26,31 +27,58 @@ class ButtonSoal extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        ElevatedButton(
-          onPressed: () {
-            print("Nama Guru: " + dguru);
-            //masukan absen ke db
+  State<ButtonSoal> createState() => _ButtonSoalState();
+}
 
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Soal(
-                  jenjang: djenjang,
-                  namaSoal: dnamaSoal,
-                  kelas: dkelas,
-                  nama: dnama,
-                  guru: dguru,
-                ),
+class _ButtonSoalState extends State<ButtonSoal> {
+  Stream<QuerySnapshot<Object?>> onSearch() {
+    setState(() {});
+    return DataBaseSoal.getScoreCheck(widget.dguru, widget.dnama);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: onSearch(),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return Text("Error");
+        } else if (snapshot.hasData || snapshot.data != null) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  print("Nama Guru: " + widget.dguru);
+                  print("Nama Siswa: " + widget.dnama);
+                  print("Belom Kerja");
+                  //masukan absen ke db
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Soal(
+                        jenjang: widget.djenjang,
+                        namaSoal: widget.dnamaSoal,
+                        kelas: widget.dkelas,
+                        nama: widget.dnama,
+                        guru: widget.dguru,
+                      ),
+                    ),
+                  );
+                },
+                child: Text("Tes ${widget.dnamaSoal}"),
               ),
-            );
-          },
-          child: Text("Tes $dnamaSoal"),
-        ),
-      ],
+            ],
+          );
+        }
+        return Center(
+          child: CircularProgressIndicator(
+            valueColor: AlwaysStoppedAnimation<Color>(
+              Colors.pinkAccent,
+            ),
+          ),
+        );
+      },
     );
   }
 }

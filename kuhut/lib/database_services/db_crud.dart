@@ -22,6 +22,7 @@ CollectionReference tbSoal = FirebaseFirestore.instance.collection("tbSoal");
 // String kelas = "";
 // String mapel = "";
 String jenjang = "";
+String scoree = "";
 String teacherName = get_user.text.substring(0, get_user.text.indexOf('@'));
 
 class DatabaseUser {
@@ -61,6 +62,21 @@ class DatabaseUser {
 
       kelamins = ds['kelamin'];
       print(kelamins);
+    }).catchError((e) {
+      print(e);
+    });
+  }
+
+  static Future<void> getIsiScore(String a, String mapel) async {
+    await db
+        .collection("tbUser")
+        .doc(a)
+        .collection("tbScore")
+        .doc(mapel)
+        .get()
+        .then((DocumentSnapshot ds) {
+      scoree = ds['score'];
+      print(scoree);
     }).catchError((e) {
       print(e);
     });
@@ -234,8 +250,10 @@ class DataBaseSoal {
   }
 
   static Future<void> addScore({required Score item}) async {
-    DocumentReference docRef =
-        tbScore.doc("${item.guru}@teacher").collection("tbScore").doc(item.mapel);
+    DocumentReference docRef = tbScore
+        .doc("${item.guru}@teacher")
+        .collection("tbScore")
+        .doc(item.mapel + item.nama);
 
     await docRef
         .set(item.toJson())
@@ -245,6 +263,14 @@ class DataBaseSoal {
 
   static Stream<QuerySnapshot<Object?>> getScore(String nama) {
     return tbScore.doc(nama + "@teacher").collection("tbScore").snapshots();
+  }
+
+  static Stream<QuerySnapshot<Object?>> getScoreCheck(String guru, String nama) {
+    return tbScore
+        .doc(guru + "@teacher")
+        .collection("tbScore")
+        .orderBy("nama")
+        .startAt([nama]).endAt([nama + '\uf8ff']).snapshots();
   }
 
   static Stream<QuerySnapshot<Object?>> getAbsen(String nama) {
