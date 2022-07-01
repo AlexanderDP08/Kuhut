@@ -128,7 +128,11 @@ class _LetterListViewState extends State<LetterListView> {
                       tileColor: listTileWarna,
                       leading: Icon(Icons.mail_sharp),
                       onTap: () {
-                        
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    ViewLetter(title: dsData['judul'], message: dsData['deskripsi'], letterOption: dsData['templateImage'], )));
                       },
                       title: Text(lvJudul),
                       subtitle: Text("Click details to see letter"),
