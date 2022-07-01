@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kuhut/imagePath.dart';
 import 'package:kuhut/pages/PageAddSoal.dart';
 import 'package:kuhut/pages/PageQuestion.dart';
+import 'package:kuhut/pages/PageScore.dart';
 import 'package:kuhut/pages/absensi.dart';
 import 'package:kuhut/pages/addcontact.dart';
 import 'package:kuhut/pages/pageSetExamDate.dart';
@@ -274,8 +275,7 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                                   Text(
                                     widget.name,
                                     style: TextStyle(
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.bold),
+                                        fontSize: 25, fontWeight: FontWeight.bold),
                                   ),
                                   Text(
                                     "Guru",
@@ -351,12 +351,13 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                               GestureDetector(
                                 onTap: () {
                                   Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Absensi(
-                                              siswaNameAbsen: widget.name,
-                                              siswaKelasAbsen:
-                                                  widget.kelaslah)));
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => AbsensiDetail(
+                                          namaGuru: widget.name,
+                                          kelasGuru: widget.kelaslah),
+                                    ),
+                                  );
                                 },
                                 child: Card(
                                   shape: RoundedRectangleBorder(
@@ -380,7 +381,14 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                                 ),
                               ),
                               GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ScoreDetailPage(
+                                              namaGuru: widget.name,
+                                              kelasGuru: widget.kelaslah)));
+                                },
                                 child: Card(
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8)),
@@ -404,13 +412,11 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                SendLetter()));
-                                  }
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => SendLetter(
+                                              )));
                                 },
                                 child: Card(
                                   shape: RoundedRectangleBorder(

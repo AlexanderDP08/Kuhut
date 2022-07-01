@@ -1,16 +1,6 @@
-import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:kuhut/database_services/db_crud.dart';
-import 'package:kuhut/pages/mainMenuSiswa.dart';
-import 'package:kuhut/pages/mainMenuTeacher.dart';
-import 'package:kuhut/pages/profilecontact.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:intl/intl.dart';
-
-import '../main.dart';
 
 class ButtonSoal extends StatelessWidget {
   final String namaGuru;
@@ -32,35 +22,33 @@ class ButtonSoal extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => viewAbsensi(
-                  nama: namaGuru,
-                  soal: namaSoal,
-                ),
-              ),
+                  builder: (context) => ScorePage(
+                        nama: namaGuru,
+                      )),
             );
           },
-          child: Text("Absensi Tes $namaSoal"),
+          child: Text("Score Tes $namaSoal"),
         ),
       ],
     );
   }
 }
 
-class AbsensiDetail extends StatefulWidget {
+class ScoreDetailPage extends StatefulWidget {
   final String namaGuru;
   final String kelasGuru;
 
-  const AbsensiDetail({
+  const ScoreDetailPage({
     Key? key,
     required this.namaGuru,
     required this.kelasGuru,
   }) : super(key: key);
 
   @override
-  State<AbsensiDetail> createState() => _AbsensiDetailState();
+  State<ScoreDetailPage> createState() => _ScoreDetailPageState();
 }
 
-class _AbsensiDetailState extends State<AbsensiDetail> {
+class _ScoreDetailPageState extends State<ScoreDetailPage> {
   Stream<QuerySnapshot<Object?>> onSearch() {
     setState(() {});
     return DataBaseSoal.getEventTeacher(widget.namaGuru);
@@ -72,7 +60,7 @@ class _AbsensiDetailState extends State<AbsensiDetail> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text("Pilih Absensi Tes"),
+          title: const Text("Pilih Tes"),
         ),
         body: StreamBuilder<QuerySnapshot>(
           stream: onSearch(),
@@ -109,20 +97,22 @@ class _AbsensiDetailState extends State<AbsensiDetail> {
   }
 }
 
-class viewAbsensi extends StatefulWidget {
+class ScorePage extends StatefulWidget {
   final String nama;
-  final String soal;
 
-  const viewAbsensi({Key? key, required this.nama, required this.soal}) : super(key: key);
+  const ScorePage({
+    Key? key,
+    required this.nama,
+  }) : super(key: key);
 
   @override
-  State<viewAbsensi> createState() => viewAbsensiState();
+  State<ScorePage> createState() => _ScorePageState();
 }
 
-class viewAbsensiState extends State<viewAbsensi> {
+class _ScorePageState extends State<ScorePage> {
   Stream<QuerySnapshot<Object?>> onSearch() {
     setState(() {});
-    return DataBaseSoal.getAbsen(widget.nama);
+    return DataBaseSoal.getScore(widget.nama);
   }
 
   @override
@@ -131,7 +121,7 @@ class viewAbsensiState extends State<viewAbsensi> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text("List Absensi Siswa"),
+          title: const Text("Your Score"),
         ),
         body: Container(
           child: Column(
@@ -140,7 +130,7 @@ class viewAbsensiState extends State<viewAbsensi> {
                 height: 20,
               ),
               Text(
-                "Absensi Test ${widget.soal.toUpperCase()}",
+                "Test Score",
                 style: TextStyle(fontSize: 20),
               ),
               Expanded(
@@ -152,10 +142,10 @@ class viewAbsensiState extends State<viewAbsensi> {
                     } else if (snapshot.hasData || snapshot.data != null) {
                       return ListView.separated(
                         itemBuilder: (context, index) {
-                          print(widget.nama);
                           DocumentSnapshot dsData = snapshot.data!.docs[index];
                           String dtMapel = dsData['mapel'];
                           String dtNama = dsData['nama'];
+                          String dtNilai = dsData['score'];
                           return Container(
                             alignment: Alignment.center,
                             padding: const EdgeInsets.all(20),
@@ -163,8 +153,8 @@ class viewAbsensiState extends State<viewAbsensi> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text("Nama Tes: ${dtMapel.toUpperCase()}"),
-                                Text("Nama Peserta: $dtNama"),
-                                Text("Sudah Absen"),
+                                Text("Nama: $dtNama"),
+                                Text("Nilai: $dtNilai"),
                               ],
                             ),
                           );

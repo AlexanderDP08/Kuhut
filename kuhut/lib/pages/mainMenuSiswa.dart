@@ -75,7 +75,9 @@ class _MainMenuSiswasState extends State<MainMenuSiswas> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => profilnya(
-                                siswaNameResetProfile: widget.siswa_name, siswaKelasResetProfile: widget.siswa_kelas,)));
+                                  siswaNameResetProfile: widget.siswa_name,
+                                  siswaKelasResetProfile: widget.siswa_kelas,
+                                )));
                   }
                 },
               ),
@@ -87,7 +89,10 @@ class _MainMenuSiswasState extends State<MainMenuSiswas> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => Contact_View(siswaNameResetcontact: widget.siswa_name, siswaKelasResetContact: widget.siswa_kelas,)));
+                            builder: (context) => Contact_View(
+                                  siswaNameResetcontact: widget.siswa_name,
+                                  siswaKelasResetContact: widget.siswa_kelas,
+                                )));
                   }
                 },
               ),
@@ -109,8 +114,7 @@ class _MainMenuSiswasState extends State<MainMenuSiswas> {
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           alignment: Alignment.topCenter,
-                          image:
-                              AssetImage('images/iconMenuSiswa/top.png'))),
+                          image: AssetImage('images/iconMenuSiswa/top.png'))),
                 ),
                 SafeArea(
                   child: Padding(
@@ -138,8 +142,7 @@ class _MainMenuSiswasState extends State<MainMenuSiswas> {
                                   Text(
                                     widget.siswa_name,
                                     style: TextStyle(
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.bold),
+                                        fontSize: 25, fontWeight: FontWeight.bold),
                                   ),
                                   Text(
                                     "kelas : " + widget.siswa_kelas,
@@ -163,8 +166,7 @@ class _MainMenuSiswasState extends State<MainMenuSiswas> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => LetterListView(
-                                                getSiswaKelas:
-                                                    widget.siswa_kelas,
+                                                getSiswaKelas: widget.siswa_kelas,
                                               )));
                                 },
                                 child: Card(
@@ -190,7 +192,13 @@ class _MainMenuSiswasState extends State<MainMenuSiswas> {
                               ),
                               GestureDetector(
                                 onTap: () {
-                                  
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: ((context) => MenuSoal(
+                                                nama: widget.siswa_name,
+                                                kelas: widget.siswa_kelas,
+                                              ))));
                                 },
                                 child: Card(
                                   shape: RoundedRectangleBorder(
