@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:kuhut/database_services/dataClass.dart';
 import 'package:kuhut/database_services/db_crud.dart';
 import 'package:kuhut/main.dart';
 import 'package:kuhut/pages/mainMenuSiswa.dart';
@@ -33,6 +34,7 @@ class ButtonSoal extends StatelessWidget {
           onPressed: () {
             print("Nama Guru: " + dguru);
             //masukan absen ke db
+
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -260,6 +262,12 @@ class _SoalState extends State<Soal> {
                                       dscore++;
                                     });
                                   }
+                                  final item = Score(
+                                      guru: widget.guru,
+                                      mapel: widget.namaSoal,
+                                      nama: widget.nama,
+                                      score: dscore.toString());
+                                  DataBaseSoal.addScore(item: item);
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(

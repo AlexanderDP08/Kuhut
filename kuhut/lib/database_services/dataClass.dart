@@ -45,12 +45,77 @@ class addSoal {
 
   factory addSoal.fromJson(Map<String, dynamic> json) {
     return addSoal(
-        soal: json['soal'],
-        ansA: json['ans_0'],
-        ansB: json['ans_1'],
-        ansC: json['ans_2'],
-        righAns: json['c_ans'],
-        namaGuru: json['guru']);
+      soal: json['soal'],
+      ansA: json['ans_0'],
+      ansB: json['ans_1'],
+      ansC: json['ans_2'],
+      righAns: json['c_ans'],
+      namaGuru: json['guru'],
+    );
+  }
+}
+
+class Absen {
+  final String absen;
+  final String nama;
+  final String namaGuru;
+  final String mapel;
+
+  Absen({
+    required this.absen,
+    required this.nama,
+    required this.namaGuru,
+    required this.mapel,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      "absen": absen,
+      "nama": nama,
+      "namaGuru": namaGuru,
+      "mapel": mapel,
+    };
+  }
+
+  factory Absen.fromJson(Map<String, dynamic> json) {
+    return Absen(
+      absen: json['absen'],
+      nama: json['nama'],
+      namaGuru: json['namaGuru'],
+      mapel: json['mapel'],
+    );
+  }
+}
+
+class Score {
+  final String guru;
+  final String mapel;
+  final String nama;
+  final String score;
+
+  Score({
+    required this.guru,
+    required this.mapel,
+    required this.nama,
+    required this.score,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      "guru": guru,
+      "mapel": mapel,
+      "nama": nama,
+      "score": score,
+    };
+  }
+
+  factory Score.fromJson(Map<String, dynamic> json) {
+    return Score(
+      guru: json['score'],
+      mapel: json['mapel'],
+      nama: json['nama'],
+      score: json['score'],
+    );
   }
 }
 
@@ -173,13 +238,15 @@ class LetterGuru {
   final String expireDate;
   final String templateImage;
   final String kelas;
+  final String expireDateFormatted;
 
   LetterGuru(
       {required this.judul,
       required this.deskripsi,
       required this.expireDate,
       required this.templateImage,
-      required this.kelas});
+      required this.kelas,
+      required this.expireDateFormatted});
 
   Map<String, dynamic> toJson() {
     return {
@@ -187,7 +254,8 @@ class LetterGuru {
       "deskripsi": deskripsi,
       "expireDate": expireDate,
       "templateImage": templateImage,
-      "kelas": kelas
+      "kelas": kelas,
+      "expiredDateForamtted": expireDateFormatted
     };
   }
 
@@ -197,24 +265,7 @@ class LetterGuru {
         deskripsi: json['deskripsi'],
         expireDate: json['expireDate'],
         templateImage: json['templateImage'],
-        kelas: json['kelas']);
+        kelas: json['kelas'],
+        expireDateFormatted: json['expireDateFormatted']);
   }
 }
-  // LetterGuru({
-  //   required this.judul, required this.deskripsi, required this.expireDate, required this.templateImage, required this.kelas
-  // });
-
-  // Map<String, dynamic> toJson(){
-  //   return {
-  //     "judul" : judul,
-  //     "deskripsi" : deskripsi,
-  //     "expireDate" : expireDate,
-  //     "templateImage" : templateImage,
-  //     "kelas" : kelas
-  //   };
-  // }
-  
-  // factory LetterGuru.fromJSON(Map<String, dynamic> json){
-  //   return LetterGuru(judul: json['judul'], deskripsi: json['deskripsi'], expireDate: json['expireDate'], templateImage: json['templateImage'], kelas: json['kelas']);
-  // }
-

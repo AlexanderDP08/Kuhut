@@ -7,3 +7,8 @@ Alert Button
 https://stackoverflow.com/questions/53844052/how-to-make-an-alertdialog-in-flutter
 
 flutter pub add photo_view
+https://www.flutterbeads.com/card-border-in-flutter/#:~:text=To%20add%20or%20change%20the,the%20color%20of%20your%20choice.
+
+https://pub.dev/packages/loading_indicator
+
+https://stackoverflow.com/questions/65959381/deleting-firestore-data-in-flutter-list-view

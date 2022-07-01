@@ -4,10 +4,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:kuhut/database_services/db_crud.dart';
+import 'package:kuhut/pages/mainMenuSiswa.dart';
+import 'package:kuhut/pages/mainMenuTeacher.dart';
+import 'package:kuhut/pages/profilecontact.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../main.dart';
+
 class Contact_View extends StatefulWidget {
-  const Contact_View({Key? key}) : super(key: key);
+  final String siswaNameResetcontact;
+  final String siswaKelasResetContact;
+  const Contact_View(
+      {Key? key,
+      required this.siswaNameResetcontact,
+      required this.siswaKelasResetContact})
+      : super(key: key);
 
   @override
   State<Contact_View> createState() => _Contact_ViewState();
@@ -53,6 +64,99 @@ class _Contact_ViewState extends State<Contact_View> {
         appBar: AppBar(
           title: const Text("View Contact"),
         ),
+        drawer: Drawer(
+            child: ListView(
+          padding: EdgeInsets.all(0.0),
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: NetworkImage("https://png.pngtree.com/thumb_back/fw800/background/20201223/pngtree-purple-minimalist-watercolor-education-background-image_512200.jpg"), 
+                      fit: BoxFit.cover)),
+              margin: EdgeInsets.all(0.0),
+              padding: EdgeInsets.all(0.0),
+              child: Center(
+                child: Text(
+                  "KuhutExam",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 24,
+                  ),
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.house),
+              title: Text("HOME"),
+              onTap: () {
+                {
+                  if (widget.siswaKelasResetContact == "7" ||
+                      widget.siswaKelasResetContact == "8" ||
+                      widget.siswaKelasResetContact == "9") {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MainMenuSiswas(
+                                siswa_name: widget.siswaNameResetcontact,
+                                siswa_kelas: widget.siswaKelasResetContact)));
+                  } else {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MainMenuTeacher(
+                                  name: widget.siswaNameResetcontact,
+                                  kelaslah: widget.siswaKelasResetContact,
+                                )));
+                  }
+                }
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.people),
+              title: Text("PROFILE"),
+              onTap: () {
+                {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => profilnya(
+                                siswaNameResetProfile:
+                                    widget.siswaNameResetcontact,
+                                siswaKelasResetProfile:
+                                    widget.siswaKelasResetContact,
+                              )));
+                }
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.call),
+              title: Text("CONTACT"),
+              onTap: () {
+                {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Contact_View(
+                                siswaNameResetcontact:
+                                    widget.siswaNameResetcontact,
+                                siswaKelasResetContact:
+                                    widget.siswaKelasResetContact,
+                              )));
+                }
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.exit_to_app_rounded),
+              title: Text("LOG OUT"),
+              onTap: () {
+                {
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                }
+              },
+            ),
+          ],
+        )),
         body: Container(
           padding: const EdgeInsets.all(20),
           child: Column(
@@ -112,7 +216,8 @@ class _Contact_ViewState extends State<Contact_View> {
                                         onPressed: () {
                                           emailOpen(lvmail);
                                         },
-                                        icon: Icon(Icons.attach_email_outlined)),
+                                        icon:
+                                            Icon(Icons.attach_email_outlined)),
                                     IconButton(
                                         onPressed: () {
                                           whatsAppOpen(lvtelp);
@@ -136,7 +241,8 @@ class _Contact_ViewState extends State<Contact_View> {
                                         onPressed: () {
                                           emailOpen(lvmail);
                                         },
-                                        icon: Icon(Icons.attach_email_outlined)),
+                                        icon:
+                                            Icon(Icons.attach_email_outlined)),
                                     IconButton(
                                         onPressed: () {
                                           whatsAppOpen(lvtelp);
@@ -160,7 +266,8 @@ class _Contact_ViewState extends State<Contact_View> {
                                         onPressed: () {
                                           emailOpen(lvmail);
                                         },
-                                        icon: Icon(Icons.attach_email_outlined)),
+                                        icon:
+                                            Icon(Icons.attach_email_outlined)),
                                     IconButton(
                                         onPressed: () {
                                           whatsAppOpen(lvtelp);
@@ -184,7 +291,8 @@ class _Contact_ViewState extends State<Contact_View> {
                                         onPressed: () {
                                           emailOpen(lvmail);
                                         },
-                                        icon: Icon(Icons.attach_email_outlined)),
+                                        icon:
+                                            Icon(Icons.attach_email_outlined)),
                                     IconButton(
                                         onPressed: () {
                                           whatsAppOpen(lvtelp);
