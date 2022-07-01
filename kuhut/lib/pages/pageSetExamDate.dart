@@ -194,35 +194,45 @@ class _pageSetExamDateState extends State<pageSetExamDate> {
               ),
               TextButton(
                 child: Text("Ok"),
-                onPressed: () {
-                  if (_eventController.text.isEmpty) {
-                  } else {
-                    if (selectedEvents[selectedDay] != null) {
-                      String formattedDate =
-                          DateFormat('dd-MM-yyyy').format(selectedDay);
-                      // selectedEvents[selectedDay]?.add(
-                      //   Event(
-                      //       title: _eventController.text.toString(),
-                      //       date: formattedDate),
-                      // );
-                      final data = Event(
-                          title: _eventController.text,
-                          date: formattedDate,
-                          name: teacherName);
-                      DatabaseTeacher.setDate(event: data);
+                onPressed: () async {
+                  await db
+                      .collection("tbUser")
+                      .doc(get_user.text.toString())
+                      .get()
+                      .then((DocumentSnapshot data) {
+                    String _jenjang = data['mengajar_kelas'];
+                    if (_eventController.text.isEmpty) {
                     } else {
-                      String formattedDate =
-                          DateFormat('dd-MM-yyyy').format(selectedDay);
-                      // selectedEvents[selectedDay] = [
-                      //   Event(title: _eventController.text, date: formattedDate)
-                      // ];
-                      final data = Event(
-                          title: _eventController.text,
-                          date: formattedDate,
-                          name: teacherName);
-                      DatabaseTeacher.setDate(event: data);
+                      if (selectedEvents[selectedDay] != null) {
+                        String formattedDate =
+                            DateFormat('dd-MM-yyyy').format(selectedDay);
+                        // selectedEvents[selectedDay]?.add(
+                        //   Event(
+                        //       title: _eventController.text.toString(),
+                        //       date: formattedDate),
+                        // );
+                        final data = Event(
+                            title: _eventController.text,
+                            date: formattedDate,
+                            name: teacherName,
+                            jenjang: _jenjang);
+                        DatabaseTeacher.setDate(event: data);
+                      } else {
+                        String formattedDate =
+                            DateFormat('dd-MM-yyyy').format(selectedDay);
+                        // selectedEvents[selectedDay] = [
+                        //   Event(title: _eventController.text, date: formattedDate)
+                        // ];
+                        final data = Event(
+                            title: _eventController.text,
+                            date: formattedDate,
+                            name: teacherName,
+                            jenjang: _jenjang);
+                        DatabaseTeacher.setDate(event: data);
+                      }
                     }
-                  }
+                  });
+
                   Navigator.pop(context);
                   _eventController.clear();
                   setState(() {});

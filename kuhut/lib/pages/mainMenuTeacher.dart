@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:kuhut/database_services/dataClass.dart';
 import 'package:kuhut/imagePath.dart';
 import 'package:kuhut/pages/PageAddSoal.dart';
+import 'package:kuhut/pages/PageQuestion.dart';
 import 'package:kuhut/pages/PageScore.dart';
 import 'package:kuhut/pages/absensi.dart';
 import 'package:kuhut/pages/addcontact.dart';
@@ -168,16 +170,17 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
             children: [
               const DrawerHeader(
                 decoration: BoxDecoration(
-                  color: Colors.blue,
-                ),
+                  image: DecorationImage(
+                      image: NetworkImage("https://png.pngtree.com/thumb_back/fw800/background/20201223/pngtree-purple-minimalist-watercolor-education-background-image_512200.jpg"), 
+                      fit: BoxFit.cover)),
                 margin: EdgeInsets.all(0.0),
                 padding: EdgeInsets.all(0.0),
                 child: Center(
                   child: Text(
-                    "MENU",
+                    "KuhutExam",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 24,
                     ),
                   ),
@@ -187,15 +190,15 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                 leading: Icon(Icons.house),
                 title: Text("HOME"),
                 onTap: () {
-                  {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MainMenuTeacher(
-                                  name: widget.name,
-                                  kelaslah: widget.kelaslah,
-                                )));
-                  }
+                  // {
+                  //   Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //           builder: (context) => MainMenuTeacher(
+                  //                 name: widget.name,
+                  //                 kelaslah: widget.kelaslah,
+                  //               )));
+                  // }
                 },
               ),
               ListTile(
@@ -233,9 +236,7 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                 title: Text("LOG OUT"),
                 onTap: () {
                   {
-                    Navigator.pop(
-                      context,
-                    );
+                    Navigator.of(context).popUntil((route) => route.isFirst);
                   }
                 },
               ),
@@ -295,7 +296,15 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                             crossAxisCount: 2,
                             children: [
                               GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                pageSetExamDate()));
+                                  }
+                                },
                                 child: Card(
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8)),
@@ -318,7 +327,15 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                                 ),
                               ),
                               GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                PageAddSoal()));
+                                  }
+                                },
                                 child: Card(
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8)),

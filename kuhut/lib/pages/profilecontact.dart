@@ -80,16 +80,17 @@ class _profilnyaState extends State<profilnya> {
           children: [
             const DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
+                  image: DecorationImage(
+                      image: NetworkImage("https://png.pngtree.com/thumb_back/fw800/background/20201223/pngtree-purple-minimalist-watercolor-education-background-image_512200.jpg"), 
+                      fit: BoxFit.cover)),
               margin: EdgeInsets.all(0.0),
               padding: EdgeInsets.all(0.0),
               child: Center(
                 child: Text(
-                  "MENU",
+                  "KuhutExam",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Colors.black,
                     fontSize: 24,
                   ),
                 ),
@@ -100,16 +101,24 @@ class _profilnyaState extends State<profilnya> {
               title: Text("HOME"),
               onTap: () {
                 {
-                  if(widget.siswaKelasResetProfile == "0"){
+                  print(widget.siswaKelasResetProfile);
+                  if (widget.siswaKelasResetProfile == "7" ||
+                      widget.siswaKelasResetProfile == "8" ||
+                      widget.siswaKelasResetProfile == "9") {
                     Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => MainMenuTeacher(name: widget.siswaNameResetProfile, kelaslah: widget.siswaKelasResetProfile,)));
-                  } else{
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MainMenuSiswas(
+                                siswa_name: widget.siswaNameResetProfile,
+                                siswa_kelas: widget.siswaKelasResetProfile)));
+                  } else {
                     Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => MainMenuSiswas(siswa_name: widget.siswaNameResetProfile, siswa_kelas: widget.siswaKelasResetProfile)));
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MainMenuTeacher(
+                                  name: widget.siswaNameResetProfile,
+                                  kelaslah: widget.siswaKelasResetProfile,
+                                )));
                   }
                 }
               },
@@ -139,20 +148,24 @@ class _profilnyaState extends State<profilnya> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => Contact_View(siswaNameResetcontact: widget.siswaNameResetProfile, siswaKelasResetContact: widget.siswaNameResetProfile,)));
+                          builder: (context) => Contact_View(
+                                siswaNameResetcontact:
+                                    widget.siswaNameResetProfile,
+                                siswaKelasResetContact:
+                                    widget.siswaNameResetProfile,
+                              )));
                 }
               },
             ),
             ListTile(
-                leading: Icon(Icons.exit_to_app_rounded),
-                title: Text("LOG OUT"),
-                onTap: () {
-                  {
-                  Navigator.pop(
-                        context,);
-                  }
-                },
-              ),
+              leading: Icon(Icons.exit_to_app_rounded),
+              title: Text("LOG OUT"),
+              onTap: () {
+                {
+                  Navigator.of(context).popUntil((route) => route.isFirst);
+                }
+              },
+            ),
           ],
         )),
         body: Container(

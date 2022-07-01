@@ -122,7 +122,7 @@ class _MyAppState extends State<MyApp> {
             // ),
             CircleAvatar(
               radius: 25,
-              backgroundImage: AssetImage('images/iconMenuSiswa/C14190136.jpg'),
+              backgroundImage: AssetImage('images/iconMenuSiswa/C14190109.jpg'),
             ),
             onPressed: () {
               {}
@@ -140,7 +140,7 @@ class _MyAppState extends State<MyApp> {
             // ),
             CircleAvatar(
               radius: 25,
-              backgroundImage: AssetImage('images/iconMenuSiswa/C14190136.jpg'),
+              backgroundImage: AssetImage('images/iconMenuSiswa/C14190123.jpg'),
             ),
             onPressed: () {
               {}
@@ -158,10 +158,10 @@ class _MyAppState extends State<MyApp> {
             // ),
             CircleAvatar(
               radius: 25,
-              backgroundImage: AssetImage('images/iconMenuSiswa/C14190136.jpg'),
+              backgroundImage: AssetImage('images/iconMenuSiswa/C14190124.jpeg'),
             ),
             onPressed: () {
-              {}
+              { }
             },
             backgroundColor: Colors.transparent,
           ),

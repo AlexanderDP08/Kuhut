@@ -14,7 +14,8 @@ import '../andrew_work/st_viewletter.dart';
 class MainMenuSiswas extends StatefulWidget {
   final String siswa_name;
   final String siswa_kelas;
-  const MainMenuSiswas({Key? key, required this.siswa_name, required this.siswa_kelas})
+  const MainMenuSiswas(
+      {Key? key, required this.siswa_name, required this.siswa_kelas})
       : super(key: key);
 
   @override
@@ -26,25 +27,26 @@ class _MainMenuSiswasState extends State<MainMenuSiswas> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-          appBar: AppBar(
-            title: const Text("Siswa "),
-          ),
-          drawer: Drawer(
-              child: ListView(
-            padding: EdgeInsets.all(0.0),
+        appBar: AppBar(
+          title: const Text("Siswa "),
+        ),
+        drawer: Drawer(
+          child: ListView(
+          padding: EdgeInsets.all(0.0),
             children: [
               const DrawerHeader(
                 decoration: BoxDecoration(
-                  color: Colors.blue,
-                ),
+                  image: DecorationImage(
+                      image: NetworkImage("https://png.pngtree.com/thumb_back/fw800/background/20201223/pngtree-purple-minimalist-watercolor-education-background-image_512200.jpg"), 
+                      fit: BoxFit.cover)),
                 margin: EdgeInsets.all(0.0),
                 padding: EdgeInsets.all(0.0),
                 child: Center(
                   child: Text(
-                    "MENU",
+                    "KuhutExam",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 24,
                     ),
                   ),

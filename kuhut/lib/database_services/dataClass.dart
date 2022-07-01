@@ -123,15 +123,24 @@ class Event {
   final String title;
   final String date;
   final String name;
+  final String jenjang;
 
-  Event({required this.title, required this.date, required this.name});
+  Event(
+      {required this.title,
+      required this.date,
+      required this.name,
+      required this.jenjang});
 
   Map<String, dynamic> toJson() {
-    return {"title": title, "date": date, "teacher": name};
+    return {"title": title, "date": date, "teacher": name, "jenjang": jenjang};
   }
 
   factory Event.fromJson(Map<String, dynamic> json) {
-    return Event(title: json['title'], date: json['date'], name: json['teacher']);
+    return Event(
+        title: json['title'],
+        date: json['date'],
+        name: json['teacher'],
+        jenjang: json['jenjang']);
   }
 }
 
