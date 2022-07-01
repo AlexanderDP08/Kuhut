@@ -12,70 +12,168 @@ import 'package:intl/intl.dart';
 
 import '../main.dart';
 
-class Absensi extends StatefulWidget {
-  final String siswaNameAbsen;
-  final String siswaKelasAbsen;
-  const Absensi({Key? key, required this.siswaNameAbsen, required this.siswaKelasAbsen})
-      : super(key: key);
+class ButtonSoal extends StatelessWidget {
+  final String namaGuru;
+  final String namaSoal;
+
+  const ButtonSoal({
+    Key? key,
+    required this.namaGuru,
+    required this.namaSoal,
+  }) : super(key: key);
 
   @override
-  State<Absensi> createState() => _AbsensiState();
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => viewAbsensi(
+                  nama: namaGuru,
+                  soal: namaSoal,
+                ),
+              ),
+            );
+          },
+          child: Text("Absensi Tes $namaSoal"),
+        ),
+      ],
+    );
+  }
 }
 
-class _AbsensiState extends State<Absensi> {
-  int _jumlah = 0;
+class AbsensiDetail extends StatefulWidget {
+  final String namaGuru;
+  final String kelasGuru;
+
+  const AbsensiDetail({
+    Key? key,
+    required this.namaGuru,
+    required this.kelasGuru,
+  }) : super(key: key);
+
+  @override
+  State<AbsensiDetail> createState() => _AbsensiDetailState();
+}
+
+class _AbsensiDetailState extends State<AbsensiDetail> {
+  Stream<QuerySnapshot<Object?>> onSearch() {
+    setState(() {});
+    return DataBaseSoal.getEventTeacher(widget.namaGuru);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text("View Absen"),
+          title: const Text("Pilih Absensi Tes"),
+        ),
+        body: StreamBuilder<QuerySnapshot>(
+          stream: onSearch(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Text('Error');
+            } else if (snapshot.hasData || snapshot.data != null) {
+              return ListView.separated(
+                itemBuilder: (context, index) {
+                  DocumentSnapshot dsData = snapshot.data!.docs[index];
+                  String dtGuru = dsData['teacher'];
+                  if (widget.namaGuru == dtGuru) {
+                    String dtTitle = dsData['title'];
+                    const SizedBox(height: 8);
+                    return ButtonSoal(namaGuru: dtGuru, namaSoal: dtTitle);
+                  }
+                  return const Text("Data Not Found");
+                },
+                separatorBuilder: (context, index) => SizedBox(height: 8),
+                itemCount: snapshot.data!.docs.length,
+              );
+            }
+            return Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  Colors.pinkAccent,
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class viewAbsensi extends StatefulWidget {
+  final String nama;
+  final String soal;
+
+  const viewAbsensi({Key? key, required this.nama, required this.soal}) : super(key: key);
+
+  @override
+  State<viewAbsensi> createState() => viewAbsensiState();
+}
+
+class viewAbsensiState extends State<viewAbsensi> {
+  Stream<QuerySnapshot<Object?>> onSearch() {
+    setState(() {});
+    return DataBaseSoal.getAbsen(widget.nama);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text("List Absensi Siswa"),
         ),
         body: Container(
-          padding: const EdgeInsets.all(20),
           child: Column(
             children: [
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                "Absensi Test ${widget.soal.toUpperCase()}",
+                style: TextStyle(fontSize: 20),
+              ),
               Expanded(
                 child: StreamBuilder<QuerySnapshot>(
-                  stream: DatabaseUser.getUserDataProfile(),
+                  stream: onSearch(),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
-                      return Text('ERROR');
+                      return Text('Error');
                     } else if (snapshot.hasData || snapshot.data != null) {
-                      return ListView.builder(
-                          itemBuilder: (context, index) {
-                            DocumentSnapshot dsData = snapshot.data!.docs[index];
-                            String lvJudul = dsData['nama'];
-                            _jumlah = snapshot.data!.docs.length;
-                            // return ListTile(
-                            //   title: Text(lvJudul),
-                            // );
-                            return Card(
-                              child: Padding(
-                                padding: EdgeInsets.all(16.0),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      children: const [
-                                        Text("data"),
-                                        Spacer(),
-                                      ],
-                                    ),
-                                    Row(
-                                      children: const [
-                                        Text("data2"),
-                                        Spacer(),
-                                        Text("data3")
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                          itemCount: snapshot.data!.docs.length);
+                      return ListView.separated(
+                        itemBuilder: (context, index) {
+                          print(widget.nama);
+                          DocumentSnapshot dsData = snapshot.data!.docs[index];
+                          String dtMapel = dsData['mapel'];
+                          String dtNama = dsData['nama'];
+                          return Container(
+                            alignment: Alignment.center,
+                            padding: const EdgeInsets.all(20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Nama Tes: ${dtMapel.toUpperCase()}"),
+                                Text("Nama Peserta: $dtNama"),
+                                Text("Sudah Absen"),
+                              ],
+                            ),
+                          );
+                        },
+                        separatorBuilder: (context, index) => SizedBox(height: 8),
+                        itemCount: snapshot.data!.docs.length,
+                      );
                     }
-                    return const Center(
+                    return Center(
                       child: CircularProgressIndicator(
                         valueColor: AlwaysStoppedAnimation<Color>(
                           Colors.pinkAccent,

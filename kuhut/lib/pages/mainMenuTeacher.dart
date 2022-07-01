@@ -343,11 +343,13 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                               GestureDetector(
                                 onTap: () {
                                   Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => Absensi(
-                                              siswaNameAbsen: widget.name,
-                                              siswaKelasAbsen: widget.kelaslah)));
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => AbsensiDetail(
+                                          namaGuru: widget.name,
+                                          kelasGuru: widget.kelaslah),
+                                    ),
+                                  );
                                 },
                                 child: Card(
                                   shape: RoundedRectangleBorder(
@@ -375,9 +377,9 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => ScorePage(
-                                                nama: widget.name,
-                                              )));
+                                          builder: (context) => ScoreDetailPage(
+                                              namaGuru: widget.name,
+                                              kelasGuru: widget.kelaslah)));
                                 },
                                 child: Card(
                                   shape: RoundedRectangleBorder(

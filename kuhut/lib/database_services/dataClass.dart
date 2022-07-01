@@ -58,11 +58,13 @@ class addSoal {
 class Absen {
   final String absen;
   final String nama;
+  final String namaGuru;
   final String mapel;
 
   Absen({
     required this.absen,
     required this.nama,
+    required this.namaGuru,
     required this.mapel,
   });
 
@@ -70,6 +72,7 @@ class Absen {
     return {
       "absen": absen,
       "nama": nama,
+      "namaGuru": namaGuru,
       "mapel": mapel,
     };
   }
@@ -78,6 +81,7 @@ class Absen {
     return Absen(
       absen: json['absen'],
       nama: json['nama'],
+      namaGuru: json['namaGuru'],
       mapel: json['mapel'],
     );
   }

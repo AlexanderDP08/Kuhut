@@ -2,6 +2,101 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kuhut/database_services/db_crud.dart';
 
+class ButtonSoal extends StatelessWidget {
+  final String namaGuru;
+  final String namaSoal;
+
+  const ButtonSoal({
+    Key? key,
+    required this.namaGuru,
+    required this.namaSoal,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ScorePage(
+                        nama: namaGuru,
+                      )),
+            );
+          },
+          child: Text("Score Tes $namaSoal"),
+        ),
+      ],
+    );
+  }
+}
+
+class ScoreDetailPage extends StatefulWidget {
+  final String namaGuru;
+  final String kelasGuru;
+
+  const ScoreDetailPage({
+    Key? key,
+    required this.namaGuru,
+    required this.kelasGuru,
+  }) : super(key: key);
+
+  @override
+  State<ScoreDetailPage> createState() => _ScoreDetailPageState();
+}
+
+class _ScoreDetailPageState extends State<ScoreDetailPage> {
+  Stream<QuerySnapshot<Object?>> onSearch() {
+    setState(() {});
+    return DataBaseSoal.getEventTeacher(widget.namaGuru);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text("Pilih Tes"),
+        ),
+        body: StreamBuilder<QuerySnapshot>(
+          stream: onSearch(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Text('Error');
+            } else if (snapshot.hasData || snapshot.data != null) {
+              return ListView.separated(
+                itemBuilder: (context, index) {
+                  DocumentSnapshot dsData = snapshot.data!.docs[index];
+                  String dtGuru = dsData['teacher'];
+                  if (widget.namaGuru == dtGuru) {
+                    String dtTitle = dsData['title'];
+                    const SizedBox(height: 8);
+                    return ButtonSoal(namaGuru: dtGuru, namaSoal: dtTitle);
+                  }
+                  return const Text("Data Not Found");
+                },
+                separatorBuilder: (context, index) => SizedBox(height: 8),
+                itemCount: snapshot.data!.docs.length,
+              );
+            }
+            return Center(
+              child: CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  Colors.pinkAccent,
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
 class ScorePage extends StatefulWidget {
   final String nama;
 
