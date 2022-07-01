@@ -172,6 +172,18 @@ class DatabaseTeacher {
           .startAt([teacherName]).endAt([teacherName + '\uf8ff']).snapshots();
     }
   }
+
+  static Stream<QuerySnapshot> getJenjang() {
+    // return events.snapshots();
+    if (teacherName == "") {
+      return tbUser.snapshots();
+    } else {
+      return tbUser
+          // .where("judulCat", isEqualTo: judul)
+          .orderBy("nama")
+          .startAt([teacherName]).endAt([teacherName + '\uf8ff']).snapshots();
+    }
+  }
 }
 
 // class DatabaseLetter {
