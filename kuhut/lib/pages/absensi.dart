@@ -15,8 +15,7 @@ import '../main.dart';
 class Absensi extends StatefulWidget {
   final String siswaNameAbsen;
   final String siswaKelasAbsen;
-  const Absensi(
-      {Key? key, required this.siswaNameAbsen, required this.siswaKelasAbsen})
+  const Absensi({Key? key, required this.siswaNameAbsen, required this.siswaKelasAbsen})
       : super(key: key);
 
   @override
@@ -45,8 +44,7 @@ class _AbsensiState extends State<Absensi> {
                     } else if (snapshot.hasData || snapshot.data != null) {
                       return ListView.builder(
                           itemBuilder: (context, index) {
-                            DocumentSnapshot dsData =
-                                snapshot.data!.docs[index];
+                            DocumentSnapshot dsData = snapshot.data!.docs[index];
                             String lvJudul = dsData['nama'];
                             _jumlah = snapshot.data!.docs.length;
                             // return ListTile(

@@ -6,11 +6,9 @@ import 'package:kuhut/main.dart';
 
 final db = FirebaseFirestore.instance;
 CollectionReference tbUser = FirebaseFirestore.instance.collection("tbUser");
-CollectionReference tbTeacher =
-    FirebaseFirestore.instance.collection("tbTeacher");
+CollectionReference tbTeacher = FirebaseFirestore.instance.collection("tbTeacher");
 CollectionReference tbUser2 = FirebaseFirestore.instance.collection("tbUser");
-CollectionReference tbSiswaProfile =
-    FirebaseFirestore.instance.collection("tbUser");
+CollectionReference tbSiswaProfile = FirebaseFirestore.instance.collection("tbUser");
 CollectionReference events = FirebaseFirestore.instance.collection("events");
 CollectionReference soal = FirebaseFirestore.instance.collection("soal");
 
@@ -36,12 +34,8 @@ class DatabaseUser {
     return tbUser.snapshots(); //returning snapshot data
   }
 
-  static Future<String> getUserProfile(String atext) async{
-    await db
-        .collection('tbUser')
-        .doc(atext)
-        .get()
-        .then((DocumentSnapshot dsData) {
+  static Future<String> getUserProfile(String atext) async {
+    await db.collection('tbUser').doc(atext).get().then((DocumentSnapshot dsData) {
       kelass = dsData['kelas'];
       birthdays = dsData['bithday'];
       telps = dsData['telp'];
@@ -51,12 +45,8 @@ class DatabaseUser {
     return kelass;
   }
 
-  static Future<void> dapatprofile(String a) async{
-    await db
-    .collection("tbUser")
-    .doc(a)
-    .get()
-    .then((DocumentSnapshot ds){
+  static Future<void> dapatprofile(String a) async {
+    await db.collection("tbUser").doc(a).get().then((DocumentSnapshot ds) {
       kelass = ds['kelas'];
       print(kelass);
 
@@ -71,8 +61,7 @@ class DatabaseUser {
 
       kelamins = ds['kelamin'];
       print(kelamins);
-
-    }).catchError((e){
+    }).catchError((e) {
       print(e);
     });
   }
@@ -96,8 +85,7 @@ class DatabaseUser {
         .catchError((e) => print(e));
   }
 
-  static Future<void> ubahDataProfilenama(
-      {required editprofilenama item}) async {
+  static Future<void> ubahDataProfilenama({required editprofilenama item}) async {
     DocumentReference docRef = tbUser.doc(item.aemail);
 
     await docRef
@@ -115,8 +103,7 @@ class DatabaseUser {
         .catchError((e) => print(e));
   }
 
-  static Future<void> ubahDataProfiletelp(
-      {required editprofiletelp item}) async {
+  static Future<void> ubahDataProfiletelp({required editprofiletelp item}) async {
     DocumentReference docRef = tbUser.doc(item.aemail);
 
     await docRef
@@ -149,9 +136,7 @@ class DatabaseTeacher {
   }
 
   static Future<void> tambahSoalGuruX(
-      {required addSoal item,
-      required String kelas_,
-      required String date_}) async {
+      {required addSoal item, required String kelas_, required String date_}) async {
     await db
         .collection('tbTeacher')
         .doc(teacherName)
@@ -243,7 +228,7 @@ class DataBaseSoal {
 
   static Future<void> addScore({required Score item}) async {
     DocumentReference docRef =
-        tbScore.doc("${item.nama}@siswa").collection("tbScore").doc(item.mapel);
+        tbScore.doc("${item.guru}@teacher").collection("tbScore").doc(item.mapel);
 
     await docRef
         .set(item.toJson())
@@ -252,7 +237,7 @@ class DataBaseSoal {
   }
 
   static Stream<QuerySnapshot<Object?>> getScore(String nama) {
-    return tbScore.doc(nama + "@siswa").collection("tbScore").snapshots();
+    return tbScore.doc(nama + "@teacher").collection("tbScore").snapshots();
   }
 
   static Stream<QuerySnapshot<Object?>> setAbsen(String nama) {
@@ -262,14 +247,12 @@ class DataBaseSoal {
 
 class DatabaseAbsensi {}
 
-CollectionReference pathLetterz =
-    FirebaseFirestore.instance.collection("Letter");
+CollectionReference pathLetterz = FirebaseFirestore.instance.collection("Letter");
 
 class DatabaseLetter {
   //add letter
   static Future<void> addLetter({required LetterGuru letterGuru}) async {
-    CollectionReference pathLetter =
-        FirebaseFirestore.instance.collection("Letter");
+    CollectionReference pathLetter = FirebaseFirestore.instance.collection("Letter");
     DocumentReference docRef = pathLetter.doc();
 
     await pathLetter

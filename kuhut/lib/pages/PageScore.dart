@@ -31,7 +31,13 @@ class _ScorePageState extends State<ScorePage> {
         body: Container(
           child: Column(
             children: [
-              Text("Score"),
+              SizedBox(
+                height: 20,
+              ),
+              Text(
+                "Test Score",
+                style: TextStyle(fontSize: 20),
+              ),
               Expanded(
                 child: StreamBuilder<QuerySnapshot>(
                   stream: onSearch(),
@@ -43,11 +49,16 @@ class _ScorePageState extends State<ScorePage> {
                         itemBuilder: (context, index) {
                           DocumentSnapshot dsData = snapshot.data!.docs[index];
                           String dtMapel = dsData['mapel'];
+                          String dtNama = dsData['nama'];
                           String dtNilai = dsData['score'];
-                          return Center(
+                          return Container(
+                            alignment: Alignment.center,
+                            padding: const EdgeInsets.all(20),
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text("Mata Pelajaran: $dtMapel"),
+                                Text("Nama Tes: ${dtMapel.toUpperCase()}"),
+                                Text("Nama: $dtNama"),
                                 Text("Nilai: $dtNilai"),
                               ],
                             ),
