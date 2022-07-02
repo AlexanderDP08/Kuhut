@@ -279,8 +279,7 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                                   Text(
                                     widget.name,
                                     style: TextStyle(
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.bold),
+                                        fontSize: 25, fontWeight: FontWeight.bold),
                                   ),
                                   Text(
                                     "Guru",
@@ -304,8 +303,7 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                pageSetExamDate()));
+                                            builder: (context) => pageSetExamDate()));
                                   }
                                 },
                                 child: Card(
@@ -335,8 +333,7 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                PageAddSoal()));
+                                            builder: (context) => PageAddSoal()));
                                   }
                                 },
                                 child: Card(
@@ -457,7 +454,7 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                pageJawabanSiswa()));
+                                                ListSoal(nama: widget.name)));
                                   }
                                 },
                                 child: Card(
