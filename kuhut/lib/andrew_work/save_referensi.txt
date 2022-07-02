@@ -12,3 +12,16 @@ https://www.flutterbeads.com/card-border-in-flutter/#:~:text=To%20add%20or%20cha
 https://pub.dev/packages/loading_indicator
 
 https://stackoverflow.com/questions/65959381/deleting-firestore-data-in-flutter-list-view
+
+
+//Tugas Tambahan
+1. Guru bisa lihat hasil jawaban ujian dari siswa - {
+    
+}
+2. Siswa bisa melihat history dia mengambil ujian dan nilai nya berapa {
+    OK
+}
+3. Guru bisa mengubah nilai siswa {
+    lv get nama, ujian nilai with button edit
+    ok
+}

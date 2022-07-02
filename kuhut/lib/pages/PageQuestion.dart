@@ -296,6 +296,12 @@ class _SoalState extends State<Soal> {
                                       nama: widget.nama,
                                       score: dscore.toString());
                                   DataBaseSoal.addScore(item: item);
+                                  final data = addJawabanSiswa(
+                                      jawabanSiswa: _character,
+                                      namaSiswa: widget.nama,
+                                      namaSoal: widget.namaSoal,
+                                      soal: _soal);
+                                  DatabaseTeacher.inputJawabanSiswa(data: data);
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -309,7 +315,14 @@ class _SoalState extends State<Soal> {
                                       dscore++;
                                     });
                                   }
-                                  print("Max Array Size: ${snapshot.data!.docs.length}");
+                                  final data = addJawabanSiswa(
+                                      jawabanSiswa: _character,
+                                      namaSiswa: widget.nama,
+                                      namaSoal: widget.namaSoal,
+                                      soal: _soal);
+                                  DatabaseTeacher.inputJawabanSiswa(data: data);
+                                  print(
+                                      "Max Array Size: ${snapshot.data!.docs.length}");
                                   nomer++;
                                   print("Nomer: $nomer");
                                   _character = "";
@@ -379,7 +392,8 @@ class _EndMenuSoalState extends State<EndMenuSoal> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => MainMenuSiswas(
-                                  siswa_name: widget.dnama, siswa_kelas: widget.dkelas)));
+                                  siswa_name: widget.dnama,
+                                  siswa_kelas: widget.dkelas)));
                     },
                     child: Text("Back To MainMenu"))
               ],

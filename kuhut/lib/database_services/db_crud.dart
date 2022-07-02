@@ -6,11 +6,15 @@ import 'package:kuhut/main.dart';
 
 final db = FirebaseFirestore.instance;
 CollectionReference tbUser = FirebaseFirestore.instance.collection("tbUser");
-CollectionReference tbTeacher = FirebaseFirestore.instance.collection("tbTeacher");
+CollectionReference tbTeacher =
+    FirebaseFirestore.instance.collection("tbTeacher");
 CollectionReference tbUser2 = FirebaseFirestore.instance.collection("tbUser");
-CollectionReference tbSiswaProfile = FirebaseFirestore.instance.collection("tbUser");
+CollectionReference tbSiswaProfile =
+    FirebaseFirestore.instance.collection("tbUser");
 CollectionReference events = FirebaseFirestore.instance.collection("events");
 CollectionReference soal = FirebaseFirestore.instance.collection("soal");
+CollectionReference tbJawaban =
+    FirebaseFirestore.instance.collection("tbJawaban");
 
 String kelas = "";
 String kelass = "";
@@ -19,8 +23,6 @@ String namas = "";
 String telps = "";
 String kelamins = "";
 CollectionReference tbSoal = FirebaseFirestore.instance.collection("tbSoal");
-// String kelas = "";
-// String mapel = "";
 String jenjang = "";
 String scoree = "";
 String teacherName = get_user.text.substring(0, get_user.text.indexOf('@'));
@@ -36,7 +38,11 @@ class DatabaseUser {
   }
 
   static Future<String> getUserProfile(String atext) async {
-    await db.collection('tbUser').doc(atext).get().then((DocumentSnapshot dsData) {
+    await db
+        .collection('tbUser')
+        .doc(atext)
+        .get()
+        .then((DocumentSnapshot dsData) {
       kelass = dsData['kelas'];
       birthdays = dsData['bithday'];
       telps = dsData['telp'];
@@ -101,7 +107,8 @@ class DatabaseUser {
         .catchError((e) => print(e));
   }
 
-  static Future<void> ubahDataProfilenama({required editprofilenama item}) async {
+  static Future<void> ubahDataProfilenama(
+      {required editprofilenama item}) async {
     DocumentReference docRef = tbUser.doc(item.aemail);
 
     await docRef
@@ -119,7 +126,21 @@ class DatabaseUser {
         .catchError((e) => print(e));
   }
 
-  static Future<void> ubahDataProfiletelp({required editprofiletelp item}) async {
+  static Future<void> ubahDataProfilenilai(
+      {required editprofilenilai item}) async {
+    DocumentReference docRef = tbUser
+        .doc(item.aemailguru)
+        .collection("tbScore")
+        .doc(item.atitle + item.anama);
+
+    await docRef
+        .update(item.toJson())
+        .whenComplete(() => print("data berhasil diubah"))
+        .catchError((e) => print(e));
+  }
+
+  static Future<void> ubahDataProfiletelp(
+      {required editprofiletelp item}) async {
     DocumentReference docRef = tbUser.doc(item.aemail);
 
     await docRef
@@ -152,7 +173,9 @@ class DatabaseTeacher {
   }
 
   static Future<void> tambahSoalGuruX(
-      {required addSoal item, required String kelas_, required String date_}) async {
+      {required addSoal item,
+      required String kelas_,
+      required String date_}) async {
     await db
         .collection('tbTeacher')
         .doc(teacherName)
@@ -209,6 +232,25 @@ class DatabaseTeacher {
           .startAt([teacherName]).endAt([teacherName + '\uf8ff']).snapshots();
     }
   }
+
+  static Stream<QuerySnapshot> getJawabanSiswa() {
+    // return events.snapshots();
+    if (teacherName == "") {
+      return tbJawaban.snapshots();
+    } else {
+      return tbJawaban
+          // .where("judulCat", isEqualTo: judul)
+          .orderBy("nama_siswa")
+          .startAt([teacherName]).endAt([teacherName + '\uf8ff']).snapshots();
+    }
+  }
+
+  static Future<void> inputJawabanSiswa({required addJawabanSiswa data}) async {
+    await tbJawaban
+        .add(data.toJson())
+        .whenComplete(() => print("Data berhasil di input"))
+        .catchError((e) => print(e));
+  }
 }
 
 // class DatabaseLetter {
@@ -249,6 +291,11 @@ class DataBaseSoal {
         [nama_guru + '\uf8ff']).snapshots(); //returning snapshot data
   }
 
+  static Stream<QuerySnapshot<Object?>> getHistoryKerja(String nama_siswa) {
+    return allSoal.orderBy("nama").startAt([nama_siswa]).endAt(
+        [nama_siswa + '\uf8ff']).snapshots(); //returning snapshot data
+  }
+
   static Stream<QuerySnapshot<Object?>> getEvent(String jenjang) {
     return events
         .orderBy("jenjang")
@@ -277,9 +324,27 @@ class DataBaseSoal {
     return tbScore.doc(nama + "@teacher").collection("tbScore").snapshots();
   }
 
-  static Stream<QuerySnapshot<Object?>> getScoreCheck(String guru, String nama) {
+  static Stream<QuerySnapshot<Object?>> getScoreCheck(
+      String guru, String nama) {
     return tbScore
         .doc(guru + "@teacher")
+        .collection("tbScore")
+        .orderBy("nama")
+        .startAt([nama]).endAt([nama + '\uf8ff']).snapshots();
+  }
+
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getScoreSiswaFromTeacher1(
+      String guru, String nama) {
+    return tbUser
+        .doc(guru + "@teacher")
+        .collection("tbScore")
+        .orderBy("nama")
+        .startAt([nama]).endAt([nama + '\uf8ff']).snapshots();
+  }
+
+  static Stream<QuerySnapshot<Object?>> getScoreSiswaFromTeacher2(String nama) {
+    return tbScore
+        .doc("andrew@teacher")
         .collection("tbScore")
         .orderBy("nama")
         .startAt([nama]).endAt([nama + '\uf8ff']).snapshots();
@@ -290,12 +355,14 @@ class DataBaseSoal {
   }
 }
 
-CollectionReference pathLetterz = FirebaseFirestore.instance.collection("Letter");
+CollectionReference pathLetterz =
+    FirebaseFirestore.instance.collection("Letter");
 
 class DatabaseLetter {
   //add letter
   static Future<void> addLetter({required LetterGuru letterGuru}) async {
-    CollectionReference pathLetter = FirebaseFirestore.instance.collection("Letter");
+    CollectionReference pathLetter =
+        FirebaseFirestore.instance.collection("Letter");
     DocumentReference docRef = pathLetter.doc();
 
     await pathLetter

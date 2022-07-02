@@ -10,6 +10,7 @@ import 'package:kuhut/pages/pageSetExamDate.dart';
 import 'package:kuhut/pages/profilecontact.dart';
 import 'package:kuhut/pages/resetpass.dart';
 import 'package:kuhut/pages/viewcontact.dart';
+import 'package:kuhut/pages/jawaban_siswa.dart';
 
 import '../andrew_work/make_letter.dart';
 import 'mainMenuSiswa.dart';
@@ -170,9 +171,10 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
             children: [
               const DrawerHeader(
                 decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: NetworkImage("https://png.pngtree.com/thumb_back/fw800/background/20201223/pngtree-purple-minimalist-watercolor-education-background-image_512200.jpg"), 
-                      fit: BoxFit.cover)),
+                    image: DecorationImage(
+                        image: NetworkImage(
+                            "https://png.pngtree.com/thumb_back/fw800/background/20201223/pngtree-purple-minimalist-watercolor-education-background-image_512200.jpg"),
+                        fit: BoxFit.cover)),
                 margin: EdgeInsets.all(0.0),
                 padding: EdgeInsets.all(0.0),
                 child: Center(
@@ -277,7 +279,8 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                                   Text(
                                     widget.name,
                                     style: TextStyle(
-                                        fontSize: 25, fontWeight: FontWeight.bold),
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold),
                                   ),
                                   Text(
                                     "Guru",
@@ -424,8 +427,7 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => SendLetter(
-                                              )));
+                                          builder: (context) => SendLetter()));
                                 },
                                 child: Card(
                                   shape: RoundedRectangleBorder(
@@ -443,6 +445,37 @@ class _MainMenuTeacherState extends State<MainMenuTeacher> {
                                       ),
                                       Text(
                                         'Send Letter',
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                pageJawabanSiswa()));
+                                  }
+                                },
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8)),
+                                  elevation: 4,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: const <Widget>[
+                                      Icon(
+                                        Icons.format_list_numbered,
+                                        size: 50,
+                                      ),
+                                      SizedBox(
+                                        height: 15,
+                                      ),
+                                      Text(
+                                        'View Jawaban Siswa',
                                       )
                                     ],
                                   ),

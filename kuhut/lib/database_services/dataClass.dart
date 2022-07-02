@@ -232,6 +232,39 @@ class editprofiletelp {
   }
 }
 
+class editprofilenilai {
+  final String anilai;
+  final String anama;
+  final String atitle;
+  final String aemailguru;
+
+  editprofilenilai(
+      {required this.anilai,
+      required this.anama,
+      required this.atitle,
+      required this.aemailguru});
+  //toJSON, or toDataClass Firebase
+  Map<String, dynamic> toJson() {
+    //json
+    return {
+      "score": anilai,
+      "nama": anama,
+      "mapel": atitle,
+      "email": aemailguru
+    };
+  }
+
+  //form TambahData
+  //fromJSON
+  factory editprofilenilai.fromJSON(Map<String, dynamic> json) {
+    return editprofilenilai(
+        anilai: json['score'],
+        anama: json['nama'],
+        atitle: json['mapel'],
+        aemailguru: json['email']);
+  }
+}
+
 class LetterGuru {
   final String judul;
   final String deskripsi;
@@ -267,5 +300,35 @@ class LetterGuru {
         templateImage: json['templateImage'],
         kelas: json['kelas'],
         expireDateFormatted: json['expireDateFormatted']);
+  }
+}
+
+class addJawabanSiswa {
+  final String jawabanSiswa;
+  final String namaSiswa;
+  final String namaSoal;
+  final String soal;
+
+  addJawabanSiswa(
+      {required this.jawabanSiswa,
+      required this.namaSiswa,
+      required this.namaSoal,
+      required this.soal});
+
+  Map<String, dynamic> toJson() {
+    return {
+      "jawaban_siswa": jawabanSiswa,
+      "nama_siswa": namaSiswa,
+      "nama_soal": namaSoal,
+      "soal": soal
+    };
+  }
+
+  factory addJawabanSiswa.fromJSON(Map<String, dynamic> json) {
+    return addJawabanSiswa(
+        jawabanSiswa: json['jawaban_siswa'],
+        namaSiswa: json['nama_siswa'],
+        namaSoal: json['nama_soal'],
+        soal: json['soal']);
   }
 }
