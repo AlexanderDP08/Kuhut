@@ -99,7 +99,7 @@ class _LetterListViewState extends State<LetterListView> {
   Widget Letter(String kelas) {
     return Expanded(
       child: StreamBuilder<QuerySnapshot>(
-        stream: DatabaseLetter.getAllLetter(kelas),
+        stream: DatabaseLetter.getAllLetter(kelas), //get from firestore
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Text("Error");
@@ -108,7 +108,7 @@ class _LetterListViewState extends State<LetterListView> {
               shape: RoundedRectangleBorder(side: BorderSide(color: Colors.deepOrangeAccent), borderRadius: BorderRadius.circular(20)),
               child: ListView.separated(
                   itemBuilder: ((context, index) {
-                    DocumentSnapshot dsData = snapshot.data!.docs[index];
+                    DocumentSnapshot dsData = snapshot.data!.docs[index]; //get the snapshot data 
                     String lvJudul = dsData['judul'];
                     String lvDesc = dsData['deskripsi'];
                     String expireDate = dsData['expiredDateForamtted'];

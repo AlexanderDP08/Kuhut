@@ -152,8 +152,13 @@ class _PageAddSoalState extends State<PageAddSoal> {
                       namaGuru: teacherName);
                   DatabaseTeacher.tambahSoal(
                       dataSoal: soalBaru, tanggal: pickDate);
+                      _soal.text = "";
+                      _ansA.text = "";
+                      _ansB.text = "";
+                      _ansC.text = "";
+                      _rightAns.text = "";
                 });
-                Navigator.pop(context);
+                //Navigator.pop(context);
               },
               child: Text("Add Soal"))
         ],

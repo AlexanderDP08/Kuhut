@@ -49,7 +49,7 @@ class _AddContactState extends State<AddContact> {
         //x.text = "okkke";
         stateOfDisable = false;
         print("Hari yang dipilih : " + formattedDate);
-        expDate = "Expiring : " + formattedDate;
+        expDate = formattedDate;
         labelJudul = "Judul";
       });
     }
